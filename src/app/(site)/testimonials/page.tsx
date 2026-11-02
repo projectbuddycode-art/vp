@@ -1,0 +1,33 @@
+import { TestimonialCarousel } from "@/components/home/Testimonials";
+import { PageHero } from "@/components/layout/PageHero";
+import { Container } from "@/components/ui/Container";
+import { getTestimonials } from "@/lib/data/public";
+import { images } from "@/lib/images";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  title: "Testimonials",
+  description: "Approved client testimonials for Sanjeev Jain’s Vedic Vastu consultancy.",
+  path: "/testimonials",
+  image: images.courtyard.src,
+});
+
+export default async function TestimonialsPage() {
+  const testimonials = await getTestimonials();
+  return (
+    <>
+      <PageHero
+        eyebrow="Testimonials"
+        title="What clients choose to say."
+        text="Words, a name, and a photograph appear here only with permission. Until then, this page stays empty on purpose."
+        image={images.courtyard}
+      />
+      <TestimonialCarousel items={testimonials} />
+      <Container className="pb-16">
+        <p className="max-w-2xl text-sm leading-relaxed text-deep/70">
+          A testimonial is a personal account. It is not evidence that another property will have the same experience.
+        </p>
+      </Container>
+    </>
+  );
+}
