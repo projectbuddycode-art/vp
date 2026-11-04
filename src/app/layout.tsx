@@ -29,11 +29,11 @@ const devanagari = Noto_Serif_Devanagari({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
   title: {
-    default: "Sanjeev Jain · Vedic Vastu Consultancy",
+    default: "Vastu consultant · Sanjeev Jain",
     template: "%s · Sanjeev Jain",
   },
   description:
-    "Personal Vedic Vastu consultations by Sanjeev Jain. Individual property assessment, practical guidance, and a one-time on-site visit.",
+    "Mr. Sanjeev Jain is a Vastu Shastra consultant. He visits a home or workplace, studies its layout and directions, and explains practical guidance in simple language. A personal visit is ₹10,000.",
   applicationName: "Sanjeev Jain Vedic Vastu Consultancy",
   authors: [{ name: "Sanjeev Jain" }],
   openGraph: {

@@ -8,6 +8,10 @@ import { VastuDiagram } from "@/components/diagrams/VastuDiagram";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { images, resolvePortrait, studyCaption } from "@/lib/images";
+import { videos } from "@/lib/videos";
+import { SanskritLabel } from "@/components/content/SanskritLabel";
+import { ServiceVideoFeature } from "@/components/video/ServiceVideoFeature";
+import { CinematicVideo } from "@/components/video/CinematicVideo";
 import type { Article } from "@/lib/content/articles";
 import type { CaseStudy } from "@/lib/data/public";
 import { caseCategories, type SiteSettings } from "@/lib/site";
@@ -16,27 +20,35 @@ import { formatInr } from "@/lib/utils";
 const areas = [
   {
     href: "/expertise/residential-vastu",
-    title: "Home and Living Spaces",
-    text: "Houses, flats, and plots. The visit looks at how your family actually uses the place.",
-    image: images.residence,
+    category: "Residential Vastu",
+    title: "Home and living spaces",
+    text: "Understand the layout and surroundings of your home.",
+    video: videos.residential,
+    boundary: "Guidance is about the house. It is not a promise about family life or health.",
   },
   {
     href: "/expertise/business-vastu",
-    title: "Business and Workplace",
-    text: "Offices, shops, and other workplaces. Guidance is about the rooms, not a promise of profit.",
-    image: images.commercial,
+    category: "Commercial and business Vastu",
+    title: "Business and workplace",
+    text: "Study your business space with a thoughtful approach to Vastu.",
+    video: videos.commercial,
+    boundary: "This is not a forecast of profit, and it does not replace business or legal advice.",
   },
   {
     href: "/expertise/financial-professional-guidance",
-    title: "Financial and Professional Concerns",
-    text: "People often ask about the rooms where work and money decisions happen. This is spatial guidance, not financial advice.",
-    image: images.modernHome,
+    category: "Financial and professional concerns",
+    title: "Work and money rooms",
+    text: "Explore how your workspace and property are arranged.",
+    video: videos.financial,
+    boundary: "This is not financial advice, and it does not promise wealth or professional success.",
   },
   {
     href: "/expertise/health-wellbeing",
-    title: "Health and Wellbeing Concerns",
-    text: "Some people want a calmer home while they look after their health. The visit does not treat illness.",
-    image: images.courtyard,
+    category: "Health and wellbeing concerns",
+    title: "A calmer living environment",
+    text: "Look at the rooms you live in. This is not medical care.",
+    video: videos.health,
+    boundary: "The visit does not diagnose or treat illness, and it does not replace a doctor.",
   },
 ] as const;
 
@@ -54,7 +66,7 @@ export function FounderStory({ settings }: { settings: SiteSettings }) {
       <Container className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
         <FounderPortrait url={settings.founderPortraitUrl} />
         <div>
-          <p className="font-serif text-xl italic text-bark">Meet Sanjeev Jain</p>
+          <SanskritLabel term="परंपरा" reading="Knowledge through tradition" meaning="A tradition carried forward, then used with care on each property." />
           <h2 className="mt-3 font-serif text-[clamp(2.5rem,4.4vw,4.4rem)] leading-[0.98] font-medium tracking-[-0.03em]">
             Mr. Sanjeev Jain
           </h2>
@@ -64,10 +76,10 @@ export function FounderStory({ settings }: { settings: SiteSettings }) {
             ) : (
               <>
                 <p>
-                  Mr. Sanjeev Jain spent his working life in the diamond industry. Alongside that work, he practises Vastu from knowledge he inherited.
+                  Mr. Sanjeev Jain worked in the diamond industry. Alongside that work, he practises Vastu Shastra from knowledge passed to him, which he has refined by visiting properties himself.
                 </p>
                 <p>
-                  He has refined that knowledge through his own study and by visiting properties in person. He does not use one fixed chart for every building.
+                  He does not use one fixed chart for every building. The guidance follows the property he has seen.
                 </p>
                 <p>
                   He looks at the layout, the directions, and the way the place is used. Only then does he suggest practical guidance for that property.
@@ -110,20 +122,38 @@ export function Philosophy() {
     <section className="bg-ivory py-20 sm:py-28">
       <Container className="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
         <div>
-          <p className="font-serif text-xl italic text-bark">The approach</p>
+          <SanskritLabel term="दिशा एवं संतुलन" reading="Directions and balance" meaning="Direction means which way a room faces. Balance means the parts of the plan sit together in a thoughtful way." />
           <h2 className="mt-3 font-serif text-[clamp(2.4rem,4.4vw,4.2rem)] leading-[0.98] font-medium tracking-[-0.03em]">
-            A personal approach to Vastu.
+            How a property is studied.
           </h2>
           <div className="mt-6 space-y-4 text-base leading-relaxed text-deep/80">
             <p>
-              Vastu is a traditional way of looking at a building. It asks where the rooms sit, which way the entrance faces, and what is around the property.
+              Vastu Shastra looks at where the rooms sit, which way the entrance faces, and what is around the property. These are traditional ideas. Mr. Sanjeev Jain applies them only after he has seen the place.
             </p>
             <p>
-              Mr. Sanjeev Jain studies those things on the property itself. A drawing on a website cannot tell you what your home needs.
+              <span className="devanagari">प्रकृति</span> means nature: the light, air and setting around the building. <span className="devanagari">संतुलन</span> means balance: a thoughtful arrangement of the plan. A drawing on this website cannot tell you what your home needs.
             </p>
             <p>
-              The square below is a simple Vastu diagram. The centre and the edges give a shared language for a plan. It is not a diagnosis.
+              The square below is a simple Vastu diagram. The centre and the edges give a shared language for a plan. It is not a reading of your home.
             </p>
+            <div>
+              <p className="text-sm text-bark">
+                <span className="devanagari">पंचमहाभूत</span> · the five elements: earth, water, fire, air and space. They belong to the wider Indian tradition behind Vastu. They are not a diagnosis.
+              </p>
+              <ul className="mt-3 flex flex-wrap gap-2">
+                {[
+                  ["पृथ्वी", "Earth"],
+                  ["जल", "Water"],
+                  ["अग्नि", "Fire"],
+                  ["वायु", "Air"],
+                  ["आकाश", "Space"],
+                ].map(([term, name], index) => (
+                  <li key={term} className="element-mark border border-deep/10 bg-white px-3 py-2 text-sm" style={{ animationDelay: `${index * 0.18}s` }}>
+                    <span className="devanagari">{term}</span> {name}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
         <VastuDiagram />
@@ -145,21 +175,18 @@ export function GuidanceAreas() {
             People come with different questions. These are areas of consultation. They are not guaranteed results.
           </p>
         </div>
-        <div className="mt-14 space-y-16">
+        <div className="mt-14 space-y-20">
           {areas.map((area, index) => (
-            <Link key={area.href} href={area.href} className="group grid items-center gap-6 lg:grid-cols-2 lg:gap-14">
-              <div className={index % 2 === 1 ? "lg:order-2" : ""}>
-                <div className="relative aspect-[16/10] bg-ivory">
-                  <Image src={area.image.src} alt={area.image.alt} fill className="object-cover" sizes="(min-width: 1024px) 46vw, 100vw" />
-                </div>
-                <p className="mt-2 text-xs text-bark">{studyCaption}</p>
-              </div>
-              <div className={index % 2 === 1 ? "lg:order-1" : ""}>
-                <p className="font-serif text-2xl text-gold">0{index + 1}</p>
-                <h3 className="mt-2 font-serif text-4xl leading-tight group-hover:text-bark sm:text-5xl">{area.title}</h3>
-                <p className="mt-4 max-w-md text-base leading-relaxed text-deep/75">{area.text}</p>
-              </div>
-            </Link>
+            <ServiceVideoFeature
+              key={area.href}
+              category={area.category}
+              title={area.title}
+              description={area.text}
+              href={area.href}
+              video={area.video}
+              reverse={index % 2 === 1}
+              boundary={area.boundary}
+            />
           ))}
         </div>
       </Container>
@@ -256,7 +283,7 @@ export function ConsultationBand({ settings }: { settings: SiteSettings }) {
         <div>
           <p className="font-serif text-xl italic text-bark">Consultation</p>
           <h2 className="mt-3 font-serif text-[clamp(2.3rem,4vw,3.8rem)] leading-[1] font-medium tracking-[-0.03em]">
-            Personal on-site consultation
+            How much does a visit cost?
           </h2>
           <p className="mt-6 font-serif text-5xl text-deep">{formatInr(settings.consultationFee)}</p>
           <div className="mt-6 space-y-4 text-base leading-relaxed text-deep/80">
@@ -297,11 +324,9 @@ export function FinalCta() {
           </Button>
         </div>
       </div>
-      <div>
-        <div className="relative min-h-[52vw] lg:min-h-full">
-          <Image src={images.palace.src} alt={images.palace.alt} fill className="object-cover" sizes="(min-width: 1024px) 50vw, 100vw" />
-        </div>
-        <p className="bg-deep px-5 py-3 text-xs text-sand sm:px-8">{studyCaption}</p>
+      <div className="relative min-h-[52vw] lg:min-h-[28rem]">
+        <CinematicVideo video={videos.finale} playInView className="absolute inset-0" sizes="(min-width: 1024px) 50vw, 100vw" />
+        <p className="absolute right-0 bottom-0 left-0 bg-deep/80 px-5 py-3 text-xs text-sand sm:px-8">{studyCaption}</p>
       </div>
     </section>
   );

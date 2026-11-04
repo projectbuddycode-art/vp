@@ -6,8 +6,8 @@ import { images } from "@/lib/images";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Knowledge Centre",
-  description: "Editorial notes on the Vastu Purusha Mandala, direction, homes, and practical recommendations.",
+  title: "Vastu questions, answered simply",
+  description: "Plain answers about Vastu directions, home layouts, offices and how to prepare for a visit with Mr. Sanjeev Jain.",
   path: "/knowledge-centre",
   image: images.geometry.src,
 });
@@ -18,8 +18,9 @@ export default async function KnowledgePage() {
     <>
       <PageHero
         eyebrow="Knowledge centre"
-        title="Read before you book."
-        text="These articles explain Vastu in everyday language. They are not a reading of your property."
+        title="What should I read before a Vastu visit?"
+        text="These notes answer common questions in everyday language. They are not a reading of your property."
+        crumbs={[{ href: "/", label: "Home" }, { href: "/knowledge-centre", label: "Knowledge centre" }]}
         image={images.geometry}
       />
       <section className="bg-ivory py-16 sm:py-20">

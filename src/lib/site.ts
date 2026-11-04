@@ -148,9 +148,9 @@ export const services: Service[] = [
     slug: "residential-vastu",
     title: "Residential Vastu",
     cardTitle: "Residential Vastu",
-    summary: "Individualised assessment of homes and residential properties.",
+    summary: "A personal look at a house, flat, or plot, based on its own layout.",
     image: images.residence,
-    lead: "A home is read through the way it is oriented, entered, and inhabited. The consultation looks at that particular house, apartment, or plot.",
+    lead: "This visit is for a house, flat, or plot. Mr. Sanjeev Jain looks at that home’s entrance, rooms and surroundings, then explains what he sees in plain language.",
     paragraphs: [
       "Residential work begins with the household’s questions and the plan of the property. Two homes on the same street can ask for different attention because their entrances, room relationships, and daily use are not the same.",
       "During a visit, Sanjeev Jain looks at orientation, the sequence of spaces, and the parts of the home connected to the concern you bring. Suggestions are then explained in ordinary language, with a preference for measures that can actually be carried out.",
@@ -158,31 +158,39 @@ export const services: Service[] = [
     ],
     points: [
       {
-        title: "Homes and apartments",
-        text: "Occupied houses and flats are assessed as they are used, not as a generic floor-plan type.",
+        title: "Who may find this useful",
+        text: "Families in a house or flat, and people planning a plot or a home that is still being built.",
       },
       {
-        title: "Plots and houses under construction",
-        text: "Early planning can be discussed on site so later changes are considered while they are still possible.",
+        title: "What is studied",
+        text: "The entrance, the direction of the plot, the centre of the plan, the main rooms, and how the household actually uses them.",
       },
       {
-        title: "Family life",
-        text: "The conversation can include how rooms are shared, where people spend time, and which part of the home feels unresolved.",
+        title: "What to prepare",
+        text: "A floor plan with north marked, if you have one, and a short note about the room or question that matters most. Photographs help. They are not required.",
+      },
+      {
+        title: "After the visit",
+        text: "Mr. Sanjeev Jain explains practical guidance for that home. Some ideas are about how a room is used. Building work, if suggested, should be checked by an architect or engineer. Remedies are priced separately.",
+      },
+      {
+        title: "How to book",
+        text: "Use the enquiry form. A personal visit is ₹10,000. Travel, if needed, is discussed separately. A visit is confirmed only after the consultancy replies.",
       },
     ],
     boundary:
       "Residential guidance is spatial. Building alterations should be checked with an architect or structural engineer before any wall, beam, or service is changed.",
-    seoTitle: "Residential Vastu",
+    seoTitle: "Home Vastu consultation",
     seoDescription:
-      "Personal Vastu assessment for homes, apartments, and residential plots by Sanjeev Jain.",
+      "A home Vastu consultation with Mr. Sanjeev Jain. He studies your house or flat in person and explains practical guidance for that layout.",
   },
   {
     slug: "business-vastu",
     title: "Business & Commercial Vastu",
     cardTitle: "Business & Commercial Vastu",
-    summary: "Guidance for offices, commercial spaces, and business properties.",
+    summary: "A personal look at an office, shop, or other workplace.",
     image: images.commercial,
-    lead: "A workplace has its own entrance, circulation, and rooms where decisions are made. Commercial guidance starts from that plan and from the concern the business brings.",
+    lead: "This visit is for an office, shop, or other business space. The layout and the way people use it are studied. It is not a promise of profit.",
     paragraphs: [
       "Offices, shops, clinics, and other commercial premises are assessed as working environments. The visit considers orientation and layout alongside how staff, clients, and goods actually move.",
       "Recommendations may concern an entrance, the placement of a cabin or cash desk, storage, or the relationship between public and private rooms. They are specific to the premises. A suggestion made for one office is not a template for the next.",
@@ -190,23 +198,31 @@ export const services: Service[] = [
     ],
     points: [
       {
-        title: "Offices",
-        text: "Cabins, meeting rooms, and the path from the entrance can be discussed in relation to the way the team works.",
+        title: "Who may find this useful",
+        text: "Owners and managers of offices, shops, clinics, and other workplaces who want the premises looked at before they spend on a further fit-out.",
       },
       {
-        title: "Retail and client-facing rooms",
-        text: "Shops and reception spaces are looked at for approach, display, and the rooms behind them.",
+        title: "What is studied",
+        text: "The entrance, the path people walk, cabins or counters, storage, and the rooms where clients are received.",
       },
       {
-        title: "Premises you already occupy",
-        text: "An existing fit-out can be reviewed before money is spent on a further alteration.",
+        title: "What to prepare",
+        text: "A plan of the premises, if you have one, and a note about how staff and visitors use the space. You do not need to share accounts or turnover.",
+      },
+      {
+        title: "After the visit",
+        text: "You receive spatial guidance for that workplace. It is not a forecast of sales. Any building change should be checked by the people responsible for the structure and the lease.",
+      },
+      {
+        title: "How to book",
+        text: "Send an enquiry with the city and the type of premises. The on-site visit is ₹10,000. Travel and any later remedy are separate.",
       },
     ],
     boundary:
       "Commercial Vastu guidance is not a business-performance guarantee. Financial and legal decisions belong with the professionals qualified to give them.",
-    seoTitle: "Business & Commercial Vastu",
+    seoTitle: "Vastu for office and business",
     seoDescription:
-      "On-site Vastu guidance for offices, shops, and other commercial properties.",
+      "A business Vastu consultation for offices and shops. Mr. Sanjeev Jain studies the workplace in person. Results are not guaranteed.",
   },
   {
     slug: "health-wellbeing",
@@ -222,23 +238,31 @@ export const services: Service[] = [
     ],
     points: [
       {
-        title: "The living environment",
-        text: "Bedrooms, kitchens, and rooms where someone spends long hours can be part of the assessment.",
+        title: "Who may find this useful",
+        text: "People who want the rooms they live in to be looked at with care. This is for the house, not for a medical condition.",
       },
       {
-        title: "A careful brief",
-        text: "You decide how much personal context to share. The property remains the subject of the consultation.",
+        title: "What is studied",
+        text: "Bedrooms, kitchens, and rooms where someone spends long hours, including light, placement and direction.",
       },
       {
-        title: "Practical measures",
-        text: "Where a change is suggested, it is explained so you can judge whether it is feasible.",
+        title: "What to prepare",
+        text: "Share only what you are comfortable saying about the rooms involved. A plan is useful. Private health details are not published.",
+      },
+      {
+        title: "After the visit",
+        text: "Suggestions, if any, are about the environment. They are not a diagnosis or a treatment. Continue with your doctor for health decisions.",
+      },
+      {
+        title: "How to book",
+        text: "Use the enquiry form and say that the question is about the living environment. The visit fee is ₹10,000. Remedies are priced after the visit.",
       },
     ],
     boundary:
       "This consultation does not diagnose, treat, or cure any condition. It does not replace medical care.",
-    seoTitle: "Health & Wellbeing",
+    seoTitle: "Vastu and a calmer home",
     seoDescription:
-      "Traditional spatial guidance for a more considered living environment. Not a medical service.",
+      "A Vastu visit about the rooms you live in. It is not medical care and does not treat illness.",
   },
   {
     slug: "financial-professional-guidance",
@@ -254,23 +278,31 @@ export const services: Service[] = [
     ],
     points: [
       {
-        title: "Work and money rooms",
-        text: "Studies, accounts areas, shops, and home offices can be included when they belong to the concern.",
+        title: "Who may find this useful",
+        text: "People who want the rooms connected with work or money to be studied. The answer is about the property, not about an investment.",
       },
       {
-        title: "An individual reading",
-        text: "The same worry in two different buildings does not produce a copied remedy.",
+        title: "What is studied",
+        text: "A study, accounts room, shop, or home office, and how that room sits in the rest of the plan.",
       },
       {
-        title: "Clear limits",
-        text: "You leave with spatial guidance. Financial decisions stay with you and your advisers.",
+        title: "What to prepare",
+        text: "Bring the actual question and a plan of the property it relates to. You do not need to share bank details or tax papers.",
+      },
+      {
+        title: "After the visit",
+        text: "You leave with spatial guidance for that place. Where to invest, how to file tax, or what a business decision should be is outside this consultation.",
+      },
+      {
+        title: "How to book",
+        text: "Describe the room and the concern on the enquiry form. The personal visit is ₹10,000. There is no promised financial result, and remedy costs are separate.",
       },
     ],
     boundary:
       "This consultation does not provide investment, tax, lending, or legal advice, and it does not promise wealth or professional success.",
-    seoTitle: "Financial & Professional Guidance",
+    seoTitle: "Vastu for work and money rooms",
     seoDescription:
-      "A personal Vastu assessment for financial and professional concerns. Spatial guidance, not financial advice.",
+      "A Vastu consultation about the rooms where you work and handle money. It is not financial advice and does not promise wealth.",
   },
 ];
 
@@ -290,15 +322,22 @@ export const fallbackFaqs: Faq[] = [
     id: "what-is-vastu",
     question: "What is Vastu Shastra?",
     answer:
-      "Vastu Shastra is a traditional Indian body of knowledge concerned with how a building sits on its site, how it is oriented, and how its rooms and entrances are arranged. In this practice it is offered as architectural and spatial guidance for an individual property. It is not a medical treatment, a financial product, or a substitute for engineering advice.",
+      "Vastu Shastra is a traditional Indian way of looking at a building: its layout, its directions, and how the rooms are arranged. Mr. Sanjeev Jain uses it as practical guidance for one property at a time. It does not replace a doctor, a financial adviser, a lawyer, or an engineer.",
     sortOrder: 1,
   },
   {
     id: "how-consultation-works",
-    question: "How does a personal Vastu consultation work?",
+    question: "How does a Vastu consultation work?",
     answer:
-      "It begins with your concern and the property itself. Sanjeev Jain discusses the situation with you, assesses the relevant layout and directions in person, and suggests measures suited to that property. Recommendations are prepared from the visit. They are not taken from a fixed menu applied to every home.",
+      "You share your concern. Mr. Sanjeev Jain visits the property, looks at the layout and directions, and then explains practical guidance for that place. The suggestions come from the visit. The same chart is not copied onto every home.",
     sortOrder: 2,
+  },
+  {
+    id: "home-check",
+    question: "What does a Vastu consultant check in a home?",
+    answer:
+      "Mr. Sanjeev Jain looks at the entrance, the direction of the plot, the centre of the plan, and the rooms connected to your question. He also notes how the household uses those rooms and what sits around the property. A checklist on a website cannot do this for you.",
+    sortOrder: 3,
   },
   {
     id: "on-site-visit",
@@ -309,16 +348,16 @@ export const fallbackFaqs: Faq[] = [
   },
   {
     id: "fee",
-    question: "What is the consultation fee?",
+    question: "How much does a Vastu consultation cost?",
     answer:
-      "The fee for a one-time personal property visit is ₹10,000. Travel charges, where a visit requires them, may be quoted separately. The cost of any remedy is independent of the consultation fee and is known only after the assessment.",
+      "A personal on-site visit by Mr. Sanjeev Jain is ₹10,000. Travel, if needed, is discussed separately. Any remedy is priced after the visit. Many simpler remedies may cost around ₹5,000–₹6,000 or less. That is not a maximum. Large building work can cost more.",
     sortOrder: 4,
   },
   {
     id: "structural",
-    question: "Do all Vastu corrections require structural changes?",
+    question: "Do I need to make major changes to my house?",
     answer:
-      "No. Some suggestions concern how a space is used or furnished. Others may involve building work. You are told which is which. Structural changes are suggested only when the assessment indicates them, and any building work should be reviewed by a qualified engineer or architect before it is carried out.",
+      "Not always. Some suggestions are about how a room is used. Others may need building work. You are told which is which. Any wall or structure should be checked by an architect or engineer before work starts.",
     sortOrder: 5,
   },
   {
@@ -330,9 +369,9 @@ export const fallbackFaqs: Faq[] = [
   },
   {
     id: "floor-plan",
-    question: "Do I need an architectural floor plan?",
+    question: "Can I share my floor plan before a visit?",
     answer:
-      "A floor plan is helpful, especially when it shows north. It is not required in order to enquire. If you do not have one, say so on the form and bring whatever drawings or photographs you do have. You may also attach plans and property photographs to the enquiry.",
+      "Yes. A plan that shows north is useful, and you can attach it to the enquiry form. You can still enquire if you do not have one. The visit is still needed, because a drawing does not show how the place is lived in.",
     sortOrder: 7,
   },
   {
@@ -346,8 +385,22 @@ export const fallbackFaqs: Faq[] = [
     id: "duration",
     question: "How long does the assessment take?",
     answer:
-      "A single duration is not published, because it depends on the property and the concerns being discussed. The likely length of the visit is confirmed when the consultation is arranged.",
+      "There is no single duration. It depends on the property and the questions you bring. The likely length is confirmed when the visit is arranged.",
     sortOrder: 9,
+  },
+  {
+    id: "office",
+    question: "Can Vastu guidance be given for an office?",
+    answer:
+      "Yes. Offices, shops and other workplaces can be studied in the same personal way as a home. The visit looks at the entrance, the rooms and how people move through them. It does not promise profit or replace business advice.",
+    sortOrder: 10,
+  },
+  {
+    id: "same-solution",
+    question: "Does every property need the same Vastu solution?",
+    answer:
+      "No. Two houses on the same street can need different attention because their entrances, rooms and daily use are different. Mr. Sanjeev Jain studies the property in front of him. He does not apply one fixed solution to every building.",
+    sortOrder: 11,
   },
 ];
 

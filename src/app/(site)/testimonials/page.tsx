@@ -6,8 +6,8 @@ import { images } from "@/lib/images";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Testimonials",
-  description: "Approved client testimonials for Sanjeev Jain’s Vedic Vastu consultancy.",
+  title: "Client words",
+  description: "Client words appear only with permission. They are personal accounts, not guaranteed results.",
   path: "/testimonials",
   image: images.courtyard.src,
 });
@@ -18,8 +18,9 @@ export default async function TestimonialsPage() {
     <>
       <PageHero
         eyebrow="Testimonials"
-        title="What clients choose to say."
-        text="Words, a name, and a photograph appear here only with permission. Until then, this page stays empty on purpose."
+        title="What have clients said?"
+        text="Words, a name and a photograph appear here only with permission. Until then, this page stays empty on purpose. A comment is not proof for another property."
+        crumbs={[{ href: "/", label: "Home" }, { href: "/testimonials", label: "Testimonials" }]}
         image={images.courtyard}
       />
       <TestimonialCarousel items={testimonials} />

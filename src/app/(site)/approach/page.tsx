@@ -1,6 +1,7 @@
 import { EightDirections } from "@/components/compass/EightDirections";
 import { Methodology } from "@/components/home/Methodology";
 import { PageHero } from "@/components/layout/PageHero";
+import { SanskritLabel } from "@/components/content/SanskritLabel";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { images } from "@/lib/images";
@@ -8,8 +9,9 @@ import { pageMetadata } from "@/lib/seo";
 import { disclaimer, processSteps } from "@/lib/site";
 
 export const metadata = pageMetadata({
-  title: "Our Approach",
-  description: "How a personal Vastu consultation proceeds, from the first conversation to practical implementation guidance.",
+  title: "How a Vastu consultation works",
+  description:
+    "Mr. Sanjeev Jain listens, visits the property, and then explains practical Vastu guidance. The same solution is not used for every home or office.",
   path: "/approach",
   image: images.geometry.src,
 });
@@ -18,9 +20,10 @@ export default function ApproachPage() {
   return (
     <>
       <PageHero
-        eyebrow="Vastu approach"
-        title="Every property is looked at on its own."
-        text="Mr. Sanjeev Jain listens, visits the property, and then suggests practical guidance. A chart on a screen is not a consultation."
+        eyebrow={<SanskritLabel term="दिशा एवं संतुलन" reading="Directions and balance" meaning="The visit looks at direction, rooms and surroundings. A screen diagram is not the consultation." />}
+        title="How does a Vastu consultation work?"
+        text="You share the concern. Mr. Sanjeev Jain visits the property. He then explains practical guidance for that layout. Two properties do not get the same answer just because the worry sounds similar."
+        crumbs={[{ href: "/", label: "Home" }, { href: "/approach", label: "Vastu approach" }]}
         image={images.geometry}
       />
       <section className="bg-ivory py-16 sm:py-20">

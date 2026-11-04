@@ -2,13 +2,55 @@ import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/layout/PageHero";
+import { ServiceVideoFeature } from "@/components/video/ServiceVideoFeature";
 import { images } from "@/lib/images";
+import { serviceFilms } from "@/lib/videos";
 import type { Service } from "@/lib/site";
+import { siteUrl } from "@/lib/utils";
 
 export function ServiceView({ service }: { service: Service }) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: service.title,
+    description: service.lead,
+    provider: { "@type": "Person", name: "Sanjeev Jain" },
+    url: `${siteUrl()}/expertise/${service.slug}`,
+    offers: {
+      "@type": "Offer",
+      price: "10000",
+      priceCurrency: "INR",
+      description: "Personal on-site visit. Travel and remedies are separate.",
+    },
+  };
+
   return (
     <>
-      <PageHero eyebrow="Expertise" title={service.title} text={service.lead} image={service.image} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <PageHero
+        eyebrow={<span className="font-serif text-xl italic text-bark">Vastu consultation</span>}
+        title={service.title}
+        text={service.lead}
+        image={service.image}
+        crumbs={[
+          { href: "/", label: "Home" },
+          { href: "/expertise", label: "Services" },
+          { href: `/expertise/${service.slug}`, label: service.title },
+        ]}
+      />
+      {service.slug in serviceFilms ? (
+        <section className="bg-white py-12 sm:py-16">
+          <Container>
+            <ServiceVideoFeature
+              variant="panel"
+              category={service.title}
+              title={service.title}
+              description={service.lead}
+              video={serviceFilms[service.slug as keyof typeof serviceFilms]}
+            />
+          </Container>
+        </section>
+      ) : null}
       <section className="bg-ivory py-16 sm:py-24">
         <Container className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="space-y-5 text-base leading-relaxed text-deep/80">

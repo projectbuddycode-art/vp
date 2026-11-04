@@ -25,18 +25,20 @@ export const articleCategories = [
 export const editorialArticles: Article[] = [
   {
     slug: "understanding-the-vastu-purusha-mandala",
-    title: "A Simple Guide to the Vastu Diagram",
+    title: "What is the Vastu diagram?",
     excerpt:
-      "The diagram is a traditional way to talk about the centre and the edges of a plan. It does not read your home by itself.",
+      "It is a traditional square used to talk about the centre and edges of a plan. The drawing does not read your home by itself.",
     category: "Foundations",
     image: images.geometry.src,
     imageAlt: images.geometry.alt,
     publishedAt: "2026-01-15",
-    seoTitle: "Understanding the Vastu Purusha Mandala",
+    seoTitle: "What is the Vastu diagram?",
     seoDescription:
-      "A clear introduction to the Vastu Purusha Mandala as a traditional planning diagram used in personal consultation.",
+      "The Vastu diagram is a traditional square for talking about the centre and edges of a plan. It does not read a home by itself.",
     source: "editorial",
-    content: `## A diagram, not a verdict
+    content: `The Vastu diagram is a traditional square used to talk about the centre and the edges of a plan. It helps organise a conversation. It does not, by itself, tell you what your home needs.
+
+## A diagram, not a verdict
 
 The Vastu Purusha Mandala is a traditional diagram used to think about a site. In classical planning it is described as a square field divided into smaller squares, often spoken of as a grid of sixty-four or eighty-one parts. The centre is commonly called the brahmasthan. Around it, the grid gives a consultant a shared language for edges, corners, and the middle of a plan.
 
@@ -60,18 +62,20 @@ The useful point for a client is simpler. The mandala is a traditional way of lo
   },
   {
     slug: "directional-principles-in-vastu",
-    title: "Understanding the Vastu Directions",
+    title: "What do the Vastu directions mean?",
     excerpt:
-      "Direction starts from a reliable north on the property, then looks at the rooms that matter to you.",
+      "Direction starts from a reliable north on the property, then looks at the rooms that matter to you. A website compass cannot assess a building.",
     category: "Directions",
     image: images.hero.src,
     imageAlt: images.hero.alt,
     publishedAt: "2026-01-22",
-    seoTitle: "Directional Principles in Vastu",
+    seoTitle: "What do the Vastu directions mean?",
     seoDescription:
-      "How direction is considered in a personal Vastu consultation, and why a website compass cannot assess a property.",
+      "Vastu directions start from a reliable north on the property. A compass on a website cannot assess a building.",
     source: "editorial",
-    content: `## Begin with a reliable north
+    content: `Vastu directions start from a reliable north on the actual property. From there, the entrance and the rooms can be discussed. A compass drawn on this website does not point at your home.
+
+## Begin with a reliable north
 
 Directional discussion in Vastu starts from the orientation of the actual property. A north point taken from a surveyed plan, or confirmed on site, is more useful than a rough guess from a phone in a room full of steel.
 
@@ -93,18 +97,20 @@ Direction is a discipline of attention. It becomes advice only after the propert
   },
   {
     slug: "considerations-when-planning-a-home",
-    title: "Understanding Your Home Layout",
+    title: "What does a Vastu consultant check in a home?",
     excerpt:
       "A few questions are worth asking early: orientation, entrance, the centre of the plan, and how the household will actually live.",
     category: "Homes",
     image: images.modernHome.src,
     imageAlt: images.modernHome.alt,
     publishedAt: "2026-02-02",
-    seoTitle: "Considerations When Planning a Home",
+    seoTitle: "What does a Vastu consultant check in a home?",
     seoDescription:
-      "Practical questions to take into a residential Vastu consultation while a home is being planned or altered.",
+      "A home visit looks at orientation, the entrance, the centre of the plan, and how the household lives. It is not a score.",
     source: "editorial",
-    content: `## Ask while the plan can still move
+    content: `In a home, Mr. Sanjeev Jain checks the direction, the entrance, the centre of the plan, and the rooms tied to your question. He also asks how the family uses those rooms. This note lists useful questions. It does not score your house.
+
+## Ask while the plan can still move
 
 The most useful time to discuss a new home is while decisions are still open. Orientation, the position of the entrance, and the relationship between kitchen, rooms, and stairs are easier to consider before walls are built. An existing home can still be assessed. The range of practical measures may then be narrower, which is a reason to be honest about what can be changed.
 
@@ -132,18 +138,20 @@ Say plainly what kind of change you are willing to consider. The consultancy aim
   },
   {
     slug: "residential-versus-commercial-vastu",
-    title: "Vastu for Workspaces",
+    title: "Can Vastu be used for an office?",
     excerpt:
       "A home and a workplace can share a compass and still ask for different attention, because their use is different.",
     category: "Practice",
     image: images.commercial.src,
     imageAlt: images.commercial.alt,
     publishedAt: "2026-02-12",
-    seoTitle: "Residential versus Commercial Vastu",
+    seoTitle: "Can Vastu be used for an office?",
     seoDescription:
-      "Why homes and commercial premises are assessed differently, even when the directional framework is shared.",
+      "Yes. An office can be studied in person. The visit looks at the workplace layout. It does not promise profit.",
     source: "editorial",
-    content: `## The same discipline, a different brief
+    content: `Yes. An office, shop, or clinic can be studied in the same personal way as a home. The visit looks at the entrance and how people use the rooms. It does not promise profit, and a home remedy is not copied onto a workplace.
+
+## The same discipline, a different brief
 
 Residential and commercial consultations use the same underlying attention to orientation, entrance, and layout. They do not produce interchangeable advice. A home is organised around household life. A shop, office, or clinic is organised around work, clients, staff, and storage. The concern that prompted the visit decides which rooms matter most.
 
@@ -165,18 +173,20 @@ If you are unsure which description fits, choose “Multiple concerns” or “O
   },
   {
     slug: "understanding-practical-vastu-recommendations",
-    title: "Preparing for a Vastu Consultation",
+    title: "How should I prepare for a Vastu visit?",
     excerpt:
       "A recommendation should be something you can understand, cost, and decide upon. Structural work is named as structural work.",
     category: "Consultation",
     image: images.carving.src,
     imageAlt: images.carving.alt,
     publishedAt: "2026-02-20",
-    seoTitle: "Practical Vastu Recommendations",
+    seoTitle: "How should I prepare for a Vastu visit?",
     seoDescription:
-      "How practical Vastu recommendations are framed, what they cost in relation to the consultation, and what they do not promise.",
+      "Bring your question, the city, and a plan if you have one. The visit is ₹10,000. Remedies are priced afterwards.",
     source: "editorial",
-    content: `## Practical means specific
+    content: `Write down the question you want answered, the city, and the type of property. A north-marked plan is useful if you have one. You can still enquire without it. The visit itself is ₹10,000, and any remedy is priced afterwards.
+
+## Practical means specific
 
 A practical recommendation names the space, the reason it is being discussed, and the kind of change suggested. It distinguishes a change of use or placement from building work. It leaves you able to ask a carpenter, a contractor, or an architect for a price. A vague instruction to “correct the energy” does not meet that standard, and this practice does not use the consultation fee to sell a fixed catalogue of objects.
 

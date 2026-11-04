@@ -1,42 +1,20 @@
 "use client";
 
-import Image from "next/image";
-import { useEffect, useLayoutEffect, useRef } from "react";
-import { Mandala } from "@/components/mandala/Mandala";
+import { useEffect, useRef } from "react";
+import { HeroAtmosphere } from "@/components/hero/HeroAtmosphere";
+import { CinematicVideo } from "@/components/video/CinematicVideo";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { images } from "@/lib/images";
-import { formatInr } from "@/lib/utils";
+import { videos } from "@/lib/videos";
 
-export function Hero({
-  sanskrit,
-  translation,
-  fee,
-}: {
-  sanskrit: string;
-  translation: string;
-  fee: number;
-}) {
-  const maskRef = useRef<HTMLDivElement>(null);
+export function Hero() {
   const copyRef = useRef<HTMLDivElement>(null);
 
-  useLayoutEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) return;
-    if (maskRef.current) maskRef.current.style.clipPath = "inset(0 0 100% 0)";
-    copyRef.current?.querySelectorAll<HTMLElement>("[data-line]").forEach((line) => {
-      line.style.opacity = "0";
-    });
-  }, []);
-
   useEffect(() => {
-    const mask = maskRef.current;
     const copy = copyRef.current;
-    if (!mask || !copy) return;
+    if (!copy) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const lines = copy.querySelectorAll("[data-line]");
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) return;
-
     let cancelled = false;
     let revert: (() => void) | undefined;
 
@@ -44,16 +22,9 @@ export function Hero({
       const gsap = (await import("gsap")).default;
       if (cancelled) return;
       const timeline = gsap.timeline({ defaults: { ease: "power3.out" } });
-      timeline
-        .fromTo(mask, { clipPath: "inset(0 0 100% 0)" }, { clipPath: "inset(0 0 0% 0)", duration: 1.4 })
-        .fromTo(lines, { y: 28, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.12, duration: 0.75 }, "-=0.65");
+      timeline.fromTo(lines, { y: 22 }, { y: 0, stagger: 0.1, duration: 0.7 });
       revert = () => timeline.kill();
-    })().catch(() => {
-      if (maskRef.current) maskRef.current.style.clipPath = "";
-      copyRef.current?.querySelectorAll<HTMLElement>("[data-line]").forEach((line) => {
-        line.style.opacity = "1";
-      });
-    });
+    })().catch(() => undefined);
 
     return () => {
       cancelled = true;
@@ -62,62 +33,36 @@ export function Hero({
   }, []);
 
   return (
-    <section className="section-stage relative min-h-[100svh] overflow-hidden bg-charcoal text-ivory" data-active="true">
-      <div ref={maskRef} className="absolute inset-0">
-        <Image src={images.hero.src} alt={images.hero.alt} fill priority className="object-cover" sizes="100vw" />
-        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/88 via-charcoal/62 to-charcoal/25" />
-        <div className="absolute inset-0 bg-gradient-to-t from-charcoal/75 via-transparent to-charcoal/30" />
+    <section className="relative min-h-[100svh] overflow-hidden bg-charcoal text-ivory">
+      <div className="absolute inset-0">
+        <CinematicVideo video={videos.hero} autoPlay priority className="absolute inset-0 h-full w-full" sizes="100vw" />
+        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/82 via-charcoal/55 to-charcoal/25" />
+        <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-transparent to-charcoal/25" />
+        <HeroAtmosphere />
       </div>
-      <Mandala className="yantra-live pointer-events-none absolute top-24 right-0 hidden w-[min(42vw,560px)] opacity-80 lg:block" />
-      <Container className="relative z-10 flex min-h-[100svh] flex-col justify-end pb-16 pt-32 lg:pb-20">
-        <div ref={copyRef} className="max-w-4xl">
-          <p data-line className="text-[0.72rem] font-semibold tracking-[0.32em] text-sand uppercase">
-            Vedic Vastu Consultancy
+      <Container className="relative z-10 flex min-h-[100svh] flex-col justify-end pt-28 pb-14 lg:pb-20">
+        <div ref={copyRef} className="max-w-3xl">
+          <p data-line className="text-sand">
+            <span className="devanagari text-xl">वास्तु परिचय</span>
+            <span className="mx-2 text-gold">·</span>
+            <span className="font-serif text-xl italic">Understanding Vastu</span>
           </p>
-          <h1 data-line className="mt-5 font-serif text-[clamp(2.8rem,6.4vw,6.6rem)] leading-[0.92] font-medium tracking-[-0.035em]">
-            Your Space Has a Story.
-            <span className="mt-2 block text-sand">Discover What It Is Telling You.</span>
+          <h1 data-line className="mt-4 max-w-4xl font-serif text-[clamp(2.8rem,5.6vw,5.8rem)] leading-[0.96] font-medium tracking-[-0.03em]">
+            Your Space. Your Life. A More Thoughtful Balance.
           </h1>
-          <p data-line className="mt-6 max-w-xl text-base leading-relaxed text-ivory/85 sm:text-lg">
-            A personalised approach to Vastu Shastra, rooted in inherited knowledge and refined through practical experience.
+          <p data-line className="mt-5 max-w-xl text-base leading-relaxed text-ivory/88 sm:text-lg">
+            Vastu Shastra is an Indian tradition that looks at the layout, directions and arrangement of a building. Mr. Sanjeev Jain personally studies each property and shares practical guidance based on its unique layout.
           </p>
           <div data-line className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button href="/contact" variant="light">
-              Book a personal consultation
+            <Button href="/approach" variant="light">
+              Explore Our Approach
             </Button>
-            <Button href="/approach" variant="lineLight">
-              Discover his approach
+            <Button href="/contact" variant="lineLight">
+              Book a Personal Visit
             </Button>
           </div>
-          <p data-line className="mt-10 text-[0.68rem] tracking-[0.18em] text-sand uppercase">
-            Personal property visit · {formatInr(fee)}
-          </p>
         </div>
       </Container>
-      <div className="pointer-events-none absolute bottom-6 left-6 z-10 hidden items-center gap-3 text-[0.62rem] tracking-[0.22em] text-sand uppercase lg:flex">
-        <span className="scroll-mark block h-12 w-px bg-sand/70" />
-        Scroll
-      </div>
-      <aside className="relative z-10 border-t border-white/10 bg-charcoal px-6 py-6 text-ivory sm:px-10">
-        {sanskrit ? (
-          <div className="mx-auto grid max-w-6xl gap-3 sm:grid-cols-[auto_1fr] sm:items-end sm:gap-8">
-            <p className="devanagari akshara-live text-2xl leading-snug text-sand">{sanskrit}</p>
-            {translation ? <p className="max-w-2xl text-sm leading-relaxed text-ivory/75">{translation}</p> : null}
-          </div>
-        ) : (
-          <div className="mx-auto flex max-w-6xl items-end justify-between gap-8">
-            <div>
-              <p className="text-[0.65rem] tracking-[0.22em] text-sand uppercase">Verse placeholder</p>
-              <p className="mt-2 max-w-2xl font-serif text-xl italic text-ivory/90">
-                A verified Sanskrit verse, with its English translation, will be placed here by the consultancy.
-              </p>
-            </div>
-            <p className="devanagari akshara-live hidden text-3xl text-sand sm:block" aria-hidden>
-              ॐ
-            </p>
-          </div>
-        )}
-      </aside>
     </section>
   );
 }

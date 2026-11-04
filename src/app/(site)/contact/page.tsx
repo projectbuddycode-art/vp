@@ -7,8 +7,8 @@ import { pageMetadata } from "@/lib/seo";
 import { formatInr, whatsappHref } from "@/lib/utils";
 
 export const metadata = pageMetadata({
-  title: "Contact",
-  description: "Request a personal Vastu consultation with Sanjeev Jain.",
+  title: "Book a Vastu visit",
+  description: "Book a personal Vastu consultation with Mr. Sanjeev Jain. The on-site visit is ₹10,000. Travel and remedies are discussed separately.",
   path: "/contact",
   image: images.carving.src,
 });
@@ -21,8 +21,9 @@ export default async function ContactPage() {
     <>
       <PageHero
         eyebrow="Contact"
-        title="Book a visit."
-        text="Share your name, city, and what you would like to talk about. A visit is confirmed only after we reply."
+        title="How do I book Mr. Sanjeev Jain?"
+        text="Send your name, phone number, city and a short note about the property. A visit is confirmed only after the consultancy replies. The on-site fee is shown beside the form."
+        crumbs={[{ href: "/", label: "Home" }, { href: "/contact", label: "Contact" }]}
         image={images.carving}
       />
       <section className="bg-ivory py-16 sm:py-20">

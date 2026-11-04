@@ -15,8 +15,9 @@ const titles = [
 ];
 
 export const metadata = pageMetadata({
-  title: "Services",
-  description: "Personal Vastu guidance for homes, workplaces, health-related living questions, and financial or professional concerns.",
+  title: "Vastu consultation services",
+  description:
+    "Vastu consultations for homes, offices, workspaces and living environments. Each visit is personal. Results are not guaranteed.",
   path: "/expertise",
   image: images.residence.src,
 });
@@ -26,8 +27,9 @@ export default function ExpertisePage() {
     <>
       <PageHero
         eyebrow="Services"
-        title="Guidance for the question you bring."
-        text="These are areas of consultation. They are not promised results. Each visit still starts with one property."
+        title="What Vastu consultations are offered?"
+        text="Homes, offices, workspaces, and questions about a calmer living environment. These are areas of consultation. They are not promised results."
+        crumbs={[{ href: "/", label: "Home" }, { href: "/expertise", label: "Services" }]}
         image={images.residence}
       />
       <section className="bg-white py-16 sm:py-24">

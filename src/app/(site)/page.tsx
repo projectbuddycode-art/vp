@@ -27,22 +27,44 @@ export default async function HomePage() {
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    name: `${settings.brandName} ${settings.practiceName}`,
-    description: "Personal Vastu guidance. Mr. Sanjeev Jain studies each property before suggesting practical changes.",
-    url: siteUrl(),
-    image: `${siteUrl()}/images/hero-sandstone.jpg`,
-    priceRange: `INR ${settings.consultationFee}`,
-    founder: { "@type": "Person", name: settings.brandName },
-    areaServed: settings.serviceAreas || undefined,
-    telephone: settings.phone || undefined,
-    email: settings.email || undefined,
+    "@graph": [
+      {
+        "@type": "Person",
+        name: "Sanjeev Jain",
+        jobTitle: "Vastu Shastra consultant",
+        description:
+          "Vastu Shastra consultant. He worked in the diamond industry and practises from inherited knowledge, refined through property visits.",
+        url: siteUrl(),
+        image: `${siteUrl()}/images/founder/sanjeev-jain.jpg`,
+      },
+      {
+        "@type": "ProfessionalService",
+        name: "Sanjeev Jain Vedic Vastu Consultancy",
+        description:
+          "Personal Vastu Shastra consultations for homes and workplaces. Each property is studied on site. A visit is ₹10,000. Outcomes are not guaranteed.",
+        url: siteUrl(),
+        image: `${siteUrl()}/images/hero-sandstone.jpg`,
+        priceRange: `INR ${settings.consultationFee}`,
+        founder: { "@type": "Person", name: "Sanjeev Jain" },
+        areaServed: settings.serviceAreas || undefined,
+        telephone: settings.phone || undefined,
+        email: settings.email || undefined,
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: { "@type": "Answer", text: faq.answer },
+        })),
+      },
+    ],
   };
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <Hero sanskrit={settings.heroSanskrit} translation={settings.heroTranslation} fee={settings.consultationFee} />
+      <Hero />
       <SanskritVerseRibbon index={0} />
       <FounderStory settings={settings} />
       <SanskritVerseRibbon index={1} />

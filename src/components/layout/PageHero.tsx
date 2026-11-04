@@ -1,4 +1,6 @@
 import Image from "next/image";
+import type { ReactNode } from "react";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { Container } from "@/components/ui/Container";
 import { studyCaption, type SiteImage } from "@/lib/images";
 
@@ -7,17 +9,20 @@ export function PageHero({
   title,
   text,
   image,
+  crumbs,
 }: {
-  eyebrow: string;
+  eyebrow: ReactNode;
   title: string;
   text: string;
   image: SiteImage;
+  crumbs?: { href: string; label: string }[];
 }) {
   return (
     <section className="bg-ivory pt-[4.5rem] text-deep lg:pt-20">
       <Container className="grid items-end gap-10 py-12 lg:grid-cols-[1.15fr_0.85fr] lg:py-16">
         <div>
-          <p className="font-serif text-xl italic text-bark">{eyebrow}</p>
+          {crumbs ? <Breadcrumbs items={crumbs} /> : null}
+          {typeof eyebrow === "string" ? <p className="font-serif text-xl italic text-bark">{eyebrow}</p> : eyebrow}
           <h1 className="mt-4 max-w-3xl font-serif text-[clamp(2.6rem,5vw,4.8rem)] leading-[0.98] font-medium tracking-[-0.03em]">
             {title}
           </h1>

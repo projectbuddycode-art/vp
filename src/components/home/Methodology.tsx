@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Compass } from "@/components/compass/Compass";
 import { GoldLine } from "@/components/animations/GoldLine";
 import { Container } from "@/components/ui/Container";
@@ -12,7 +12,14 @@ import { cn } from "@/lib/utils";
 
 export function Methodology() {
   const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
   const step = processSteps[active];
+
+  useEffect(() => {
+    if (paused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const timer = window.setInterval(() => setActive((value) => (value + 1) % processSteps.length), 3200);
+    return () => window.clearInterval(timer);
+  }, [paused]);
 
   return (
     <section className="dark-panel py-20 text-ivory sm:py-28">
@@ -24,7 +31,11 @@ export function Methodology() {
           text="Four stages, carried out by the consultant. The diagram explains the sequence. It does not assess a property."
         />
         <GoldLine className="mt-8 h-3 w-full max-w-xl" />
-        <div className="mt-12 grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+        <div
+          className="mt-12 grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
           <div className="space-y-3">
             {processSteps.map((item, index) => {
               const selected = index === active;

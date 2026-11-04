@@ -6,8 +6,8 @@ import { images } from "@/lib/images";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Case Studies",
-  description: "Consented Vastu case studies, published only when a client has agreed.",
+  title: "Vastu case studies",
+  description: "Client stories are published only with permission. A reported experience is not proof that another property will have the same result.",
   path: "/case-studies",
   image: images.modernHome.src,
 });
@@ -18,8 +18,9 @@ export default async function CaseStudiesPage() {
     <>
       <PageHero
         eyebrow="Case studies"
-        title="Stories from real properties."
-        text="A case study is published only when the client agrees. It includes the situation, the concern, what was studied, the guidance, and the client’s own words."
+        title="What do real Vastu visits look like?"
+        text="A story is published only when the client agrees. It separates the property, the concern, what was studied, the guidance, and the client’s own words. Their experience is not a promise for your property."
+        crumbs={[{ href: "/", label: "Home" }, { href: "/case-studies", label: "Case studies" }]}
         image={images.modernHome}
       />
       <section className="bg-[#efe8da] py-16 sm:py-20">

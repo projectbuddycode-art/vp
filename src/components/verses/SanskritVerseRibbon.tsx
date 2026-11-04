@@ -9,7 +9,7 @@ function VerseSet({ verse, hidden = false }: { verse: SanskritVerse; hidden?: bo
           <path d="M1 6h16M31 6h16M24 1.5 27.2 6 24 10.5 20.8 6Z" fill="none" stroke="currentColor" strokeWidth="0.8" />
         </svg>
       </span>
-      <p className="max-w-md text-[0.92rem] leading-relaxed text-bark">{verse.translation}</p>
+      <p className="text-[0.92rem] leading-relaxed text-bark">{verse.translation}</p>
       <p className="text-[0.72rem] leading-relaxed text-bark/80">{verse.source}</p>
     </div>
   );
@@ -29,8 +29,7 @@ export function SanskritVerseRibbon({
     <section
       className="verse-ribbon"
       data-reverse={reverse ? "true" : "false"}
-      tabIndex={0}
-      aria-label={`${item.translation} Source: ${item.source}. The moving line pauses while hovered or focused.`}
+      aria-label={`${item.translation} Source: ${item.source}.`}
     >
       <div className="verse-marquee">
         <VerseSet verse={item} />
