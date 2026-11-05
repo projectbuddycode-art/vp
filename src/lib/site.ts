@@ -8,6 +8,7 @@ export type NavItem = { href: string; label: string };
 export const navItems: NavItem[] = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About Sanjeev Jain" },
+  { href: "/understanding-vastu", label: "Understanding Vastu" },
   { href: "/approach", label: "Vastu Approach" },
   { href: "/expertise", label: "Services" },
   { href: "/case-studies", label: "Case Studies" },
@@ -107,13 +108,13 @@ export const processSteps: ProcessStep[] = [
     number: "01",
     title: "Share Your Concern",
     direction: "N",
-    text: "Tell us what is on your mind, and a little about the property. The conversation starts before any suggestion.",
+    text: "Write what is worrying you, and a little about the house or workplace. No suggestion is made from the form alone.",
   },
   {
     number: "02",
     title: "Discuss Your Property",
     direction: "E",
-    text: "We talk through the layout, how the place is used, and any plans you already have.",
+    text: "The layout, the rooms that matter, and any drawings you already have are discussed before the visit is fixed.",
   },
   {
     number: "03",
@@ -125,7 +126,7 @@ export const processSteps: ProcessStep[] = [
     number: "04",
     title: "Receive Practical Guidance",
     direction: "W",
-    text: "You receive suggestions for that property, explained in plain language, including what a builder may need to check.",
+    text: "You receive guidance for that property, in plain language. Building work, if it is suggested, is named separately so an architect or engineer can check it.",
   },
 ];
 
@@ -437,10 +438,10 @@ export const defaultDeliverables = [
 ];
 
 export const defaultSettings: SiteSettings = {
-  brandName: "Sanjeev Jain",
-  practiceName: "Vedic Vastu Consultancy",
-  tagline: "Ancient Knowledge. Personal Insight. Practical Guidance.",
-  coreMessage: "Every Space Is Different. Every Vastu Solution Should Be Personal.",
+  brandName: "STHAPATYA",
+  practiceName: "Vastu Shastra consultancy by Sanjeev Jain",
+  tagline: "Ancient Wisdom. A Thoughtful Approach to Modern Spaces.",
+  coreMessage: "Every property is studied on its own. Guidance is personal, and results are not promised.",
   phone: "",
   whatsapp: "",
   email: "",

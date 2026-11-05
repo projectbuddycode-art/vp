@@ -48,7 +48,12 @@ export default function ExpertisePage() {
               </div>
             </Link>
           ))}
-          <Button href="/contact">Book a Visit</Button>
+          <div className="max-w-xl space-y-4">
+            <p className="text-base leading-relaxed text-deep/80">
+              If you are not sure which consultation fits, describe the property. Mr. Sanjeev Jain can tell you, after he has heard the concern, whether a visit is the right next step.
+            </p>
+            <Button href="/contact">Not Sure Where to Start? Tell Us About Your Property.</Button>
+          </div>
         </Container>
       </section>
     </>

@@ -58,7 +58,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         <p className="font-serif text-xl italic text-bark">{article.category}</p>
         <h1 className="mt-4 font-serif text-5xl leading-[0.98] sm:text-6xl">{article.title}</h1>
         <p className="mt-4 text-sm text-deep/70">
-          Written for the practice of Mr. Sanjeev Jain. Updated {article.publishedAt}. {readingMinutes(article.content)} minute read. This note explains an idea. It does not read your property.
+          Written for STHAPATYA, the Vastu practice of Mr. Sanjeev Jain. Updated {article.publishedAt}. {readingMinutes(article.content)} minute read. This note explains an idea. It does not read your property.
         </p>
         <div className="relative mt-8 aspect-[16/9]">
           <Image src={article.image} alt={article.imageAlt} fill priority className="object-cover" sizes="(min-width: 768px) 768px, 100vw" />
@@ -66,7 +66,12 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         <div className="mt-10">
           <Markdown source={article.content} />
         </div>
-        <div className="mt-12">
+        <div className="mt-12 flex flex-col gap-3 sm:flex-row">
+          {article.relatedHref ? (
+            <Button href={article.relatedHref} variant="line">
+              Related page
+            </Button>
+          ) : null}
           <Button href="/contact">Book a personal consultation</Button>
         </div>
         {related.length > 0 ? (

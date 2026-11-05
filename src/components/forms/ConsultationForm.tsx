@@ -96,8 +96,8 @@ export function ConsultationForm({ settings }: { settings: SiteSettings }) {
           <FieldError message={errors.mobile?.message} />
         </div>
         <div>
-          <label className="label" htmlFor="email">Email address</label>
-          <p className="mb-1 text-xs text-bark">So we can reply.</p>
+          <label className="label" htmlFor="email">Email address (optional)</label>
+          <p className="mb-1 text-xs text-bark">Useful if you would like a written reply. The phone number is enough to enquire.</p>
           <input id="email" type="email" className="field" autoComplete="email" aria-invalid={Boolean(errors.email)} {...register("email")} />
           <FieldError message={errors.email?.message} />
         </div>

@@ -48,7 +48,8 @@ export async function notifyEnquiry(notice: Notice) {
     ? await sendEmail(admin, `Consultation enquiry ${notice.enquiryCode}`, summary)
     : { sent: false, reason: "No administrator email is configured." };
 
-  const visitorResult = await sendEmail(
+  const visitorResult = notice.email
+    ? await sendEmail(
     notice.email,
     `Enquiry received · ${notice.enquiryCode}`,
     [
@@ -60,9 +61,10 @@ export async function notifyEnquiry(notice: Notice) {
       "This note confirms receipt only. It does not confirm a visit date, and it does not promise a particular outcome.",
       "",
       "Sanjeev Jain",
-      "Vedic Vastu Consultancy",
+      "STHAPATYA",
     ].join("\n"),
-  );
+    )
+    : { sent: false, reason: "No email address was given." };
 
   return {
     adminNotified: adminResult.sent,

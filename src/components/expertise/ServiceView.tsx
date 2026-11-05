@@ -3,12 +3,14 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/layout/PageHero";
 import { ServiceVideoFeature } from "@/components/video/ServiceVideoFeature";
+import { serviceGuides } from "@/lib/content/service-guides";
 import { images } from "@/lib/images";
 import { serviceFilms } from "@/lib/videos";
 import type { Service } from "@/lib/site";
 import { siteUrl } from "@/lib/utils";
 
 export function ServiceView({ service }: { service: Service }) {
+  const guide = serviceGuides[service.slug];
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -28,8 +30,18 @@ export function ServiceView({ service }: { service: Service }) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <PageHero
-        eyebrow={<span className="font-serif text-xl italic text-bark">Vastu consultation</span>}
-        title={service.title}
+        eyebrow={
+          guide ? (
+            <span className="text-bark">
+              <span className="devanagari text-xl">{guide.sanskrit}</span>
+              <span className="mx-2 text-gold">·</span>
+              <span className="font-serif text-xl italic">{guide.reading}</span>
+            </span>
+          ) : (
+            <span className="font-serif text-xl italic text-bark">Vastu consultation</span>
+          )
+        }
+        title={guide?.headline ?? service.title}
         text={service.lead}
         image={service.image}
         crumbs={[
@@ -70,6 +82,54 @@ export function ServiceView({ service }: { service: Service }) {
           </div>
         </Container>
       </section>
+      {guide ? (
+        <section className="bg-white py-16 sm:py-20">
+          <Container className="grid gap-12 lg:grid-cols-2">
+            <div>
+              <h2 className="font-serif text-4xl">Concerns people bring</h2>
+              <ul className="mt-4 space-y-3 text-sm leading-relaxed text-deep/80">
+                {guide.concerns.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              <h2 className="mt-10 font-serif text-4xl">What to prepare</h2>
+              <ul className="mt-4 space-y-3 text-sm leading-relaxed text-deep/80">
+                {guide.prepare.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h2 className="font-serif text-4xl">What is studied</h2>
+              <ul className="mt-4 space-y-3 text-sm leading-relaxed text-deep/80">
+                {guide.studied.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              <h2 className="mt-10 font-serif text-4xl">Forms of guidance</h2>
+              <ul className="mt-4 space-y-3 text-sm leading-relaxed text-deep/80">
+                {guide.guidance.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </Container>
+          <Container className="mt-14">
+            <h2 className="font-serif text-4xl">Questions about this consultation</h2>
+            <div className="mt-6 grid gap-6 md:grid-cols-2">
+              {guide.faqs.map((faq) => (
+                <article key={faq.question} className="border border-deep/10 p-5">
+                  <h3 className="font-serif text-2xl">{faq.question}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-deep/75">{faq.answer}</p>
+                </article>
+              ))}
+            </div>
+            <div className="mt-8">
+              <Button href="/contact">Not sure where to start? Tell us about your property.</Button>
+            </div>
+          </Container>
+        </section>
+      ) : null}
       <section className="bg-[#efe8da] py-16">
         <Container className="grid items-center gap-8 md:grid-cols-2">
           <div className="relative aspect-[4/3]">

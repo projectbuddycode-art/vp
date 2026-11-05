@@ -21,8 +21,8 @@ export default function ApproachPage() {
     <>
       <PageHero
         eyebrow={<SanskritLabel term="दिशा एवं संतुलन" reading="Directions and balance" meaning="The visit looks at direction, rooms and surroundings. A screen diagram is not the consultation." />}
-        title="How does a Vastu consultation work?"
-        text="You share the concern. Mr. Sanjeev Jain visits the property. He then explains practical guidance for that layout. Two properties do not get the same answer just because the worry sounds similar."
+        title="Every Property Is Different. So Is Its Approach."
+        text="Mr. Sanjeev Jain studies the concern, the plan, the directions, and the surroundings before he suggests anything. Two properties do not get the same answer just because the worry sounds similar."
         crumbs={[{ href: "/", label: "Home" }, { href: "/approach", label: "Vastu approach" }]}
         image={images.geometry}
       />
@@ -39,6 +39,30 @@ export default function ApproachPage() {
       </section>
       <EightDirections />
       <Methodology />
+      <section className="bg-white py-16 sm:py-20">
+        <Container>
+          <h2 className="max-w-3xl font-serif text-4xl">How the property is studied</h2>
+          <ol className="mt-8 grid gap-6 md:grid-cols-2">
+            {[
+              ["The concern", "The visit starts from the question you actually have, not from a fixed menu."],
+              ["The property details", "City, property type, and any drawings are reviewed so the visit is prepared."],
+              ["The layout", "Rooms, the centre of the plan, and the path through the building are looked at on site."],
+              ["The directions", "North is established as reliably as the plan and the site allow."],
+              ["Entrances and rooms", "The door people use, and the rooms tied to the concern, are discussed in plain words."],
+              ["The surroundings", "What can be seen around the property is noted. A place he has not visited is not described."],
+              ["Possible guidance", "Suggestions are specific to that property. They are not copied from the last visit."],
+              ["What a change would mean", "A change of use is distinguished from building work."],
+              ["Effort and cost", "The visit is ₹10,000. Travel and remedies are separate. A remedy price is not fixed before the assessment."],
+            ].map(([title, text], index) => (
+              <li key={title} className="border border-deep/10 p-5">
+                <p className="font-serif text-2xl text-gold">0{index + 1}</p>
+                <h3 className="mt-2 font-serif text-3xl">{title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-deep/75">{text}</p>
+              </li>
+            ))}
+          </ol>
+        </Container>
+      </section>
       <section className="bg-ivory py-16">
         <Container className="max-w-3xl space-y-4 text-base leading-relaxed text-deep/80">
           <h2 className="font-serif text-4xl text-deep">What the consultation is for</h2>

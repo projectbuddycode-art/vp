@@ -4,6 +4,7 @@ import {
   ConsultationBand,
   FinalCta,
   FounderStory,
+  VastuIntro,
   GuidanceAreas,
   KnowledgePreview,
   Philosophy,
@@ -39,9 +40,10 @@ export default async function HomePage() {
       },
       {
         "@type": "ProfessionalService",
-        name: "Sanjeev Jain Vedic Vastu Consultancy",
+        name: "STHAPATYA",
+        alternateName: "Sanjeev Jain Vastu Shastra consultancy",
         description:
-          "Personal Vastu Shastra consultations for homes and workplaces. Each property is studied on site. A visit is ₹10,000. Outcomes are not guaranteed.",
+          "STHAPATYA is the personal Vastu Shastra consultancy of Mr. Sanjeev Jain. Each property is studied on site. A visit is ₹10,000. Outcomes are not guaranteed.",
         url: siteUrl(),
         image: `${siteUrl()}/images/hero-sandstone.jpg`,
         priceRange: `INR ${settings.consultationFee}`,
@@ -64,8 +66,9 @@ export default async function HomePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <Hero />
+      <Hero portraitUrl={settings.founderPortraitUrl} />
       <SanskritVerseRibbon index={0} />
+      <VastuIntro />
       <FounderStory settings={settings} />
       <SanskritVerseRibbon index={1} />
       <Philosophy />

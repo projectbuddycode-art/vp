@@ -309,7 +309,7 @@ export async function saveSettings(formData: FormData) {
   if (file instanceof File && file.size > 0) portrait = await uploadPublicImage(file, "brand");
   const payload = {
     id: 1,
-    brand_name: one(formData, "brand_name") || "Sanjeev Jain",
+    brand_name: one(formData, "brand_name") || "STHAPATYA",
     practice_name: one(formData, "practice_name") || "Vedic Vastu Consultancy",
     tagline: one(formData, "tagline"),
     core_message: one(formData, "core_message"),

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Manrope, Noto_Serif_Devanagari } from "next/font/google";
+import { Cormorant_Garamond, Inter, Noto_Serif_Devanagari } from "next/font/google";
 import { MotionProvider } from "@/components/animations/MotionProvider";
 import { siteUrl } from "@/lib/utils";
 import "./globals.css";
@@ -12,10 +12,9 @@ const serif = Cormorant_Garamond({
   display: "swap",
 });
 
-const sans = Manrope({
+const sans = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-manrope",
+  variable: "--font-inter",
   display: "swap",
 });
 
@@ -29,17 +28,17 @@ const devanagari = Noto_Serif_Devanagari({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
   title: {
-    default: "Vastu consultant · Sanjeev Jain",
-    template: "%s · Sanjeev Jain",
+    default: "STHAPATYA · Sanjeev Jain",
+    template: "%s · STHAPATYA",
   },
   description:
-    "Mr. Sanjeev Jain is a Vastu Shastra consultant. He visits a home or workplace, studies its layout and directions, and explains practical guidance in simple language. A personal visit is ₹10,000.",
-  applicationName: "Sanjeev Jain Vedic Vastu Consultancy",
+    "STHAPATYA is the Vastu Shastra consultancy of Mr. Sanjeev Jain. He visits a home or workplace, studies its layout and directions, and explains practical guidance. A personal visit is ₹10,000.",
+  applicationName: "STHAPATYA",
   authors: [{ name: "Sanjeev Jain" }],
   openGraph: {
     type: "website",
     locale: "en_IN",
-    siteName: "Sanjeev Jain Vedic Vastu Consultancy",
+    siteName: "STHAPATYA",
   },
   robots: { index: true, follow: true },
 };

@@ -25,10 +25,10 @@ export default async function AboutPage() {
             <Breadcrumbs items={[{ href: "/", label: "Home" }, { href: "/about", label: "About Sanjeev Jain" }]} />
             <SanskritLabel term="परंपरा" reading="Knowledge through tradition" meaning="What was passed on, then checked against real properties." />
             <h1 className="mt-4 font-serif text-[clamp(2.6rem,5vw,4.8rem)] leading-[0.98] font-medium tracking-[-0.03em]">
-              Who is Mr. Sanjeev Jain?
+              Experience, Tradition and a Personal Approach.
             </h1>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-deep/80 sm:text-lg">
-              He is a Vastu Shastra consultant. He visits the property himself and explains what he finds in simple words. He does not use one chart for every building.
+              Mr. Sanjeev Jain is the consultant behind STHAPATYA. He visits each property himself and explains what he finds in plain language.
             </p>
           </div>
           <figure>
@@ -48,27 +48,34 @@ export default async function AboutPage() {
       </section>
       <section className="bg-white py-16 sm:py-24">
         <Container className="grid items-start gap-12 lg:grid-cols-[0.9fr_1.1fr]">
-          <p className="font-serif text-3xl leading-snug italic">Practical guidance, explained in plain language.</p>
+          <p className="font-serif text-3xl leading-snug italic">The consultant, not a catalogue of claims.</p>
           <div className="space-y-5 text-base leading-relaxed text-deep/80">
             {settings.founderSummary ? (
               settings.founderSummary.split("\n").filter(Boolean).map((paragraph) => <p key={paragraph}>{paragraph}</p>)
             ) : (
               <>
+                <h2 className="font-serif text-3xl text-deep">Professional background</h2>
                 <p>
-                  Mr. Sanjeev Jain has a background in the diamond industry. He practises Vastu from knowledge he inherited, and he has refined that knowledge by studying properties in person.
+                  Before this consultancy, Mr. Sanjeev Jain worked in the diamond industry. That fact is stated because it is his. This page does not turn it into an award or a count of years.
+                </p>
+                <h2 className="font-serif text-3xl text-deep">Inherited knowledge</h2>
+                <p>
+                  His Vastu practice comes from knowledge passed to him. He has refined that inheritance by studying properties himself. The site does not invent a lineage name, a certificate, or a publication.
+                </p>
+                <h2 className="font-serif text-3xl text-deep">A personal method</h2>
+                <p>
+                  He does not apply one chart to every building. The entrance, the rooms, and the way people use them decide what is discussed. Traditional principles are the starting language. The property decides the guidance.
+                </p>
+                <h2 className="font-serif text-3xl text-deep">How he works with clients</h2>
+                <p>
+                  People come with questions about homes, offices, work rooms, and the feeling of a living space. He listens, visits, and then explains practical steps. Some steps are small. Building work, when it is really needed, can cost more and should be checked by an engineer or architect.
                 </p>
                 <p>
-                  This page does not add qualifications, awards, or a number of years. Those details will appear only if he chooses to publish them.
-                </p>
-                <p>
-                  People ask him about homes, workplaces, money and work concerns, and the feeling of a living space. A personal visit is ₹10,000. Travel, where it applies, is discussed separately. Remedies are priced on their own after the visit.
-                </p>
-                <p>
-                  He looks for changes a person can actually carry out. Some are small. Building work, when it is really needed, can cost more and should be checked by an engineer or architect.
+                  A personal visit is ₹10,000. Travel, where it applies, is discussed separately. Remedies are priced after the visit. Qualifications and awards will be added only if he chooses to publish them.
                 </p>
               </>
             )}
-            <Button href="/contact">Book a Visit</Button>
+            <Button href="/contact">Book a Personal Consultation</Button>
           </div>
         </Container>
       </section>

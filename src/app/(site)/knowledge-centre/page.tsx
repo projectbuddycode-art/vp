@@ -7,7 +7,7 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   title: "Vastu questions, answered simply",
-  description: "Plain answers about Vastu directions, home layouts, offices and how to prepare for a visit with Mr. Sanjeev Jain.",
+  description: "Plain answers from STHAPATYA about Vastu Shastra, directions, homes, offices, and how to prepare for a visit with Mr. Sanjeev Jain.",
   path: "/knowledge-centre",
   image: images.geometry.src,
 });

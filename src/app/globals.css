@@ -11,7 +11,7 @@
   --color-ink: #211b17;
   --color-charcoal: #171411;
   --font-serif: var(--font-cormorant), "Iowan Old Style", "Palatino Linotype", serif;
-  --font-sans: var(--font-manrope), "Avenir Next", "Segoe UI", sans-serif;
+  --font-sans: var(--font-inter), "Segoe UI", sans-serif;
   --shadow-lift: 0 30px 70px -42px rgba(33, 27, 23, 0.55);
 }
 

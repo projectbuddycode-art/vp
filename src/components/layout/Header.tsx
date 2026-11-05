@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
+import { BrandLockup } from "@/components/brand/Logo";
 import { navItems } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/ui/Container";
@@ -45,9 +46,8 @@ export function Header() {
       )}
     >
       <Container className="flex h-[4.5rem] items-center justify-between gap-4 lg:h-20">
-        <Link href="/" className="min-w-0 leading-none">
-          <span className="block font-serif text-[1.35rem] tracking-normal sm:text-[1.55rem]">Sanjeev Jain</span>
-          <span className={cn("mt-1 block text-[0.72rem]", overlay ? "text-sand" : "text-bark")}>Vastu consultancy</span>
+        <Link href="/" className="min-w-0 leading-none" aria-label="STHAPATYA, Vastu consultancy of Sanjeev Jain">
+          <BrandLockup light={overlay} />
         </Link>
         <nav className="hidden items-center gap-x-3 xl:flex 2xl:gap-x-4" aria-label="Primary">
           {navItems.map((item) => (
@@ -73,7 +73,7 @@ export function Header() {
               overlay ? "bg-ivory text-deep hover:bg-sand" : "bg-deep text-ivory hover:bg-[#342b26]",
             )}
           >
-            Book a Visit
+            Book a Consultation
           </Link>
           <button
             type="button"
@@ -107,7 +107,7 @@ export function Header() {
               </Link>
             ))}
             <Link href="/contact" onClick={() => setOpen(false)} className="vedic-button mt-8 inline-flex items-center justify-center bg-deep px-5 py-4 text-center text-base text-ivory">
-              Book a Visit
+              Book a Consultation
             </Link>
           </nav>
         </div>

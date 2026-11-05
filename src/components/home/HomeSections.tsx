@@ -60,6 +60,39 @@ const storyFields = [
   "The client’s own feedback",
 ];
 
+export function VastuIntro() {
+  return (
+    <section className="bg-ivory py-20 sm:py-24">
+      <Container className="max-w-3xl">
+        <SanskritLabel
+          term="वास्तु परिचय"
+          reading="Understanding Vastu"
+          meaning="वास्तु means the space we live and work in. This section explains the idea. It does not assess a property."
+        />
+        <h2 className="mt-4 font-serif text-[clamp(2.4rem,4.4vw,4.2rem)] leading-[0.98] font-medium tracking-[-0.03em]">
+          Understanding the Space Around Us.
+        </h2>
+        <div className="mt-6 space-y-4 text-base leading-relaxed text-deep/80">
+          <p>
+            Vastu Shastra is a traditional Indian way of looking at a building. It asks how the rooms are arranged, which way the entrance faces, and what sits around the property.
+          </p>
+          <p>
+            STHAPATYA uses that tradition in a personal consultation. Mr. Sanjeev Jain studies one property at a time. He does not offer a chart that claims to fit every home or office.
+          </p>
+          <p>
+            The ideas on this website are explanations. They are not quotations from a scripture unless a source is named. They are also not a substitute for an architect, an engineer, a doctor, or a financial adviser.
+          </p>
+        </div>
+        <div className="mt-8">
+          <Button href="/understanding-vastu" variant="line">
+            Read the introduction
+          </Button>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
 export function FounderStory({ settings }: { settings: SiteSettings }) {
   return (
     <section className="bg-white py-20 sm:py-28">
@@ -68,7 +101,7 @@ export function FounderStory({ settings }: { settings: SiteSettings }) {
         <div>
           <SanskritLabel term="परंपरा" reading="Knowledge through tradition" meaning="A tradition carried forward, then used with care on each property." />
           <h2 className="mt-3 font-serif text-[clamp(2.5rem,4.4vw,4.4rem)] leading-[0.98] font-medium tracking-[-0.03em]">
-            Mr. Sanjeev Jain
+            Meet Mr. Sanjeev Jain.
           </h2>
           <div className="mt-6 space-y-4 text-base leading-relaxed text-deep/80">
             {settings.founderSummary ? (
@@ -124,7 +157,7 @@ export function Philosophy() {
         <div>
           <SanskritLabel term="दिशा एवं संतुलन" reading="Directions and balance" meaning="Direction means which way a room faces. Balance means the parts of the plan sit together in a thoughtful way." />
           <h2 className="mt-3 font-serif text-[clamp(2.4rem,4.4vw,4.2rem)] leading-[0.98] font-medium tracking-[-0.03em]">
-            How a property is studied.
+            Ancient Principles. A Thoughtful Modern Approach.
           </h2>
           <div className="mt-6 space-y-4 text-base leading-relaxed text-deep/80">
             <p>
@@ -169,7 +202,7 @@ export function GuidanceAreas() {
         <div className="max-w-3xl">
           <p className="font-serif text-xl italic text-bark">Areas of guidance</p>
           <h2 className="mt-3 font-serif text-[clamp(2.4rem,4.4vw,4.2rem)] leading-[0.98] font-medium tracking-[-0.03em]">
-            Every property has its own story.
+            Guidance for the Spaces That Matter.
           </h2>
           <p className="mt-5 text-base leading-relaxed text-deep/80 sm:text-lg">
             People come with different questions. These are areas of consultation. They are not guaranteed results.

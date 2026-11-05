@@ -21,8 +21,8 @@ export default async function ContactPage() {
     <>
       <PageHero
         eyebrow="Contact"
-        title="How do I book Mr. Sanjeev Jain?"
-        text="Send your name, phone number, city and a short note about the property. A visit is confirmed only after the consultancy replies. The on-site fee is shown beside the form."
+        title="How do I book a STHAPATYA consultation?"
+        text="Send your name, phone number, city and a short note about the property. Email is optional. If you are not sure which consultation you need, describe the property in your own words. A visit is confirmed only after a reply."
         crumbs={[{ href: "/", label: "Home" }, { href: "/contact", label: "Contact" }]}
         image={images.carving}
       />

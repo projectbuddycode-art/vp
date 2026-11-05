@@ -13,7 +13,7 @@ export function Journey() {
       <Container>
         <p className="font-serif text-xl italic text-bark">How a visit works</p>
         <h2 className="mt-3 max-w-3xl font-serif text-[clamp(2.4rem,4.5vw,4.4rem)] leading-[0.98] font-medium tracking-[-0.03em]">
-          A personal visit, in four clear steps.
+          A Clear and Personal Consultation Process.
         </h2>
         <p className="mt-5 max-w-2xl text-base leading-relaxed text-deep/75 sm:text-lg">
           Mr. Sanjeev Jain listens first. He then looks at the property himself before suggesting anything.

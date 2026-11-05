@@ -98,8 +98,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, message: "Enter a valid 10-digit Indian mobile number." }, { status: 400 });
   }
 
+  const enquiryEmail = parsed.data.email.trim().toLowerCase();
   const fingerprint = createHash("sha256")
-    .update(`${parsed.data.email.toLowerCase()}|${mobile}|${parsed.data.consultationCategory}`)
+    .update(`${enquiryEmail}|${mobile}|${parsed.data.consultationCategory}`)
     .digest("hex");
   const supabase = createServiceClient();
 
@@ -141,7 +142,7 @@ export async function POST(request: Request) {
         enquiry_code: enquiryCode,
         full_name: parsed.data.fullName,
         mobile,
-        email: parsed.data.email.toLowerCase(),
+        email: enquiryEmail,
         city: parsed.data.city,
         property_type: parsed.data.propertyType,
         consultation_category: parsed.data.consultationCategory,
@@ -199,7 +200,7 @@ export async function POST(request: Request) {
   const email = await notifyEnquiry({
     enquiryCode,
     fullName: parsed.data.fullName,
-    email: parsed.data.email,
+    email: enquiryEmail,
     mobile,
     city: parsed.data.city,
     propertyType: parsed.data.propertyType,

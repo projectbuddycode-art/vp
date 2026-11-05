@@ -1,4 +1,5 @@
 import { saveSettings } from "@/lib/actions/admin";
+import { factsAwaitingConfirmation } from "@/lib/content/confirmation";
 import { createClient } from "@/lib/supabase/server";
 import { defaultSettings } from "@/lib/site";
 
@@ -10,6 +11,14 @@ export default async function SettingsPage() {
   return (
     <form action={saveSettings} className="max-w-3xl space-y-4">
       <h1 className="font-serif text-5xl">Website settings</h1>
+      <aside className="border border-deep/10 bg-parchment p-4 text-sm leading-relaxed">
+        <p className="font-serif text-2xl">Confirm before publishing</p>
+        <ul className="mt-3 list-disc space-y-1 pl-5">
+          {factsAwaitingConfirmation.map((fact) => (
+            <li key={fact}>{fact}</li>
+          ))}
+        </ul>
+      </aside>
       <input type="hidden" name="existing_portrait" value={String(row.founder_portrait_url || "")} />
       {(
         [

@@ -17,9 +17,10 @@ export const enquirySchema = z.object({
   email: z
     .string()
     .trim()
-    .min(1, "Email is required.")
-    .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Enter a valid email address.")
-    .max(160),
+    .max(160)
+    .refine((value) => value === "" || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value), {
+      message: "Enter a valid email address, or leave this blank.",
+    }),
   city: z.string().trim().min(2, "Please enter your city.").max(80),
   propertyType: z.enum(propertyTypeValues, { message: "Select a property type." }),
   consultationCategory: z.enum(concernValues, { message: "Select a concern." }),

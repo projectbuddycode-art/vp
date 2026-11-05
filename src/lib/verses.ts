@@ -4,6 +4,8 @@ export type SanskritVerse = {
   transliteration: string;
   translation: string;
   source: string;
+  context: string;
+  verificationStatus: "verified";
 };
 
 /**
@@ -17,6 +19,8 @@ export const verses: SanskritVerse[] = [
     transliteration: "oṃ asato mā sad gamaya. tamaso mā jyotir gamaya. mṛtyor mā amṛtaṃ gamaya. oṃ śāntiḥ śāntiḥ śāntiḥ.",
     translation: "Lead me from what is not true to what is true. From darkness to light. From death to what does not die.",
     source: "Bṛhadāraṇyaka Upaniṣad 1.3.28",
+    context: "A general Upaniṣadic prayer. It is not a Vastu reading of a building.",
+    verificationStatus: "verified",
   },
   {
     id: "isha-1",
@@ -24,6 +28,8 @@ export const verses: SanskritVerse[] = [
     transliteration: "īśā vāsyam idaṃ sarvaṃ yat kiñca jagatyāṃ jagat. tena tyaktena bhuñjīthā mā gṛdhaḥ kasya svid dhanam.",
     translation: "All of this world is pervaded by the divine. Enjoy with a sense of letting go. Do not take what belongs to someone else.",
     source: "Īśā Upaniṣad, verse 1",
+    context: "A verse about the world and restraint. It is not a property mantra.",
+    verificationStatus: "verified",
   },
   {
     id: "taittiriya-shanti",
@@ -31,12 +37,16 @@ export const verses: SanskritVerse[] = [
     transliteration: "oṃ saha nāv avatu. saha nau bhunaktu. saha vīryaṃ karavāvahai. tejasvi nāv adhītam astu mā vidviṣāvahai.",
     translation: "May we be protected together. May we be nourished together. May we work with strength. May our learning be bright, and may we not turn against each other.",
     source: "Taittirīya Upaniṣad, Śikṣāvallī, śānti pāṭha",
+    context: "A prayer spoken before study together. It is not a Vastu remedy.",
+    verificationStatus: "verified",
   },
   {
     id: "sarve-bhavantu",
     sanskrit: "ॐ सर्वे भवन्तु सुखिनः । सर्वे सन्तु निरामयाः । सर्वे भद्राणि पश्यन्तु । मा कश्चिद् दुःखभाग् भवेत् ॥",
     transliteration: "oṃ sarve bhavantu sukhinaḥ. sarve santu nirāmayāḥ. sarve bhadrāṇi paśyantu. mā kaścid duḥkha-bhāg bhavet.",
     translation: "May everyone be happy. May everyone be free from illness. May everyone see what is good. May no one have to suffer.",
-    source: "Traditional Sanskrit śānti prayer. Not a verse from a Vastu manual, and not a reading of a building.",
+    source: "Traditional Sanskrit śānti prayer. Not a verse from a Vastu manual.",
+    context: "A general wish for the welfare of all. Reciting it is not presented as a cure or a property result.",
+    verificationStatus: "verified",
   },
 ];

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { BrandMark } from "@/components/brand/Logo";
 import { disclaimer, navItems, services, type SiteSettings } from "@/lib/site";
 import { whatsappHref } from "@/lib/utils";
 
@@ -13,9 +14,13 @@ export function Footer({ settings }: { settings: SiteSettings }) {
     <footer className="dark-panel text-ivory">
       <Container className="grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4 lg:py-20">
         <div>
-          <p className="font-serif text-3xl">Sanjeev Jain</p>
-          <p className="mt-2 text-sm text-sand">Vastu consultancy</p>
+          <BrandMark light />
+          <p className="mt-3 font-serif text-3xl tracking-[0.12em]">STHAPATYA</p>
+          <p className="mt-2 text-sm text-sand">
+            <span className="devanagari">स्थापत्य</span> · Sanjeev Jain
+          </p>
           <p className="mt-6 max-w-xs text-sm leading-relaxed text-sand">{settings.tagline}</p>
+          <p className="devanagari mt-3 text-sm text-sand">वास्तु · दिशा · संतुलन</p>
         </div>
         <div>
           <p className="text-[0.68rem] tracking-[0.2em] text-gold uppercase">Visit</p>
