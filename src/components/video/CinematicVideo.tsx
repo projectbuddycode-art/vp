@@ -123,7 +123,7 @@ export function CinematicVideo({
         <video
           ref={videoRef}
           className="absolute inset-0 h-full w-full object-cover object-center"
-          poster={video.poster}
+          poster={continuous ? undefined : video.poster}
           muted
           playsInline
           autoPlay={autoPlay || continuous}
