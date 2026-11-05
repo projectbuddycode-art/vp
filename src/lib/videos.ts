@@ -18,7 +18,8 @@ export type VideoSlot = {
 export const videos = {
   hero: {
     id: "hero",
-    title: "Sunlight moving through a sandstone courtyard",
+    title: "STHAPATYA opening film",
+    src: "/videos/sthapathya-opening.mp4",
     poster: images.hero.src,
     posterAlt: images.hero.alt,
   },

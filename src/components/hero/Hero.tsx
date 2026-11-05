@@ -1,15 +1,13 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
 import { HeroAtmosphere } from "@/components/hero/HeroAtmosphere";
 import { CinematicVideo } from "@/components/video/CinematicVideo";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { images, resolvePortrait } from "@/lib/images";
 import { videos } from "@/lib/videos";
 
-export function Hero({ portraitUrl }: { portraitUrl?: string }) {
+export function Hero() {
   const copyRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -35,14 +33,14 @@ export function Hero({ portraitUrl }: { portraitUrl?: string }) {
   }, []);
 
   return (
-    <section className="relative min-h-[100svh] overflow-hidden bg-charcoal text-ivory">
+    <section className="relative h-[100svh] w-full overflow-hidden bg-charcoal text-ivory">
       <div className="absolute inset-0">
-        <CinematicVideo video={videos.hero} autoPlay priority className="absolute inset-0 h-full w-full" sizes="100vw" />
+        <CinematicVideo video={videos.hero} autoPlay continuous priority className="absolute inset-0 h-full w-full" sizes="100vw" />
         <div className="absolute inset-0 bg-gradient-to-r from-charcoal/82 via-charcoal/55 to-charcoal/25" />
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-transparent to-charcoal/25" />
         <HeroAtmosphere />
       </div>
-      <Container className="relative z-10 grid min-h-[100svh] items-end gap-8 pt-28 pb-16 lg:grid-cols-[1.05fr_0.95fr] lg:pb-20">
+      <Container className="relative z-10 flex h-full flex-col justify-end pt-28 pb-16 lg:pb-20">
         <div ref={copyRef} className="max-w-3xl">
           <p data-line className="text-sand">
             <span className="font-serif tracking-[0.16em]">STHAPATYA</span>
@@ -64,19 +62,6 @@ export function Hero({ portraitUrl }: { portraitUrl?: string }) {
             </Button>
           </div>
         </div>
-        <figure data-line className="w-full max-w-xl justify-self-end border border-ivory/30 bg-parchment p-2">
-          <div className="relative aspect-[3/2] bg-parchment">
-            <Image
-              src={resolvePortrait(portraitUrl)}
-              alt={images.founder.alt}
-              fill
-              priority
-              className="object-cover object-center"
-              sizes="(min-width: 1024px) 42vw, 100vw"
-            />
-          </div>
-          <figcaption className="px-2 py-2 text-xs text-deep">Mr. Sanjeev Jain. The photograph is shown in full, without a filter over his face.</figcaption>
-        </figure>
       </Container>
     </section>
   );

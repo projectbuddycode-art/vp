@@ -13,6 +13,7 @@ export function CinematicVideo({
   playInView = false,
   playOnHover = false,
   priority = false,
+  continuous = false,
   className,
   sizes = "100vw",
 }: {
@@ -23,6 +24,8 @@ export function CinematicVideo({
   playInView?: boolean;
   playOnHover?: boolean;
   priority?: boolean;
+  /** Keep a muted film playing. Used for the full-screen opening. */
+  continuous?: boolean;
   className?: string;
   sizes?: string;
 }) {
@@ -55,7 +58,24 @@ export function CinematicVideo({
       setPlaying(false);
     };
 
-    if (!playInView && autoPlay) play();
+    if (continuous || (!playInView && autoPlay)) play();
+
+    if (continuous) {
+      const keepPlaying = () => {
+        if (node.paused || node.ended) {
+          if (node.ended) node.currentTime = 0;
+          void node.play().then(() => setPlaying(true)).catch(() => undefined);
+        }
+      };
+      node.addEventListener("pause", keepPlaying);
+      node.addEventListener("ended", keepPlaying);
+      node.addEventListener("stalled", keepPlaying);
+      return () => {
+        node.removeEventListener("pause", keepPlaying);
+        node.removeEventListener("ended", keepPlaying);
+        node.removeEventListener("stalled", keepPlaying);
+      };
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -70,7 +90,7 @@ export function CinematicVideo({
       observer.disconnect();
       pause();
     };
-  }, [autoPlay, canPlay, playInView]);
+  }, [autoPlay, canPlay, continuous, playInView]);
 
   function toggle() {
     const node = videoRef.current;
@@ -102,13 +122,14 @@ export function CinematicVideo({
       {canPlay ? (
         <video
           ref={videoRef}
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover object-center"
           poster={video.poster}
           muted
           playsInline
-          loop={loop}
+          autoPlay={autoPlay || continuous}
+          loop={loop || continuous}
           controls={controls}
-          preload={priority ? "metadata" : "none"}
+          preload={priority || continuous ? "auto" : "none"}
           aria-labelledby={labelId}
           onError={() => setFailed(true)}
         >
@@ -127,7 +148,7 @@ export function CinematicVideo({
         />
       )}
       {!canPlay ? <span className="cinematic-light pointer-events-none absolute inset-0" aria-hidden /> : null}
-      {canPlay ? (
+      {canPlay && !continuous ? (
         <button
           type="button"
           className="absolute right-3 bottom-3 z-10 bg-ivory/90 px-3 py-2 text-sm text-deep"

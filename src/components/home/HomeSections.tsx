@@ -7,7 +7,7 @@ import { useOnceInView } from "@/components/animations/useOnceInView";
 import { VastuDiagram } from "@/components/diagrams/VastuDiagram";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { images, resolvePortrait, studyCaption } from "@/lib/images";
+import { studyCaption } from "@/lib/images";
 import { videos } from "@/lib/videos";
 import { SanskritLabel } from "@/components/content/SanskritLabel";
 import { ServiceVideoFeature } from "@/components/video/ServiceVideoFeature";
@@ -96,9 +96,8 @@ export function VastuIntro() {
 export function FounderStory({ settings }: { settings: SiteSettings }) {
   return (
     <section className="bg-white py-20 sm:py-28">
-      <Container className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-        <FounderPortrait url={settings.founderPortraitUrl} />
-        <div>
+      <Container>
+        <div className="max-w-3xl">
           <SanskritLabel term="परंपरा" reading="Knowledge through tradition" meaning="A tradition carried forward, then used with care on each property." />
           <h2 className="mt-3 font-serif text-[clamp(2.5rem,4.4vw,4.4rem)] leading-[0.98] font-medium tracking-[-0.03em]">
             Meet Mr. Sanjeev Jain.
@@ -129,24 +128,6 @@ export function FounderStory({ settings }: { settings: SiteSettings }) {
         </div>
       </Container>
     </section>
-  );
-}
-
-function FounderPortrait({ url }: { url?: string }) {
-  const { ref, seen } = useOnceInView<HTMLDivElement>(0.3);
-  return (
-    <figure>
-      <div ref={ref} className={`portrait-reveal relative aspect-[3/2] bg-parchment ${seen ? "is-in" : ""}`}>
-        <Image
-          src={resolvePortrait(url)}
-          alt={images.founder.alt}
-          fill
-          className="object-cover object-center"
-          sizes="(min-width: 1024px) 46vw, 100vw"
-        />
-      </div>
-      <figcaption className="mt-3 text-sm text-bark">Mr. Sanjeev Jain, in his study. The photograph is shown without retouching his face.</figcaption>
-    </figure>
   );
 }
 

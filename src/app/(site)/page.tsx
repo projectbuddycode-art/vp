@@ -66,7 +66,7 @@ export default async function HomePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <Hero portraitUrl={settings.founderPortraitUrl} />
+      <Hero />
       <SanskritVerseRibbon index={0} />
       <VastuIntro />
       <FounderStory settings={settings} />
