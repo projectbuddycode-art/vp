@@ -122,7 +122,7 @@ export function CinematicVideo({
       {canPlay ? (
         <video
           ref={videoRef}
-          className="absolute inset-0 h-full w-full object-cover object-center"
+          className="video-frame absolute top-0 left-0 h-[132%] w-full object-cover object-top"
           poster={continuous ? undefined : video.poster}
           muted
           playsInline
@@ -138,16 +138,17 @@ export function CinematicVideo({
           {video.src ? <source src={video.src} type="video/mp4" /> : null}
         </video>
       ) : (
-        <Image
-          src={video.poster}
-          alt={video.posterAlt}
-          fill
-          priority={priority}
-          className="object-cover"
-          sizes={sizes}
-        />
+        <div className="absolute top-0 left-0 h-[132%] w-full">
+          <Image
+            src={video.poster}
+            alt={video.posterAlt}
+            fill
+            priority={priority}
+            className="object-cover object-top"
+            sizes={sizes}
+          />
+        </div>
       )}
-      <span className="video-corner-blur" aria-hidden />
       {!canPlay ? <span className="cinematic-light pointer-events-none absolute inset-0" aria-hidden /> : null}
       {canPlay && !continuous ? (
         <button

@@ -360,19 +360,8 @@ body {
   }
 }
 
-.video-corner-blur {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  z-index: 3;
-  width: clamp(5.5rem, 24%, 10rem);
-  height: clamp(3.75rem, 22%, 6.5rem);
-  pointer-events: none;
-  background: rgba(23, 20, 17, 0.45);
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
-  mask-image: radial-gradient(120% 120% at 100% 100%, #000 36%, transparent 72%);
-  -webkit-mask-image: radial-gradient(120% 120% at 100% 100%, #000 36%, transparent 72%);
+.video-frame {
+  max-width: none;
 }
 
 .portrait-reveal.is-in {
