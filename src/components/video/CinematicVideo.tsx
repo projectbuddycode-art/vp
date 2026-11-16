@@ -147,12 +147,12 @@ export function CinematicVideo({
           sizes={sizes}
         />
       )}
-      {continuous ? <span className="video-corner-blur" aria-hidden /> : null}
+      <span className="video-corner-blur" aria-hidden />
       {!canPlay ? <span className="cinematic-light pointer-events-none absolute inset-0" aria-hidden /> : null}
       {canPlay && !continuous ? (
         <button
           type="button"
-          className="absolute right-3 bottom-3 z-10 bg-ivory/90 px-3 py-2 text-sm text-deep"
+          className="absolute right-3 bottom-3 z-20 bg-ivory/90 px-3 py-2 text-sm text-deep"
           aria-pressed={playing}
           onClick={toggle}
         >
