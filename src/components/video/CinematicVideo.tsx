@@ -34,7 +34,6 @@ export function CinematicVideo({
   const videoRef = useRef<HTMLVideoElement>(null);
   const [failed, setFailed] = useState(false);
   const [reduced, setReduced] = useState(false);
-  const [playing, setPlaying] = useState(false);
   const canPlay = Boolean(video.src) && !failed && !reduced;
 
   useEffect(() => {
@@ -51,11 +50,10 @@ export function CinematicVideo({
     if (!node || !root || !canPlay) return;
 
     const play = () => {
-      void node.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+      void node.play().catch(() => undefined);
     };
     const pause = () => {
       node.pause();
-      setPlaying(false);
     };
 
     if (continuous || (!playInView && autoPlay)) play();
@@ -64,7 +62,7 @@ export function CinematicVideo({
       const keepPlaying = () => {
         if (node.paused || node.ended) {
           if (node.ended) node.currentTime = 0;
-          void node.play().then(() => setPlaying(true)).catch(() => undefined);
+          void node.play().catch(() => undefined);
         }
       };
       node.addEventListener("pause", keepPlaying);
@@ -92,27 +90,16 @@ export function CinematicVideo({
     };
   }, [autoPlay, canPlay, continuous, playInView]);
 
-  function toggle() {
-    const node = videoRef.current;
-    if (!node) return;
-    if (node.paused) void node.play().then(() => setPlaying(true)).catch(() => setFailed(true));
-    else {
-      node.pause();
-      setPlaying(false);
-    }
-  }
-
   return (
     <div
       ref={rootRef}
       className={cn("group/video relative overflow-hidden bg-charcoal", className)}
       onMouseEnter={() => {
-        if (playOnHover && canPlay) void videoRef.current?.play().then(() => setPlaying(true)).catch(() => undefined);
+        if (playOnHover && canPlay) void videoRef.current?.play().catch(() => undefined);
       }}
       onMouseLeave={() => {
         if (playOnHover && !playInView && !autoPlay) {
           videoRef.current?.pause();
-          setPlaying(false);
         }
       }}
     >
@@ -150,16 +137,6 @@ export function CinematicVideo({
         </div>
       )}
       {!canPlay ? <span className="cinematic-light pointer-events-none absolute inset-0" aria-hidden /> : null}
-      {canPlay && !continuous ? (
-        <button
-          type="button"
-          className="absolute right-3 bottom-3 z-20 bg-ivory/90 px-3 py-2 text-sm text-deep"
-          aria-pressed={playing}
-          onClick={toggle}
-        >
-          {playing ? "Pause film" : "Play film"}
-        </button>
-      ) : null}
     </div>
   );
 }

@@ -146,7 +146,7 @@ function FounderPortrait({ url }: { url?: string }) {
           <path d="M2 16V2h14M104 2h14v14M118 64v14H104M16 78H2V64" fill="none" stroke="currentColor" strokeWidth="0.6" />
         </svg>
       </div>
-      <figcaption className="mt-3 text-sm text-bark">Mr. Sanjeev Jain, in his study.</figcaption>
+      <figcaption className="mt-3 text-sm text-bark">Mr. Sanjeev Jain.</figcaption>
     </figure>
   );
 }
