@@ -34,7 +34,7 @@ export default async function HomePage() {
         name: "Sanjeev Jain",
         jobTitle: "Vastu Shastra consultant",
         description:
-          "Vastu Shastra consultant. He worked in the diamond industry and practises from inherited knowledge, refined through property visits.",
+          "Vastu Shastra consultant with a professional background in the diamond industry. He practises from inherited knowledge, refined through property visits.",
         url: siteUrl(),
         image: `${siteUrl()}/images/founder/sanjeev-jain.jpg`,
       },

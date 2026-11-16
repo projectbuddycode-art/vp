@@ -60,44 +60,41 @@ export function Footer({ settings }: { settings: SiteSettings }) {
                   {settings.phone}
                 </a>
               </li>
-            ) : (
-              <li>Phone to be published</li>
-            )}
+            ) : null}
             {settings.email ? (
               <li>
                 <a href={`mailto:${settings.email}`} className="vedic-link hover:text-ivory">
                   {settings.email}
                 </a>
               </li>
-            ) : (
-              <li>Email to be published</li>
-            )}
-            {settings.address ? <li>{settings.address}</li> : <li>Address to be published</li>}
+            ) : null}
+            {settings.address ? <li>{settings.address}</li> : null}
             {settings.serviceAreas ? <li>Service areas: {settings.serviceAreas}</li> : null}
+            <li>
+              <Link href="/contact" className="vedic-link hover:text-ivory">
+                Enquire about a visit
+              </Link>
+            </li>
           </ul>
-          <div className="mt-5 flex flex-wrap gap-4 text-[0.68rem] tracking-[0.16em] uppercase">
-            {whatsapp ? (
-              <a href={whatsapp} className="vedic-link text-sand hover:text-ivory">
-                WhatsApp
-              </a>
-            ) : (
-              <span className="text-sand/70">WhatsApp to be added</span>
-            )}
-            {settings.instagramUrl ? (
-              <a href={settings.instagramUrl} className="vedic-link text-sand hover:text-ivory">
-                Instagram
-              </a>
-            ) : (
-              <span className="text-sand/70">Instagram to be added</span>
-            )}
-            {settings.linkedinUrl ? (
-              <a href={settings.linkedinUrl} className="vedic-link text-sand hover:text-ivory">
-                LinkedIn
-              </a>
-            ) : (
-              <span className="text-sand/70">LinkedIn to be added</span>
-            )}
-          </div>
+          {whatsapp || settings.instagramUrl || settings.linkedinUrl ? (
+            <div className="mt-5 flex flex-wrap gap-4 text-[0.68rem] tracking-[0.16em] uppercase">
+              {whatsapp ? (
+                <a href={whatsapp} className="vedic-link text-sand hover:text-ivory">
+                  WhatsApp
+                </a>
+              ) : null}
+              {settings.instagramUrl ? (
+                <a href={settings.instagramUrl} className="vedic-link text-sand hover:text-ivory">
+                  Instagram
+                </a>
+              ) : null}
+              {settings.linkedinUrl ? (
+                <a href={settings.linkedinUrl} className="vedic-link text-sand hover:text-ivory">
+                  LinkedIn
+                </a>
+              ) : null}
+            </div>
+          ) : null}
         </div>
       </Container>
       <Container className="border-t border-white/10 py-6">

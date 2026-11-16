@@ -1,4 +1,8 @@
 import { EightDirections } from "@/components/compass/EightDirections";
+import { SanskritMantra } from "@/components/content/SanskritMantra";
+import { CinematicVideo } from "@/components/video/CinematicVideo";
+import { verses } from "@/lib/verses";
+import { videos } from "@/lib/videos";
 import { SanskritLabel } from "@/components/content/SanskritLabel";
 import { FiveElements } from "@/components/diagrams/FiveElements";
 import { VastuDiagram } from "@/components/diagrams/VastuDiagram";
@@ -63,6 +67,17 @@ export default function UnderstandingVastuPage() {
           { href: "/understanding-vastu", label: "Understanding Vastu" },
         ]}
       />
+      <section className="bg-ivory py-12 sm:py-16">
+        <Container className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+          <div>
+            <CinematicVideo video={videos.floorplan} playInView className="aspect-[16/9]" sizes="(min-width: 1024px) 60vw, 100vw" />
+            <p className="mt-3 text-xs leading-relaxed text-bark">
+              Architectural floor-plan film. Illustrative only. Not an assessment of a real property.
+            </p>
+          </div>
+          <SanskritMantra verse={verses[2]} />
+        </Container>
+      </section>
       <section className="bg-white py-16 sm:py-20">
         <Container className="grid gap-10 lg:grid-cols-2">
           {sections.map((section) => (

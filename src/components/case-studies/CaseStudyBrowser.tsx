@@ -20,9 +20,10 @@ export function CaseStudyBrowser({ studies }: { studies: CaseStudy[] }) {
       <div className="border border-deep/10 bg-ivory px-6 py-14 sm:px-12">
         <p className="max-w-2xl font-serif text-4xl leading-tight">There are no published case studies yet.</p>
         <p className="mt-4 max-w-xl text-sm leading-relaxed text-deep/70">
-          A study is added only after the client has agreed to publication. Demonstration records stay unpublished.
+          A client study is added only after the client has agreed. The page linked below is an educational demonstration. It is not a completed consultation.
         </p>
-        <div className="mt-8">
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <Button href="/case-studies/understanding-a-modern-residence">Read the illustrative study</Button>
           <Button href="/approach" variant="line">
             Learn about the consultation
           </Button>

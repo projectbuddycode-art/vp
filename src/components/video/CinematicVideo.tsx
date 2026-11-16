@@ -83,7 +83,7 @@ export function CinematicVideo({
         if (entry.isIntersecting && (autoPlay || playInView)) play();
         else pause();
       },
-      { threshold: 0.45 },
+      { rootMargin: "240px 0px", threshold: 0.2 },
     );
     observer.observe(root);
     return () => {

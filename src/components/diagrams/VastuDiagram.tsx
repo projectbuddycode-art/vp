@@ -24,8 +24,8 @@ export function VastuDiagram({ className }: { className?: string }) {
   useEffect(() => {
     if (!seen) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setComplete(true);
-      return;
+      const frame = window.requestAnimationFrame(() => setComplete(true));
+      return () => window.cancelAnimationFrame(frame);
     }
     const timer = window.setTimeout(() => setComplete(true), 2800);
     return () => window.clearTimeout(timer);

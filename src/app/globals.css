@@ -348,6 +348,18 @@ body {
   color: #b68b50;
 }
 
+.swastik-mark {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .swastik-mark {
+    stroke-dashoffset: 1;
+    animation: diagram-draw 1.8s ease forwards;
+  }
+}
+
 .video-corner-blur {
   position: absolute;
   right: 0;

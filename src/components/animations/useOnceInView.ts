@@ -10,8 +10,8 @@ export function useOnceInView<T extends HTMLElement>(threshold = 0.35) {
     const node = ref.current;
     if (!node) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setSeen(true);
-      return;
+      const frame = window.requestAnimationFrame(() => setSeen(true));
+      return () => window.cancelAnimationFrame(frame);
     }
     const observer = new IntersectionObserver(
       ([entry]) => {

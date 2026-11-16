@@ -2,12 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { GoldLine } from "@/components/animations/GoldLine";
 import { ConsultationForm } from "@/components/forms/ConsultationForm";
 import { useOnceInView } from "@/components/animations/useOnceInView";
 import { VastuDiagram } from "@/components/diagrams/VastuDiagram";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { images, resolvePortrait, studyCaption } from "@/lib/images";
+import { images, resolvePortrait } from "@/lib/images";
 import { videos } from "@/lib/videos";
 import { SanskritLabel } from "@/components/content/SanskritLabel";
 import { ServiceVideoFeature } from "@/components/video/ServiceVideoFeature";
@@ -31,34 +32,26 @@ const areas = [
     category: "Commercial and business Vastu",
     title: "Business and workplace",
     text: "Study your business space with a thoughtful approach to Vastu.",
-    video: videos.commercial,
-    boundary: "This is not a forecast of profit, and it does not replace business or legal advice.",
+    video: videos.entrance,
+    boundary: "The film shows a home approach, not a client office. This is not a forecast of profit, and it does not replace business or legal advice.",
   },
   {
     href: "/expertise/financial-professional-guidance",
     category: "Financial and professional concerns",
     title: "Work and money rooms",
     text: "Explore how your workspace and property are arranged.",
-    video: videos.financial,
-    boundary: "This is not financial advice, and it does not promise wealth or professional success.",
+    video: videos.floorplan,
+    boundary: "The film is a floor-plan study, not a financial result. This is not financial advice, and it does not promise wealth or professional success.",
   },
   {
     href: "/expertise/health-wellbeing",
     category: "Health and wellbeing concerns",
     title: "A calmer living environment",
     text: "Look at the rooms you live in. This is not medical care.",
-    video: videos.health,
-    boundary: "The visit does not diagnose or treat illness, and it does not replace a doctor.",
+    video: videos.villa,
+    boundary: "The film is a residence study, not a treatment room. The visit does not diagnose or treat illness, and it does not replace a doctor.",
   },
 ] as const;
-
-const storyFields = [
-  "The property or situation",
-  "The concern shared",
-  "What was studied",
-  "Guidance suggested",
-  "The client’s own feedback",
-];
 
 export function VastuIntro() {
   return (
@@ -99,29 +92,34 @@ export function FounderStory({ settings }: { settings: SiteSettings }) {
       <Container className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
         <FounderPortrait url={settings.founderPortraitUrl} />
         <div>
-          <SanskritLabel term="परंपरा" reading="Knowledge through tradition" meaning="A tradition carried forward, then used with care on each property." />
-          <h2 className="mt-3 font-serif text-[clamp(2.5rem,4.4vw,4.4rem)] leading-[0.98] font-medium tracking-[-0.03em]">
-            Meet Mr. Sanjeev Jain.
+          <p className="text-[0.72rem] tracking-[0.22em] text-gold uppercase">The person behind STHAPATYA</p>
+          <h2 className="mt-3 font-serif text-[clamp(2.4rem,4.2vw,4.2rem)] leading-[0.98] font-medium tracking-[-0.03em]">
+            A Journey Shaped by Precision. Guided by Tradition.
           </h2>
+          <GoldLine className="mt-5 h-3 w-40 text-gold" />
           <div className="mt-6 space-y-4 text-base leading-relaxed text-deep/80">
             {settings.founderSummary ? (
               settings.founderSummary.split("\n").filter(Boolean).map((paragraph) => <p key={paragraph}>{paragraph}</p>)
             ) : (
               <>
                 <p>
-                  Mr. Sanjeev Jain worked in the diamond industry. Alongside that work, he practises Vastu Shastra from knowledge passed to him, which he has refined by visiting properties himself.
+                  Mr. Sanjeev Jain brings to STHAPATYA a professional journey shaped by the discipline and precision of the diamond industry, alongside a deep personal connection with traditional Vedic knowledge.
                 </p>
                 <p>
-                  He does not use one fixed chart for every building. The guidance follows the property he has seen.
+                  His experience in the diamond domain has given him an appreciation for detail, careful observation, quality and considered decision-making. These values also inform his approach to understanding the spaces in which people live and work.
                 </p>
                 <p>
-                  He looks at the layout, the directions, and the way the place is used. Only then does he suggest practical guidance for that property.
+                  Drawing upon traditional Vastu principles and an inherited understanding that he has continued to refine, he approaches each property with individual attention to its layout, directions, surroundings and practical requirements.
                 </p>
-                <p className="text-sm text-bark">
-                  Qualifications, awards, and years of practice are not listed here. They will be added only if he chooses to publish them.
+                <p>
+                  Through STHAPATYA, he brings these two distinct parts of his journey together: the precision developed through his professional experience and a thoughtful approach to traditional Vastu Shastra.
                 </p>
+                <p>His philosophy is simple: understand the space before recommending a change.</p>
               </>
             )}
+            <p className="font-serif text-xl leading-snug text-deep italic">
+              Precision in every detail. Respect for every tradition. A thoughtful understanding of every space.
+            </p>
           </div>
           <div className="mt-8">
             <Button href="/contact">Book a Visit</Button>
@@ -144,6 +142,9 @@ function FounderPortrait({ url }: { url?: string }) {
           className="object-cover object-center"
           sizes="(min-width: 1024px) 46vw, 100vw"
         />
+        <svg viewBox="0 0 120 80" className="pointer-events-none absolute inset-3 h-[calc(100%-1.5rem)] w-[calc(100%-1.5rem)] text-gold/80" aria-hidden>
+          <path d="M2 16V2h14M104 2h14v14M118 64v14H104M16 78H2V64" fill="none" stroke="currentColor" strokeWidth="0.6" />
+        </svg>
       </div>
       <figcaption className="mt-3 text-sm text-bark">Mr. Sanjeev Jain, in his study.</figcaption>
     </figure>
@@ -238,17 +239,8 @@ export function CaseStories({ studies }: { studies: CaseStudy[] }) {
         {studies.length === 0 ? (
           <div className="mt-12">
             <p className="max-w-2xl text-base leading-relaxed text-deep/75">
-              No client story is published yet. When one is added, it will use the client’s own words and only photographs they have approved. Nothing on this page is invented.
+              A client story is published only with that client’s agreement, in their own words. Until then, the study below explains the method. It is not a completed consultation.
             </p>
-            <ol className="mt-10 grid gap-px bg-deep/10 sm:grid-cols-2 lg:grid-cols-5">
-              {storyFields.map((field, index) => (
-                <li key={field} className="bg-ivory px-5 py-6">
-                  <p className="font-serif text-2xl text-gold">0{index + 1}</p>
-                  <p className="mt-3 font-serif text-2xl leading-tight">{field}</p>
-                  <p className="mt-3 text-sm text-bark">Waiting for a verified account.</p>
-                </li>
-              ))}
-            </ol>
           </div>
         ) : (
           <div className="mt-12 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
@@ -267,7 +259,8 @@ export function CaseStories({ studies }: { studies: CaseStudy[] }) {
             ))}
           </div>
         )}
-        <div className="mt-10">
+        <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+          <Button href="/case-studies/understanding-a-modern-residence">Read the illustrative study</Button>
           <Button href="/case-studies" variant="line">
             View case studies
           </Button>
@@ -293,16 +286,21 @@ export function KnowledgePreview({ articles }: { articles: Article[] }) {
           </Button>
         </div>
         <div className="mt-12 grid gap-10 lg:grid-cols-3">
-          {articles.slice(0, 3).map((article) => (
-            <Link key={article.slug} href={`/knowledge-centre/${article.slug}`} className="group">
-              <div className="relative aspect-[4/3] bg-parchment">
-                <Image src={article.image} alt={article.imageAlt} fill className="object-cover" sizes="(min-width: 1024px) 30vw, 100vw" />
-              </div>
-              <p className="mt-2 text-xs text-bark">{studyCaption}</p>
-              <h3 className="mt-4 font-serif text-3xl leading-tight group-hover:text-bark">{article.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-deep/70">{article.excerpt}</p>
-            </Link>
-          ))}
+          {articles.slice(0, 3).map((article, index) => {
+            const film = [videos.entrance, videos.floorplan, videos.villa][index] ?? videos.villa;
+            return (
+              <article key={article.slug}>
+                <CinematicVideo video={film} playInView className="aspect-[4/3]" sizes="(min-width: 1024px) 30vw, 100vw" />
+                <p className="mt-2 text-xs text-bark">Architectural film prepared for this website. Not a client property.</p>
+                <h3 className="mt-4 font-serif text-3xl leading-tight">
+                  <Link href={`/knowledge-centre/${article.slug}`} className="hover:text-bark">
+                    {article.title}
+                  </Link>
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-deep/70">{article.excerpt}</p>
+              </article>
+            );
+          })}
         </div>
       </Container>
     </section>
@@ -358,8 +356,10 @@ export function FinalCta() {
         </div>
       </div>
       <div className="relative min-h-[52vw] lg:min-h-[28rem]">
-        <CinematicVideo video={videos.finale} playInView className="absolute inset-0" sizes="(min-width: 1024px) 50vw, 100vw" />
-        <p className="absolute right-0 bottom-0 left-0 bg-deep/80 px-5 py-3 text-xs text-sand sm:px-8">{studyCaption}</p>
+        <CinematicVideo video={videos.villa} playInView className="absolute inset-0" sizes="(min-width: 1024px) 50vw, 100vw" />
+        <p className="absolute right-0 bottom-0 left-0 bg-deep/80 px-5 py-3 text-xs text-sand sm:px-8">
+          Architectural film of a modern residence. Not a client property.
+        </p>
       </div>
     </section>
   );

@@ -1,6 +1,6 @@
 import { siteUrl } from "@/lib/utils";
 
-export function Breadcrumbs({ items }: { items: { href: string; label: string }[] }) {
+export function Breadcrumbs({ items, light = false }: { items: { href: string; label: string }[]; light?: boolean }) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -14,7 +14,7 @@ export function Breadcrumbs({ items }: { items: { href: string; label: string }[
 
   return (
     <nav aria-label="Breadcrumb" className="mb-4">
-      <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-bark">
+      <ol className={`flex flex-wrap items-center gap-x-2 gap-y-1 text-sm ${light ? "text-sand" : "text-bark"}`}>
         {items.map((item, index) => (
           <li key={item.href} className="flex items-center gap-2">
             {index > 0 ? <span aria-hidden>·</span> : null}

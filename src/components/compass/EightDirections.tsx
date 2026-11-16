@@ -24,9 +24,11 @@ export function EightDirections() {
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setDrawn(true);
-      setComplete(true);
-      return;
+      const frame = window.requestAnimationFrame(() => {
+        setDrawn(true);
+        setComplete(true);
+      });
+      return () => window.cancelAnimationFrame(frame);
     }
     const frame = window.requestAnimationFrame(() => setDrawn(true));
     const done = window.setTimeout(() => setComplete(true), 2400);

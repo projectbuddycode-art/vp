@@ -33,7 +33,7 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative h-[100svh] w-full overflow-hidden bg-charcoal text-ivory">
+    <section className="relative min-h-[100svh] w-full overflow-hidden bg-charcoal text-ivory">
       {videos.hero.src ? <link rel="preload" href={videos.hero.src} as="video" type="video/mp4" fetchPriority="high" /> : null}
       <div className="absolute inset-0">
         <CinematicVideo video={videos.hero} autoPlay continuous priority className="absolute inset-0 h-full w-full" sizes="100vw" />

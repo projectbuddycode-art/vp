@@ -1,4 +1,6 @@
 import { EightDirections } from "@/components/compass/EightDirections";
+import { CinematicVideo } from "@/components/video/CinematicVideo";
+import { videos } from "@/lib/videos";
 import { Methodology } from "@/components/home/Methodology";
 import { PageHero } from "@/components/layout/PageHero";
 import { SanskritLabel } from "@/components/content/SanskritLabel";
@@ -26,6 +28,14 @@ export default function ApproachPage() {
         crumbs={[{ href: "/", label: "Home" }, { href: "/approach", label: "Vastu approach" }]}
         image={images.geometry}
       />
+      <section className="bg-white py-12 sm:py-16">
+        <Container>
+          <CinematicVideo video={videos.entrance} playInView className="aspect-[16/9]" sizes="(min-width: 1024px) 80vw, 100vw" />
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-bark">
+            Architectural film of a camera moving into a modern home. Not a client property, and not a record of a visit.
+          </p>
+        </Container>
+      </section>
       <section className="bg-ivory py-16 sm:py-20">
         <Container className="grid gap-6 md:grid-cols-2">
           {processSteps.map((step) => (

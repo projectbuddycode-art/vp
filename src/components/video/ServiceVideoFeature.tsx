@@ -36,7 +36,11 @@ export function ServiceVideoFeature({
           sizes="(min-width: 1024px) 70vw, 100vw"
         />
         <figcaption className="mt-3 max-w-2xl text-base leading-relaxed text-deep/80">{description}</figcaption>
-        <p className="mt-2 text-xs text-bark">{studyCaption} A filmed sequence will replace this still when it is ready.</p>
+        <p className="mt-2 text-xs text-bark">
+          {video.src
+            ? "Architectural film prepared for this website. Not a client property, and not a record of a consultation."
+            : studyCaption}
+        </p>
       </figure>
     );
   }
