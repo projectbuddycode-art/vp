@@ -22,14 +22,17 @@ export function WhatsAppButton({
       target="_blank"
       rel="noreferrer"
       className={cn(
-        "inline-flex items-center justify-center px-5 py-3 text-sm transition",
-        variant === "solid" && "bg-deep text-ivory hover:bg-[#342b26]",
+        "inline-flex items-center justify-center gap-2 px-5 py-3 text-sm transition",
+        variant === "solid" && "bg-[#1f6b45] text-ivory hover:bg-[#185536]",
         variant === "line" && "border border-deep/20 text-deep hover:bg-parchment",
         variant === "light" && "bg-ivory text-deep hover:bg-sand",
         className,
       )}
     >
-      {label}
+      <span aria-hidden className="text-base leading-none">
+        ✆
+      </span>
+      <span>{label}</span>
     </a>
   );
 }

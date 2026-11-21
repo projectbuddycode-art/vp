@@ -20,7 +20,7 @@ import { useCopy } from "@/components/i18n/LocaleProvider";
 import { fill } from "@/lib/i18n/dictionaries";
 import { visitFees } from "@/lib/payments/fees";
 import { caseCategories, type SiteSettings } from "@/lib/site";
-import { formatInr } from "@/lib/utils";
+import { formatInr, publicWhatsappNumber } from "@/lib/utils";
 
 const areaVideos = [videos.residential, videos.entrance, videos.floorplan, videos.villa] as const;
 const areaHrefs = [
@@ -193,9 +193,11 @@ export function Specialisations({ whatsappNumber }: { whatsappNumber?: string })
                   <li key={point}>{point}</li>
                 ))}
               </ul>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Button href={card.href}>{card.cta}</Button>
-                <WhatsAppButton number={whatsappNumber} message={card.whatsapp} label={copy.whatsapp.enquire} variant="line" />
+              <div className="mt-8 flex flex-col gap-3">
+                <WhatsAppButton number={whatsappNumber} message={card.whatsapp} label={copy.whatsapp.direct} className="w-full sm:w-auto" />
+                <Button href={card.href} variant="line">
+                  {card.cta}
+                </Button>
               </div>
             </article>
           ))}
@@ -354,7 +356,13 @@ export function ConsultationBand({ settings }: { settings: SiteSettings }) {
             <p>{settings.bookingNote}</p>
             <p className="text-sm text-bark">{copy.home.disclaimer}</p>
           </div>
-          <div className="mt-8">
+          <div className="mt-8 flex flex-col gap-3">
+            <WhatsAppButton
+              number={publicWhatsappNumber(settings.whatsapp, settings.phone)}
+              message={copy.footer.whatsappMessage}
+              label={copy.whatsapp.direct}
+              className="w-full sm:w-auto"
+            />
             <Button href="/phone-consultation" variant="line">
               {copy.bookPhone}
             </Button>

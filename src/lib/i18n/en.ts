@@ -260,8 +260,9 @@ export const en: Copy = {
     money: "Hello STHAPATYA, I would like to ask about a Money & Financial Concerns consultation.",
     health: "Hello STHAPATYA, I would like to ask about a Health & Wellbeing consultation.",
     booking: "Continue on WhatsApp",
-    or: "Or connect directly on WhatsApp",
+    or: "Or fill the form below",
     direct: "Chat on WhatsApp",
+    prefer: "Prefer WhatsApp? Connect directly.",
   },
   errors: {
     "Please enter your full name.": "Please enter your full name.",

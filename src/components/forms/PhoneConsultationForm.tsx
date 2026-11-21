@@ -131,6 +131,18 @@ export function PhoneConsultationForm({
 
   return (
     <form onSubmit={onPay} className="space-y-5 border border-deep/10 bg-white p-6 sm:p-8" noValidate>
+      {whatsapp ? (
+        <div className="border border-[#1f6b45]/25 bg-[#1f6b45]/5 p-4">
+          <p className="text-sm text-deep/80">{copy.whatsapp.prefer}</p>
+          <WhatsAppButton
+            number={whatsapp}
+            message={subject === "health" ? copy.whatsapp.health : copy.whatsapp.money}
+            label={copy.whatsapp.direct}
+            className="mt-3 w-full px-6 py-3.5 sm:w-auto"
+          />
+          <p className="mt-3 text-xs text-bark">{copy.whatsapp.or}</p>
+        </div>
+      ) : null}
       <div className="grid gap-3 sm:grid-cols-3">
         <p>
           <span className="block text-xs text-bark">{copy.phone.totalLabel}</span>
@@ -232,18 +244,6 @@ export function PhoneConsultationForm({
           </button>
         ) : null}
       </div>
-      {whatsapp ? (
-        <div className="border-t border-deep/10 pt-5">
-          <p className="mb-3 text-sm text-bark">{copy.whatsapp.or}</p>
-          <WhatsAppButton
-            number={whatsapp}
-            message={subject === "health" ? copy.whatsapp.health : copy.whatsapp.money}
-            label={copy.whatsapp.direct}
-            variant="line"
-            className="w-full px-6 py-3.5 sm:w-auto"
-          />
-        </div>
-      ) : null}
       {bypass ? <p className="text-sm leading-relaxed text-bark">{copy.phone.bypassNote}</p> : null}
     </form>
   );

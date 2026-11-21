@@ -211,6 +211,7 @@ export type Copy = {
     booking: string;
     or: string;
     direct: string;
+    prefer: string;
   };
   errors: Record<string, string>;
   common: {

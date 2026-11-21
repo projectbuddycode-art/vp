@@ -209,6 +209,18 @@ export function ConsultationForm({ settings }: { settings: SiteSettings }) {
 
   return (
     <form id="consultation" onSubmit={handleSubmit(sendEnquiry)} className="space-y-5" noValidate>
+      {whatsappNumber ? (
+        <div className="border border-[#1f6b45]/25 bg-[#1f6b45]/5 p-4">
+          <p className="text-sm text-deep/80">{copy.whatsapp.prefer}</p>
+          <WhatsAppButton
+            number={whatsappNumber}
+            message={copy.footer.whatsappMessage}
+            label={copy.whatsapp.direct}
+            className="mt-3 w-full px-6 py-3.5 text-[0.72rem] font-semibold tracking-[0.18em] uppercase sm:w-auto"
+          />
+          <p className="mt-3 text-xs text-bark">{copy.whatsapp.or}</p>
+        </div>
+      ) : null}
       <div className="grid gap-3 sm:grid-cols-3">
         <p>
           <span className="block text-xs text-bark">{copy.visit.totalLabel}</span>
@@ -383,18 +395,6 @@ export function ConsultationForm({ settings }: { settings: SiteSettings }) {
           {isSubmitting ? copy.form.sending : copy.form.enquireOnly}
         </button>
       </div>
-      {whatsappNumber ? (
-        <div className="border-t border-deep/10 pt-5">
-          <p className="mb-3 text-sm text-bark">{copy.whatsapp.or}</p>
-          <WhatsAppButton
-            number={whatsappNumber}
-            message={copy.footer.whatsappMessage}
-            label={copy.whatsapp.direct}
-            variant="line"
-            className="w-full px-6 py-3.5 text-[0.72rem] font-semibold tracking-[0.18em] uppercase sm:w-auto"
-          />
-        </div>
-      ) : null}
       {bypass ? <p className="text-sm leading-relaxed text-bark">{copy.phone.bypassNote}</p> : null}
     </form>
   );
