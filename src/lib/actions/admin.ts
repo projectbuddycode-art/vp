@@ -298,6 +298,26 @@ export async function saveFaq(formData: FormData) {
   redirect("/admin/faqs");
 }
 
+export async function updateBooking(formData: FormData) {
+  const { supabase } = await adminDb();
+  const id = one(formData, "id");
+  const status = one(formData, "booking_status");
+  const allowed = ["requested", "confirmed", "rescheduled", "cancelled"];
+  if (!allowed.includes(status)) throw new Error("Unknown booking status.");
+  const preferredDate = one(formData, "preferred_date");
+  const { error } = await supabase
+    .from("bookings")
+    .update({
+      booking_status: status,
+      preferred_date: preferredDate || null,
+      preferred_time: one(formData, "preferred_time"),
+      confirmed_at: status === "confirmed" ? new Date().toISOString() : null,
+    })
+    .eq("id", id);
+  if (error) throw new Error(error.message);
+  redirect("/admin/bookings");
+}
+
 export async function saveSettings(formData: FormData) {
   const { supabase } = await adminDb();
   const deliverables = one(formData, "deliverables")
@@ -307,6 +327,7 @@ export async function saveSettings(formData: FormData) {
   let portrait = one(formData, "existing_portrait");
   const file = formData.get("portrait");
   if (file instanceof File && file.size > 0) portrait = await uploadPublicImage(file, "brand");
+  const token = Number(one(formData, "booking_token") || 1000);
   const payload = {
     id: 1,
     brand_name: one(formData, "brand_name") || "STHAPATYA",
@@ -321,6 +342,7 @@ export async function saveSettings(formData: FormData) {
     service_areas: one(formData, "service_areas"),
     address: one(formData, "address"),
     consultation_fee: Number(one(formData, "consultation_fee") || 10000),
+    booking_token: Math.max(0, Math.round(token)),
     fee_note: one(formData, "fee_note"),
     remedy_note: one(formData, "remedy_note"),
     online_consultation_enabled: checked(formData, "online_consultation_enabled"),
@@ -333,6 +355,17 @@ export async function saveSettings(formData: FormData) {
   };
   const { error } = await supabase.from("website_settings").upsert(payload);
   if (error) throw new Error(error.message);
+
+  const consultationPhone = one(formData, "consultation_phone");
+  if (consultationPhone || formData.has("consultation_phone")) {
+    const { error: privateError } = await supabase.from("private_settings").upsert({
+      id: 1,
+      consultation_phone: consultationPhone,
+      updated_at: new Date().toISOString(),
+    });
+    if (privateError) throw new Error(privateError.message);
+  }
+
   updateTag("settings");
   redirect("/admin/settings");
 }

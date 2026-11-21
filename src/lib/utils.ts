@@ -46,7 +46,8 @@ export function normalizeIndianMobile(value: string) {
 export function whatsappHref(number: string, text: string) {
   const digits = digitsOnly(number);
   if (digits.length < 10) return null;
-  return `https://wa.me/${digits}?text=${encodeURIComponent(text)}`;
+  const withCountry = digits.length === 10 ? `91${digits}` : digits;
+  return `https://wa.me/${withCountry}?text=${encodeURIComponent(text)}`;
 }
 
 export function formatDate(value: string | null | undefined) {

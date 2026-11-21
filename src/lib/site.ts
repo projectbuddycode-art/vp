@@ -418,6 +418,7 @@ export type SiteSettings = {
   serviceAreas: string;
   address: string;
   consultationFee: number;
+  bookingToken: number;
   feeNote: string;
   remedyNote: string;
   onlineConsultationEnabled: boolean;
@@ -450,6 +451,7 @@ export const defaultSettings: SiteSettings = {
   serviceAreas: "",
   address: "",
   consultationFee: 10000,
+  bookingToken: 1000,
   feeNote: "Travel charges, where applicable, may be separate.",
   remedyNote:
     "Remedy costs are independent of the consultation fee and vary with the recommendations. A fixed maximum is not guaranteed. The practice aims for practical measures. Significant structural changes can cost more.",

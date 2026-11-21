@@ -5,10 +5,12 @@ import { HeroAtmosphere } from "@/components/hero/HeroAtmosphere";
 import { CinematicVideo } from "@/components/video/CinematicVideo";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { useCopy } from "@/components/i18n/LocaleProvider";
 import { videos } from "@/lib/videos";
 
 export function Hero() {
   const copyRef = useRef<HTMLDivElement>(null);
+  const copy = useCopy();
 
   useEffect(() => {
     const copy = copyRef.current;
@@ -49,17 +51,17 @@ export function Hero() {
             <span className="devanagari text-xl">वास्तु · दिशा · संतुलन</span>
           </p>
           <h1 data-line className="mt-4 max-w-4xl font-serif text-[clamp(2.7rem,5.2vw,5.4rem)] leading-[0.96] font-medium tracking-[-0.03em]">
-            Your Space. Your Life. A More Thoughtful Balance.
+            {copy.hero.title}
           </h1>
           <p data-line className="mt-5 max-w-xl text-base leading-relaxed text-ivory/88 sm:text-lg">
-            Every property has its own layout, directions and surroundings. Through STHAPATYA, Mr. Sanjeev Jain offers personal Vastu consultation based on the traditional principles of Vastu Shastra and an individual understanding of each property.
+            {copy.hero.text}
           </p>
           <div data-line className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Button href="/contact" variant="light">
-              Book a Personal Consultation
+              {copy.bookPersonal}
             </Button>
             <Button href="/approach" variant="lineLight">
-              Discover the STHAPATYA Approach
+              {copy.hero.approach}
             </Button>
           </div>
         </div>

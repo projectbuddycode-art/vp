@@ -1,18 +1,31 @@
+import { Suspense } from "react";
 import { ScrollProgress } from "@/components/animations/ScrollProgress";
+import { LocaleProvider } from "@/components/i18n/LocaleProvider";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { MobileBookBar } from "@/components/layout/MobileBookBar";
 import { getSettings } from "@/lib/data/public";
+import { getLocale } from "@/lib/i18n/get-locale";
 
-export default async function SiteLayout({ children }: { children: React.ReactNode }) {
-  const settings = await getSettings();
+async function SiteChrome({ children }: { children: React.ReactNode }) {
+  const [settings, locale] = await Promise.all([getSettings(), getLocale()]);
   return (
-    <>
+    <LocaleProvider locale={locale}>
       <ScrollProgress />
       <Header />
-      <main id="content" className="pb-20 sm:pb-0">{children}</main>
+      <main id="content" className="pb-20 sm:pb-0">
+        {children}
+      </main>
       <Footer settings={settings} />
       <MobileBookBar />
-    </>
+    </LocaleProvider>
+  );
+}
+
+export default function SiteLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <Suspense fallback={<main id="content" className="min-h-screen bg-ivory px-6 py-24" />}>
+      <SiteChrome>{children}</SiteChrome>
+    </Suspense>
   );
 }

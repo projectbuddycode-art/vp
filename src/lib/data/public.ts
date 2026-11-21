@@ -66,6 +66,7 @@ function asSettings(row: Record<string, unknown> | null): SiteSettings {
     serviceAreas: String(row.service_areas || ""),
     address: String(row.address || ""),
     consultationFee: Number(row.consultation_fee || defaultSettings.consultationFee),
+    bookingToken: Number(row.booking_token || defaultSettings.bookingToken),
     feeNote: String(row.fee_note || defaultSettings.feeNote),
     remedyNote: String(row.remedy_note || defaultSettings.remedyNote),
     onlineConsultationEnabled: Boolean(row.online_consultation_enabled),

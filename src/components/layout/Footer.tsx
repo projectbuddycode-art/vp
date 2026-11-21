@@ -1,14 +1,15 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { BrandMark } from "@/components/brand/Logo";
+import { getCopy } from "@/lib/i18n/get-locale";
 import { disclaimer, navItems, services, type SiteSettings } from "@/lib/site";
 import { whatsappHref } from "@/lib/utils";
 
-export function Footer({ settings }: { settings: SiteSettings }) {
-  const whatsapp = whatsappHref(
-    settings.whatsapp,
-    "Hello, I would like to enquire about a personal Vastu consultation.",
-  );
+const footerNav = ["about", "understanding", "approach", "services"] as const;
+
+export async function Footer({ settings }: { settings: SiteSettings }) {
+  const copy = await getCopy();
+  const whatsapp = whatsappHref(settings.whatsapp, copy.footer.whatsappMessage);
 
   return (
     <footer className="dark-panel text-ivory">
@@ -23,36 +24,36 @@ export function Footer({ settings }: { settings: SiteSettings }) {
           <p className="devanagari mt-3 text-sm text-sand">वास्तु · दिशा · संतुलन</p>
         </div>
         <div>
-          <p className="text-[0.68rem] tracking-[0.2em] text-gold uppercase">Visit</p>
+          <p className="text-[0.68rem] tracking-[0.2em] text-gold uppercase">{copy.footer.visit}</p>
           <ul className="mt-4 space-y-2 text-sm">
-            {navItems.slice(1, 5).map((item) => (
+            {navItems.slice(1, 5).map((item, index) => (
               <li key={item.href}>
                 <Link href={item.href} className="vedic-link text-sand hover:text-ivory">
-                  {item.label}
+                  {copy.nav[footerNav[index]]}
                 </Link>
               </li>
             ))}
             <li>
               <Link href="/knowledge-centre" className="vedic-link text-sand hover:text-ivory">
-                Knowledge Centre
+                {copy.nav.knowledge}
               </Link>
             </li>
           </ul>
         </div>
         <div>
-          <p className="text-[0.68rem] tracking-[0.2em] text-gold uppercase">Expertise</p>
+          <p className="text-[0.68rem] tracking-[0.2em] text-gold uppercase">{copy.footer.expertise}</p>
           <ul className="mt-4 space-y-2 text-sm">
             {services.map((service) => (
               <li key={service.slug}>
                 <Link href={`/expertise/${service.slug}`} className="vedic-link text-sand hover:text-ivory">
-                  {service.title}
+                  {copy.form.serviceTitles[service.slug] || service.title}
                 </Link>
               </li>
             ))}
           </ul>
         </div>
         <div>
-          <p className="text-[0.68rem] tracking-[0.2em] text-gold uppercase">Contact</p>
+          <p className="text-[0.68rem] tracking-[0.2em] text-gold uppercase">{copy.footer.contact}</p>
           <ul className="mt-4 space-y-2 text-sm text-sand">
             {settings.phone ? (
               <li>
@@ -69,10 +70,10 @@ export function Footer({ settings }: { settings: SiteSettings }) {
               </li>
             ) : null}
             {settings.address ? <li>{settings.address}</li> : null}
-            {settings.serviceAreas ? <li>Service areas: {settings.serviceAreas}</li> : null}
+            {settings.serviceAreas ? <li>{copy.footer.serviceAreas}: {settings.serviceAreas}</li> : null}
             <li>
               <Link href="/contact" className="vedic-link hover:text-ivory">
-                Enquire about a visit
+                {copy.footer.enquire}
               </Link>
             </li>
           </ul>

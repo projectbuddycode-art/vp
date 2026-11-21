@@ -5,8 +5,12 @@ import { defaultSettings } from "@/lib/site";
 
 export default async function SettingsPage() {
   const supabase = await createClient();
-  const { data } = await supabase.from("website_settings").select("*").eq("id", 1).maybeSingle();
+  const [{ data }, { data: privateRow }] = await Promise.all([
+    supabase.from("website_settings").select("*").eq("id", 1).maybeSingle(),
+    supabase.from("private_settings").select("consultation_phone").eq("id", 1).maybeSingle(),
+  ]);
   const row = (data || {}) as Record<string, unknown>;
+  const privateSettings = (privateRow || {}) as { consultation_phone?: string };
   const deliverables = Array.isArray(row.deliverables) ? row.deliverables.join("\n") : defaultSettings.deliverables.join("\n");
   return (
     <form action={saveSettings} className="max-w-3xl space-y-4">
@@ -26,14 +30,15 @@ export default async function SettingsPage() {
           ["practice_name", "Practice name", row.practice_name || defaultSettings.practiceName],
           ["tagline", "Tagline", row.tagline || defaultSettings.tagline],
           ["core_message", "Core message", row.core_message || defaultSettings.coreMessage],
-          ["phone", "Phone", row.phone || ""],
+          ["phone", "Public phone", row.phone || ""],
           ["whatsapp", "WhatsApp number with country code", row.whatsapp || ""],
           ["email", "Email", row.email || ""],
           ["instagram_url", "Instagram URL", row.instagram_url || ""],
           ["linkedin_url", "LinkedIn URL", row.linkedin_url || ""],
           ["service_areas", "Service areas", row.service_areas || ""],
           ["address", "Address", row.address || ""],
-          ["consultation_fee", "Consultation fee", String(row.consultation_fee || 10000)],
+          ["consultation_fee", "On-site consultation fee", String(row.consultation_fee || 10000)],
+          ["booking_token", "Booking token (part of the fee, e.g. 1000 or 800)", String(row.booking_token || defaultSettings.bookingToken)],
         ] as [string, string, string][]
       ).map(([name, label, value]) => (
         <div key={String(name)}>
@@ -41,6 +46,11 @@ export default async function SettingsPage() {
           <input name={String(name)} defaultValue={String(value)} className="field" />
         </div>
       ))}
+      <div>
+        <label className="label">Private phone-consultation number</label>
+        <p className="mb-1 text-xs text-bark">Shown only after a verified ₹250 phone-consultation payment. Never placed in public pages.</p>
+        <input name="consultation_phone" defaultValue={String(privateSettings.consultation_phone || "")} className="field" autoComplete="off" />
+      </div>
       <label className="label">Fee note</label>
       <textarea name="fee_note" rows={3} defaultValue={String(row.fee_note || defaultSettings.feeNote)} className="field" />
       <label className="label">Remedy note</label>

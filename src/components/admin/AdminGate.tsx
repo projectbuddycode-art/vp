@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { signOut } from "@/lib/actions/admin";
+import { adminDevBypassAllowed, assertAdminBypassSafe } from "@/lib/payments/config";
 import { isServiceRoleConfigured, isSupabaseConfigured } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
 
 const links = [
   { href: "/admin", label: "Dashboard" },
   { href: "/admin/leads", label: "Enquiries" },
+  { href: "/admin/bookings", label: "Bookings" },
   { href: "/admin/case-studies", label: "Case studies" },
   { href: "/admin/testimonials", label: "Testimonials" },
   { href: "/admin/articles", label: "Knowledge" },
@@ -14,7 +16,48 @@ const links = [
   { href: "/admin/settings", label: "Settings" },
 ];
 
+function Shell({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div className="min-h-screen bg-[#efe8da] md:grid md:grid-cols-[240px_1fr]">
+      <aside className="bg-deep text-ivory md:min-h-screen">
+        <div className="px-5 py-6">
+          <p className="font-serif text-2xl">Studio desk</p>
+          <p className="mt-1 text-xs text-sand">{label}</p>
+        </div>
+        <nav className="flex gap-2 overflow-x-auto px-3 pb-4 md:block md:space-y-1 md:px-3">
+          {links.map((link) => (
+            <Link key={link.href} href={link.href} className="block whitespace-nowrap px-3 py-2 text-sm text-sand hover:bg-white/5 hover:text-ivory">
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+        <form action={signOut} className="px-5 py-4">
+          <button className="text-xs tracking-[0.14em] text-sand uppercase">Sign out</button>
+        </form>
+        {!isServiceRoleConfigured() ? (
+          <p className="px-5 pb-6 text-xs leading-relaxed text-sand">Uploads and public enquiry storage need the service role key.</p>
+        ) : null}
+      </aside>
+      <div className="px-4 py-6 sm:px-8">{children}</div>
+    </div>
+  );
+}
+
 export async function AdminGate({ children }: { children: React.ReactNode }) {
+  assertAdminBypassSafe();
+
+  if (adminDevBypassAllowed()) {
+    console.info("[admin] development bypass active");
+    return (
+      <Shell label="Development bypass">
+        <div className="mb-6 border border-terracotta/40 bg-sand/50 px-4 py-3 text-sm">
+          Development-only admin bypass is active. This option is blocked when NODE_ENV=production.
+        </div>
+        {children}
+      </Shell>
+    );
+  }
+
   if (!isSupabaseConfigured()) {
     return (
       <main className="mx-auto max-w-2xl px-6 py-20">
@@ -45,28 +88,5 @@ export async function AdminGate({ children }: { children: React.ReactNode }) {
     );
   }
 
-  return (
-    <div className="min-h-screen bg-[#efe8da] md:grid md:grid-cols-[240px_1fr]">
-      <aside className="bg-deep text-ivory md:min-h-screen">
-        <div className="px-5 py-6">
-          <p className="font-serif text-2xl">Studio desk</p>
-          <p className="mt-1 text-xs text-sand">{profile.full_name || user.email}</p>
-        </div>
-        <nav className="flex gap-2 overflow-x-auto px-3 pb-4 md:block md:space-y-1 md:px-3">
-          {links.map((link) => (
-            <Link key={link.href} href={link.href} className="block whitespace-nowrap px-3 py-2 text-sm text-sand hover:bg-white/5 hover:text-ivory">
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-        <form action={signOut} className="px-5 py-4">
-          <button className="text-xs tracking-[0.14em] text-sand uppercase">Sign out</button>
-        </form>
-        {!isServiceRoleConfigured() ? (
-          <p className="px-5 pb-6 text-xs leading-relaxed text-sand">Uploads and public enquiry storage need the service role key.</p>
-        ) : null}
-      </aside>
-      <div className="px-4 py-6 sm:px-8">{children}</div>
-    </div>
-  );
+  return <Shell label={profile.full_name || user.email || "Admin"}>{children}</Shell>;
 }

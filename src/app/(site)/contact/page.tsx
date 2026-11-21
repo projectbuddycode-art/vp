@@ -1,10 +1,13 @@
 import { ConsultationForm } from "@/components/forms/ConsultationForm";
+import { WhatsAppButton } from "@/components/contact/WhatsAppButton";
 import { PageHero } from "@/components/layout/PageHero";
 import { Container } from "@/components/ui/Container";
 import { getSettings } from "@/lib/data/public";
+import { getCopy } from "@/lib/i18n/get-locale";
 import { images } from "@/lib/images";
 import { pageMetadata } from "@/lib/seo";
-import { formatInr, whatsappHref } from "@/lib/utils";
+import { visitFees } from "@/lib/payments/fees";
+import { formatInr } from "@/lib/utils";
 
 export const metadata = pageMetadata({
   title: "Book a Vastu visit",
@@ -14,44 +17,44 @@ export const metadata = pageMetadata({
 });
 
 export default async function ContactPage() {
-  const settings = await getSettings();
-  const whatsapp = whatsappHref(settings.whatsapp, "Hello, I would like to enquire about a personal Vastu consultation.");
+  const [settings, copy] = await Promise.all([getSettings(), getCopy()]);
+  const fees = visitFees(settings.consultationFee, settings.bookingToken);
 
   return (
     <>
       <PageHero
-        eyebrow="Contact"
-        title="How do I book a STHAPATYA consultation?"
-        text="Send your name, phone number, city and a short note about the property. Email is optional. If you are not sure which consultation you need, describe the property in your own words. A visit is confirmed only after a reply."
-        crumbs={[{ href: "/", label: "Home" }, { href: "/contact", label: "Contact" }]}
+        eyebrow={copy.nav.contact}
+        title={copy.home.formTitle}
+        text={copy.home.formText}
+        crumbs={[
+          { href: "/", label: copy.common.home },
+          { href: "/contact", label: copy.nav.contact },
+        ]}
         image={images.carving}
       />
       <section className="bg-ivory py-16 sm:py-20">
         <Container className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
           <div>
-            <p className="font-serif text-5xl text-terracotta">{formatInr(settings.consultationFee)}</p>
-            <p className="mt-3 text-sm leading-relaxed text-deep/75">One-time personal property visit by Sanjeev Jain.</p>
+            <p className="font-serif text-5xl text-terracotta">{formatInr(fees.total)}</p>
+            <p className="mt-3 text-sm leading-relaxed text-deep/75">{copy.home.visitBy}</p>
+            <p className="mt-4 text-sm leading-relaxed text-deep/75">
+              {copy.visit.tokenLabel}: {formatInr(fees.token)}. {copy.visit.remainingLabel}: {formatInr(fees.remaining)}.
+            </p>
             <p className="mt-4 text-sm leading-relaxed text-deep/75">{settings.feeNote}</p>
             <p className="mt-4 text-sm leading-relaxed text-deep/75">{settings.bookingNote}</p>
             <dl className="mt-8 space-y-3 text-sm">
               <div>
-                <dt className="text-[0.68rem] tracking-[0.16em] uppercase text-gold">Phone</dt>
-                <dd>{settings.phone || "To be published"}</dd>
+                <dt className="text-[0.68rem] tracking-[0.16em] text-gold uppercase">{copy.footer.phone}</dt>
+                <dd>{settings.phone || "—"}</dd>
               </div>
               <div>
-                <dt className="text-[0.68rem] tracking-[0.16em] uppercase text-gold">Email</dt>
-                <dd>{settings.email || "To be published"}</dd>
+                <dt className="text-[0.68rem] tracking-[0.16em] text-gold uppercase">Email</dt>
+                <dd>{settings.email || "—"}</dd>
               </div>
               <div>
-                <dt className="text-[0.68rem] tracking-[0.16em] uppercase text-gold">WhatsApp</dt>
-                <dd>
-                  {whatsapp ? (
-                    <a href={whatsapp} className="underline">
-                      Message on WhatsApp
-                    </a>
-                  ) : (
-                    "To be published"
-                  )}
+                <dt className="text-[0.68rem] tracking-[0.16em] text-gold uppercase">{copy.whatsapp.label}</dt>
+                <dd className="mt-2">
+                  <WhatsAppButton number={settings.whatsapp} message={copy.footer.whatsappMessage} label={copy.whatsapp.enquire} variant="line" />
                 </dd>
               </div>
             </dl>

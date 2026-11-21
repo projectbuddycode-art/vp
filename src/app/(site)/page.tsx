@@ -8,6 +8,7 @@ import {
   GuidanceAreas,
   KnowledgePreview,
   Philosophy,
+  Specialisations,
 } from "@/components/home/HomeSections";
 import { Journey } from "@/components/home/Journey";
 import { FaqList } from "@/components/home/FaqList";
@@ -72,6 +73,7 @@ export default async function HomePage() {
       <FounderStory settings={settings} />
       <SanskritVerseRibbon index={1} />
       <Philosophy />
+      <Specialisations whatsappNumber={settings.whatsapp} />
       <SanskritVerseRibbon index={2} />
       <Journey />
       <SanskritVerseRibbon index={3} />
