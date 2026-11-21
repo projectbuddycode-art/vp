@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { WhatsAppButton } from "@/components/contact/WhatsAppButton";
 import { useCopy, useLocale } from "@/components/i18n/LocaleProvider";
 import { translateError } from "@/lib/i18n/dictionaries";
 import { openRazorpayCheckout } from "@/lib/payments/checkout";
@@ -16,7 +17,7 @@ import {
   type SiteSettings,
 } from "@/lib/site";
 import { enquirySchema, type EnquiryInput } from "@/lib/validation/enquiry";
-import { formatInr } from "@/lib/utils";
+import { formatInr, publicWhatsappNumber } from "@/lib/utils";
 
 function FieldError({ message }: { message?: string }) {
   if (!message) return null;
@@ -28,6 +29,7 @@ export function ConsultationForm({ settings }: { settings: SiteSettings }) {
   const locale = useLocale();
   const router = useRouter();
   const fees = visitFees(settings.consultationFee, settings.bookingToken);
+  const whatsappNumber = publicWhatsappNumber(settings.whatsapp, settings.phone);
   const [formError, setFormError] = useState<string | null>(null);
   const [paying, setPaying] = useState(false);
   const [bypass, setBypass] = useState(false);
@@ -381,6 +383,18 @@ export function ConsultationForm({ settings }: { settings: SiteSettings }) {
           {isSubmitting ? copy.form.sending : copy.form.enquireOnly}
         </button>
       </div>
+      {whatsappNumber ? (
+        <div className="border-t border-deep/10 pt-5">
+          <p className="mb-3 text-sm text-bark">{copy.whatsapp.or}</p>
+          <WhatsAppButton
+            number={whatsappNumber}
+            message={copy.footer.whatsappMessage}
+            label={copy.whatsapp.direct}
+            variant="line"
+            className="w-full px-6 py-3.5 text-[0.72rem] font-semibold tracking-[0.18em] uppercase sm:w-auto"
+          />
+        </div>
+      ) : null}
       {bypass ? <p className="text-sm leading-relaxed text-bark">{copy.phone.bypassNote}</p> : null}
     </form>
   );

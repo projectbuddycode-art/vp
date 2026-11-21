@@ -5,6 +5,7 @@ import { getSettings } from "@/lib/data/public";
 import { getCopy } from "@/lib/i18n/get-locale";
 import { images } from "@/lib/images";
 import { pageMetadata } from "@/lib/seo";
+import { publicWhatsappNumber } from "@/lib/utils";
 
 export const metadata = pageMetadata({
   title: "Phone consultation",
@@ -21,6 +22,7 @@ export default async function PhoneConsultationPage({
   const params = await searchParams;
   const [copy, settings] = await Promise.all([getCopy(), getSettings()]);
   const subject = params.subject === "health" || params.subject === "money" ? params.subject : "";
+  const whatsappNumber = publicWhatsappNumber(settings.whatsapp, settings.phone);
   return (
     <>
       <PageHero
@@ -35,7 +37,7 @@ export default async function PhoneConsultationPage({
       />
       <section className="bg-ivory py-16 sm:py-20">
         <Container className="max-w-3xl">
-          <PhoneConsultationForm initialSubject={subject} whatsappNumber={settings.whatsapp} />
+          <PhoneConsultationForm initialSubject={subject} whatsappNumber={whatsappNumber} />
         </Container>
       </section>
     </>

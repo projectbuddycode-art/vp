@@ -209,6 +209,8 @@ export type Copy = {
     money: string;
     health: string;
     booking: string;
+    or: string;
+    direct: string;
   };
   errors: Record<string, string>;
   common: {

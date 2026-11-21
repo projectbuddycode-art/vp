@@ -7,7 +7,7 @@ import { getCopy } from "@/lib/i18n/get-locale";
 import { images } from "@/lib/images";
 import { pageMetadata } from "@/lib/seo";
 import { visitFees } from "@/lib/payments/fees";
-import { formatInr } from "@/lib/utils";
+import { formatInr, publicWhatsappNumber } from "@/lib/utils";
 
 export const metadata = pageMetadata({
   title: "Book a Vastu visit",
@@ -19,6 +19,7 @@ export const metadata = pageMetadata({
 export default async function ContactPage() {
   const [settings, copy] = await Promise.all([getSettings(), getCopy()]);
   const fees = visitFees(settings.consultationFee, settings.bookingToken);
+  const whatsappNumber = publicWhatsappNumber(settings.whatsapp, settings.phone);
 
   return (
     <>
@@ -54,7 +55,7 @@ export default async function ContactPage() {
               <div>
                 <dt className="text-[0.68rem] tracking-[0.16em] text-gold uppercase">{copy.whatsapp.label}</dt>
                 <dd className="mt-2">
-                  <WhatsAppButton number={settings.whatsapp} message={copy.footer.whatsappMessage} label={copy.whatsapp.enquire} variant="line" />
+                  <WhatsAppButton number={whatsappNumber} message={copy.footer.whatsappMessage} label={copy.whatsapp.direct} variant="line" />
                 </dd>
               </div>
             </dl>

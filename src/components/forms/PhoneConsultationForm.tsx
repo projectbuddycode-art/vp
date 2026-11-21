@@ -9,7 +9,7 @@ import { localeMeta, locales, type Locale } from "@/lib/i18n/locale";
 import { translateError } from "@/lib/i18n/dictionaries";
 import { openRazorpayCheckout } from "@/lib/payments/checkout";
 import { phoneFees } from "@/lib/payments/fees";
-import { formatInr } from "@/lib/utils";
+import { formatInr, publicWhatsappNumber } from "@/lib/utils";
 
 export function PhoneConsultationForm({
   initialSubject,
@@ -22,6 +22,7 @@ export function PhoneConsultationForm({
   const locale = useLocale();
   const router = useRouter();
   const fees = phoneFees();
+  const whatsapp = publicWhatsappNumber(whatsappNumber);
   const [bypass, setBypass] = useState(false);
   const [subject, setSubject] = useState<"money" | "health" | "">(initialSubject);
   const [language, setLanguage] = useState<Locale>(locale);
@@ -230,13 +231,19 @@ export function PhoneConsultationForm({
             {copy.phone.bypass}
           </button>
         ) : null}
-        <WhatsAppButton
-          number={whatsappNumber}
-          message={subject === "health" ? copy.whatsapp.health : copy.whatsapp.money}
-          label={copy.whatsapp.enquire}
-          variant="line"
-        />
       </div>
+      {whatsapp ? (
+        <div className="border-t border-deep/10 pt-5">
+          <p className="mb-3 text-sm text-bark">{copy.whatsapp.or}</p>
+          <WhatsAppButton
+            number={whatsapp}
+            message={subject === "health" ? copy.whatsapp.health : copy.whatsapp.money}
+            label={copy.whatsapp.direct}
+            variant="line"
+            className="w-full px-6 py-3.5 sm:w-auto"
+          />
+        </div>
+      ) : null}
       {bypass ? <p className="text-sm leading-relaxed text-bark">{copy.phone.bypassNote}</p> : null}
     </form>
   );

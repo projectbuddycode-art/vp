@@ -16,7 +16,7 @@ import { TestimonialCarousel } from "@/components/home/Testimonials";
 import { Hero } from "@/components/hero/Hero";
 import { getArticles, getCaseStudies, getFaqs, getSettings, getTestimonials } from "@/lib/data/public";
 import { disclaimer } from "@/lib/site";
-import { siteUrl } from "@/lib/utils";
+import { publicWhatsappNumber, siteUrl } from "@/lib/utils";
 
 export default async function HomePage() {
   const [settings, faqs, articles, studies, testimonials] = await Promise.all([
@@ -73,7 +73,7 @@ export default async function HomePage() {
       <FounderStory settings={settings} />
       <SanskritVerseRibbon index={1} />
       <Philosophy />
-      <Specialisations whatsappNumber={settings.whatsapp} />
+      <Specialisations whatsappNumber={publicWhatsappNumber(settings.whatsapp, settings.phone)} />
       <SanskritVerseRibbon index={2} />
       <Journey />
       <SanskritVerseRibbon index={3} />
