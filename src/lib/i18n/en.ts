@@ -33,6 +33,8 @@ export const en: Copy = {
     serviceAreas: "Service areas",
     phone: "Phone",
     whatsappMessage: "Hello, I would like to enquire about a personal Vastu consultation.",
+    privacy: "Privacy Policy",
+    terms: "Terms and Conditions",
   },
   hero: {
     title: "Your Space. Your Life. A More Thoughtful Balance.",
@@ -186,6 +188,7 @@ export const en: Copy = {
       on_site: "Personal property visit",
       online: "Online consultation",
       either: "Either",
+      initial_discussion: "Initial discussion",
     },
     serviceTitles: {
       "residential-vastu": "Residential Vastu",

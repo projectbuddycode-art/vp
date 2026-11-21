@@ -102,13 +102,13 @@ export async function Footer({ settings }: { settings: SiteSettings }) {
         <p className="max-w-4xl text-xs leading-relaxed text-sand/80">{disclaimer}</p>
         <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-[0.68rem] tracking-[0.14em] text-sand uppercase">
           <Link href="/privacy-policy" className="vedic-link hover:text-ivory">
-            Privacy Policy
+            {copy.footer.privacy}
           </Link>
           <Link href="/terms-and-conditions" className="vedic-link hover:text-ivory">
-            Terms and Conditions
+            {copy.footer.terms}
           </Link>
           <Link href="/contact" className="vedic-link hover:text-ivory">
-            Contact
+            {copy.nav.contact}
           </Link>
         </div>
       </Container>

@@ -33,6 +33,8 @@ export const gu: Copy = {
     serviceAreas: "સેવા વિસ્તાર",
     phone: "ફોન",
     whatsappMessage: "નમસ્તે, હું અંગત વાસ્તુ સલાહ વિશે પૂછવા માગું છું.",
+    privacy: "ગોપનીયતા નીતિ",
+    terms: "નિયમો અને શરતો",
   },
   hero: {
     title: "તમારી જગ્યા. તમારું જીવન. વિચારપૂર્વકનું સંતુલન.",
@@ -186,6 +188,7 @@ export const gu: Copy = {
       on_site: "અંગત મિલકત મુલાકાત",
       online: "ઑનલાઇન સલાહ",
       either: "કોઈ પણ",
+      initial_discussion: "પ્રારંભિક વાતચીત",
     },
     serviceTitles: {
       "residential-vastu": "રહેણાંક વાસ્તુ",

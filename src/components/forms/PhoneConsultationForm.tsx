@@ -209,7 +209,7 @@ export function PhoneConsultationForm({
         <span>
           {copy.phone.terms}{" "}
           <Link href="/privacy-policy" className="underline">
-            Privacy
+            {copy.footer.privacy}
           </Link>
         </span>
       </label>

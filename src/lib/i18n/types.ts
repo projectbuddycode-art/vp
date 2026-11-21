@@ -31,6 +31,8 @@ export type Copy = {
     serviceAreas: string;
     phone: string;
     whatsappMessage: string;
+    privacy: string;
+    terms: string;
   };
   hero: {
     title: string;

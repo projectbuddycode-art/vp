@@ -344,7 +344,7 @@ export function ConsultationForm({ settings }: { settings: SiteSettings }) {
         <span>
           {copy.form.terms}{" "}
           <Link href="/privacy-policy" className="underline">
-            Privacy
+            {copy.footer.privacy}
           </Link>
         </span>
       </label>

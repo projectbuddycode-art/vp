@@ -33,6 +33,8 @@ export const hi: Copy = {
     serviceAreas: "सेवा क्षेत्र",
     phone: "फ़ोन",
     whatsappMessage: "नमस्ते, मैं निजी वास्तु परामर्श के बारे में पूछना चाहता हूँ।",
+    privacy: "गोपनीयता नीति",
+    terms: "नियम और शर्तें",
   },
   hero: {
     title: "आपकी जगह। आपका जीवन। एक सोच-समझकर रखा संतुलन।",
@@ -186,6 +188,7 @@ export const hi: Copy = {
       on_site: "निजी संपत्ति विज़िट",
       online: "ऑनलाइन परामर्श",
       either: "कोई भी",
+      initial_discussion: "प्रारंभिक बातचीत",
     },
     serviceTitles: {
       "residential-vastu": "आवासीय वास्तु",
