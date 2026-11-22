@@ -6,6 +6,7 @@ import { getSettings } from "@/lib/data/public";
 import { getCopy } from "@/lib/i18n/get-locale";
 import { fill } from "@/lib/i18n/dictionaries";
 import { pageMetadata } from "@/lib/seo";
+import { publicWhatsappNumber } from "@/lib/utils";
 
 export const metadata = pageMetadata({
   title: "Enquiry received",
@@ -33,7 +34,7 @@ async function ThankYou({ searchParams }: { searchParams: Promise<{ ref?: string
       {reference ? <p className="mt-6 font-serif text-3xl text-terracotta">{reference}</p> : null}
       <p className="mt-6 text-base leading-relaxed text-deep/75">{copy.confirm.text}</p>
       <div className="mt-8 flex flex-wrap gap-4">
-        <WhatsAppButton number={settings.whatsapp} message={message} label={copy.whatsapp.booking} />
+        <WhatsAppButton number={publicWhatsappNumber(settings.whatsapp, settings.phone)} message={message} label={copy.whatsapp.booking} />
         <Link href="/" className="border border-deep/20 px-5 py-3 text-sm">
           {copy.common.home}
         </Link>

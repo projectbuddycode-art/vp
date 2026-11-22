@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { getSettings } from "@/lib/data/public";
 import { getCopy } from "@/lib/i18n/get-locale";
 import { pageMetadata } from "@/lib/seo";
+import { publicWhatsappNumber } from "@/lib/utils";
 
 export const metadata = pageMetadata({
   title: "Booking confirmation",
@@ -23,7 +24,10 @@ export default async function BookingConfirmationPage({
     <section className="bg-ivory py-20 sm:py-28">
       <Container className="max-w-3xl">
         {bookingCode ? (
-          <BookingConfirmation bookingCode={bookingCode} whatsappNumber={settings.whatsapp} />
+          <BookingConfirmation
+            bookingCode={bookingCode}
+            whatsappNumber={publicWhatsappNumber(settings.whatsapp, settings.phone)}
+          />
         ) : (
           <p className="text-sm text-bark">{copy.common.notFoundText}</p>
         )}

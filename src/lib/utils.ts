@@ -43,13 +43,17 @@ export function normalizeIndianMobile(value: string) {
   return /^[6-9]\d{9}$/.test(local) ? local : null;
 }
 
+/** Public STHAPATYA business WhatsApp (Indian mobile, without +). */
+export const DEFAULT_BUSINESS_WHATSAPP = "9825047860";
+
 export function publicWhatsappNumber(...candidates: Array<string | null | undefined>) {
   for (const candidate of candidates) {
     const digits = digitsOnly(String(candidate || ""));
     if (digits.length >= 10) return String(candidate).trim();
   }
   const fromEnv = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.trim() || "";
-  return digitsOnly(fromEnv).length >= 10 ? fromEnv : "";
+  if (digitsOnly(fromEnv).length >= 10) return fromEnv;
+  return DEFAULT_BUSINESS_WHATSAPP;
 }
 
 export function whatsappHref(number: string, text: string) {

@@ -3,13 +3,13 @@ import { Container } from "@/components/ui/Container";
 import { BrandMark } from "@/components/brand/Logo";
 import { getCopy } from "@/lib/i18n/get-locale";
 import { disclaimer, navItems, services, type SiteSettings } from "@/lib/site";
-import { whatsappHref } from "@/lib/utils";
+import { publicWhatsappNumber, whatsappHref } from "@/lib/utils";
 
 const footerNav = ["about", "understanding", "approach", "services"] as const;
 
 export async function Footer({ settings }: { settings: SiteSettings }) {
   const copy = await getCopy();
-  const whatsapp = whatsappHref(settings.whatsapp, copy.footer.whatsappMessage);
+  const whatsapp = whatsappHref(publicWhatsappNumber(settings.whatsapp, settings.phone), copy.footer.whatsappMessage);
 
   return (
     <footer className="dark-panel text-ivory">
