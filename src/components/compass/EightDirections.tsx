@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePageBodies } from "@/components/i18n/LocaleProvider";
 import { directions, type DirectionKey } from "@/lib/directions";
 import { cn } from "@/lib/utils";
 
@@ -16,11 +17,14 @@ const positions: Record<DirectionKey, string> = {
 };
 
 export function EightDirections() {
+  const bodies = usePageBodies();
+  const panel = bodies.directionsPanel;
   const [active, setActive] = useState<DirectionKey>("n");
   const [paused, setPaused] = useState(false);
   const [drawn, setDrawn] = useState(false);
   const [complete, setComplete] = useState(false);
-  const note = directions.find((item) => item.key === active) ?? directions[0];
+  const base = directions.find((item) => item.key === active) ?? directions[0];
+  const note = panel.notes[active];
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -53,11 +57,9 @@ export function EightDirections() {
     <section className="bg-charcoal py-20 text-ivory sm:py-28">
       <div className="mx-auto grid max-w-6xl items-center gap-14 px-5 sm:px-8 lg:grid-cols-[1fr_0.9fr]">
         <div>
-          <p className="text-[0.72rem] tracking-[0.24em] text-gold uppercase">Directions</p>
-          <h2 className="mt-4 font-serif text-4xl leading-none sm:text-6xl">Eight ways of reading a plan.</h2>
-          <p className="mt-5 max-w-xl text-sm leading-relaxed text-sand">
-            These are the traditional directions a consultant names while standing in a property. Choosing one explains the idea. It does not assess your building.
-          </p>
+          <p className="text-[0.72rem] tracking-[0.24em] text-gold uppercase">{panel.eyebrow}</p>
+          <h2 className="mt-4 font-serif text-4xl leading-none sm:text-6xl">{panel.title}</h2>
+          <p className="mt-5 max-w-xl text-sm leading-relaxed text-sand">{panel.text}</p>
           <div
             className="relative mx-auto mt-10 hidden aspect-square w-full max-w-[440px] sm:block"
             onMouseEnter={() => setPaused(true)}
@@ -82,7 +84,7 @@ export function EightDirections() {
                 )}
               >
                 <span className="devanagari block text-lg leading-none">{item.sanskrit}</span>
-                <span className="mt-1 block text-[0.58rem] tracking-[0.16em] uppercase">{item.name}</span>
+                <span className="mt-1 block text-[0.58rem] tracking-[0.16em] uppercase">{panel.notes[item.key].name}</span>
               </button>
             ))}
           </div>
@@ -98,13 +100,13 @@ export function EightDirections() {
                   active === item.key ? "border-gold text-ivory" : "border-white/15 text-sand",
                 )}
               >
-                {item.name}
+                {panel.notes[item.key].name}
               </button>
             ))}
           </div>
         </div>
         <article className="border border-white/10 bg-deep p-8 sm:p-12">
-          <p className="devanagari text-4xl text-sand">{note.sanskrit}</p>
+          <p className="devanagari text-4xl text-sand">{base.sanskrit}</p>
           <h3 className="mt-4 font-serif text-4xl">{note.name}</h3>
           <p className="mt-5 text-base leading-relaxed text-sand">{note.text}</p>
         </article>

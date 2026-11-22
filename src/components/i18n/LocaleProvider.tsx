@@ -2,6 +2,7 @@
 
 import { createContext, useContext } from "react";
 import { dictionaries } from "@/lib/i18n/dictionaries";
+import { getPageBodies, type PageBodies } from "@/lib/i18n/page-bodies";
 import type { Locale } from "@/lib/i18n/locale";
 import type { Copy } from "@/lib/i18n/types";
 
@@ -17,4 +18,8 @@ export function useLocale() {
 
 export function useCopy(): Copy {
   return dictionaries[useContext(LocaleContext)];
+}
+
+export function usePageBodies(): PageBodies {
+  return getPageBodies(useContext(LocaleContext));
 }

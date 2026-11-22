@@ -7,18 +7,29 @@ import { serviceGuides } from "@/lib/content/service-guides";
 import { images } from "@/lib/images";
 import { serviceFilms } from "@/lib/videos";
 import type { Service } from "@/lib/site";
-import { getCopy } from "@/lib/i18n/get-locale";
+import { getCopy, getLocale } from "@/lib/i18n/get-locale";
+import { getPageBodies } from "@/lib/i18n/page-bodies";
+import { getServiceBody } from "@/lib/i18n/service-bodies";
 import { siteUrl } from "@/lib/utils";
 
 export async function ServiceView({ service }: { service: Service }) {
-  const copy = await getCopy();
-  const guide = serviceGuides[service.slug];
+  const [copy, locale] = await Promise.all([getCopy(), getLocale()]);
+  const chrome = getPageBodies(locale).serviceChrome;
+  const body = getServiceBody(locale, service.slug);
+  const baseGuide = serviceGuides[service.slug];
   const title = copy.form.serviceTitles[service.slug] || service.title;
+  const lead = body?.lead ?? service.lead;
+  const paragraphs = body?.paragraphs ?? service.paragraphs;
+  const points = body?.points ?? service.points;
+  const boundary = body?.boundary ?? service.boundary;
+  const guide = body && baseGuide
+    ? { sanskrit: baseGuide.sanskrit, ...body.guide }
+    : baseGuide;
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
     name: title,
-    description: service.lead,
+    description: lead,
     provider: { "@type": "Person", name: "Sanjeev Jain" },
     url: `${siteUrl()}/expertise/${service.slug}`,
     offers: {
@@ -45,7 +56,7 @@ export async function ServiceView({ service }: { service: Service }) {
           )
         }
         title={title}
-        text={service.lead}
+        text={lead}
         image={service.image}
         crumbs={[
           { href: "/", label: copy.common.home },
@@ -60,7 +71,8 @@ export async function ServiceView({ service }: { service: Service }) {
               variant="panel"
               category={title}
               title={title}
-              description={service.lead}
+              description={lead}
+              filmNote={copy.home.filmNote}
               video={serviceFilms[service.slug as keyof typeof serviceFilms]}
             />
           </Container>
@@ -69,14 +81,14 @@ export async function ServiceView({ service }: { service: Service }) {
       <section className="bg-ivory py-16 sm:py-24">
         <Container className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="space-y-5 text-base leading-relaxed text-deep/80">
-            {service.paragraphs.map((paragraph) => (
+            {paragraphs.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
-            <div className="border-l-2 border-gold pl-5 text-sm leading-relaxed text-deep">{service.boundary}</div>
+            <div className="border-l-2 border-gold pl-5 text-sm leading-relaxed text-deep">{boundary}</div>
             <Button href="/contact">{copy.bookVisit}</Button>
           </div>
           <div className="space-y-4">
-            {service.points.map((point) => (
+            {points.map((point) => (
               <article key={point.title} className="border border-deep/10 bg-white p-6 transition-colors hover:border-gold">
                 <h2 className="font-serif text-3xl">{point.title}</h2>
                 <p className="mt-3 text-sm leading-relaxed text-deep/75">{point.text}</p>
@@ -89,13 +101,13 @@ export async function ServiceView({ service }: { service: Service }) {
         <section className="bg-white py-16 sm:py-20">
           <Container className="grid gap-12 lg:grid-cols-2">
             <div>
-              <h2 className="font-serif text-4xl">Concerns people bring</h2>
+              <h2 className="font-serif text-4xl">{chrome.concerns}</h2>
               <ul className="mt-4 space-y-3 text-sm leading-relaxed text-deep/80">
                 {guide.concerns.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
               </ul>
-              <h2 className="mt-10 font-serif text-4xl">What to prepare</h2>
+              <h2 className="mt-10 font-serif text-4xl">{chrome.prepare}</h2>
               <ul className="mt-4 space-y-3 text-sm leading-relaxed text-deep/80">
                 {guide.prepare.map((item) => (
                   <li key={item}>{item}</li>
@@ -103,13 +115,13 @@ export async function ServiceView({ service }: { service: Service }) {
               </ul>
             </div>
             <div>
-              <h2 className="font-serif text-4xl">What is studied</h2>
+              <h2 className="font-serif text-4xl">{chrome.studied}</h2>
               <ul className="mt-4 space-y-3 text-sm leading-relaxed text-deep/80">
                 {guide.studied.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
               </ul>
-              <h2 className="mt-10 font-serif text-4xl">Forms of guidance</h2>
+              <h2 className="mt-10 font-serif text-4xl">{chrome.guidance}</h2>
               <ul className="mt-4 space-y-3 text-sm leading-relaxed text-deep/80">
                 {guide.guidance.map((item) => (
                   <li key={item}>{item}</li>
@@ -118,7 +130,7 @@ export async function ServiceView({ service }: { service: Service }) {
             </div>
           </Container>
           <Container className="mt-14">
-            <h2 className="font-serif text-4xl">Questions about this consultation</h2>
+            <h2 className="font-serif text-4xl">{chrome.faqs}</h2>
             <div className="mt-6 grid gap-6 md:grid-cols-2">
               {guide.faqs.map((faq) => (
                 <article key={faq.question} className="border border-deep/10 p-5">
@@ -139,8 +151,8 @@ export async function ServiceView({ service }: { service: Service }) {
             <Image src={images.geometry.src} alt={images.geometry.alt} fill className="object-cover" sizes="(min-width: 768px) 50vw, 100vw" />
           </div>
           <div>
-            <h2 className="font-serif text-4xl leading-tight">{copy.pages.approach.title}</h2>
-            <p className="mt-4 text-sm leading-relaxed text-deep/75">{copy.pages.approach.text}</p>
+            <h2 className="font-serif text-4xl leading-tight">{chrome.personalTitle}</h2>
+            <p className="mt-4 text-sm leading-relaxed text-deep/75">{chrome.personalText}</p>
             <div className="mt-6">
               <Button href="/approach" variant="line">
                 {copy.nav.approach}

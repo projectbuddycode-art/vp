@@ -2,9 +2,10 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { Container } from "@/components/ui/Container";
-import { studyCaption, type SiteImage } from "@/lib/images";
+import { getCopy } from "@/lib/i18n/get-locale";
+import type { SiteImage } from "@/lib/images";
 
-export function PageHero({
+export async function PageHero({
   eyebrow,
   title,
   text,
@@ -17,6 +18,7 @@ export function PageHero({
   image: SiteImage;
   crumbs?: { href: string; label: string }[];
 }) {
+  const copy = await getCopy();
   return (
     <section className="bg-ivory pt-[4.5rem] text-deep lg:pt-20">
       <Container className="grid items-end gap-10 py-12 lg:grid-cols-[1.15fr_0.85fr] lg:py-16">
@@ -32,7 +34,7 @@ export function PageHero({
           <div className="relative aspect-[3/2] bg-parchment">
             <Image src={image.src} alt={image.alt} fill className="object-cover" sizes="(min-width: 1024px) 40vw, 100vw" priority />
           </div>
-          <figcaption className="mt-2 text-xs leading-relaxed text-bark">{studyCaption}</figcaption>
+          <figcaption className="mt-2 text-xs leading-relaxed text-bark">{copy.home.filmNote}</figcaption>
         </figure>
       </Container>
     </section>

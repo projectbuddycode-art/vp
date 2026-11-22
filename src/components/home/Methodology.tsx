@@ -5,30 +5,37 @@ import { Compass } from "@/components/compass/Compass";
 import { GoldLine } from "@/components/animations/GoldLine";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { useCopy, usePageBodies } from "@/components/i18n/LocaleProvider";
 import { processSteps } from "@/lib/site";
-
-const directionMark = { N: "उत्तर", E: "पूर्व", S: "दक्षिण", W: "पश्चिम" } as const;
 import { cn } from "@/lib/utils";
 
+const directionMark = { N: "उत्तर", E: "पूर्व", S: "दक्षिण", W: "पश्चिम" } as const;
+
 export function Methodology() {
+  const copy = useCopy();
+  const bodies = usePageBodies();
+  const steps = copy.home.journeySteps.map((step, index) => ({
+    ...step,
+    direction: processSteps[index]?.direction ?? ("N" as const),
+  }));
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
-  const step = processSteps[active];
+  const step = steps[active] ?? steps[0];
 
   useEffect(() => {
     if (paused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const timer = window.setInterval(() => setActive((value) => (value + 1) % processSteps.length), 3200);
+    const timer = window.setInterval(() => setActive((value) => (value + 1) % steps.length), 3200);
     return () => window.clearInterval(timer);
-  }, [paused]);
+  }, [paused, steps.length]);
 
   return (
     <section className="dark-panel py-20 text-ivory sm:py-28">
       <Container>
         <SectionHeading
           light
-          eyebrow="Methodology"
-          title="No Two Properties Are the Same."
-          text="Four stages, carried out by the consultant. The diagram explains the sequence. It does not assess a property."
+          eyebrow={bodies.methodology.eyebrow}
+          title={bodies.methodology.title}
+          text={bodies.methodology.text}
         />
         <GoldLine className="mt-8 h-3 w-full max-w-xl" />
         <div
@@ -37,7 +44,7 @@ export function Methodology() {
           onMouseLeave={() => setPaused(false)}
         >
           <div className="space-y-3">
-            {processSteps.map((item, index) => {
+            {steps.map((item, index) => {
               const selected = index === active;
               return (
                 <button
@@ -63,7 +70,7 @@ export function Methodology() {
           <div>
             <Compass active={step.direction} />
             <p className="mt-4 text-center text-[0.68rem] tracking-[0.18em] text-sand uppercase">
-              Stage marker · {step.direction} · {step.title}
+              {bodies.methodology.stageMarker} · {step.direction} · {step.title}
             </p>
           </div>
         </div>

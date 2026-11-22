@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { BrandMark } from "@/components/brand/Logo";
 import { getCopy } from "@/lib/i18n/get-locale";
-import { disclaimer, navItems, services, type SiteSettings } from "@/lib/site";
+import { navItems, services, type SiteSettings } from "@/lib/site";
 import { publicWhatsappNumber, whatsappHref } from "@/lib/utils";
 
 const footerNav = ["about", "understanding", "approach", "services"] as const;
@@ -99,7 +99,7 @@ export async function Footer({ settings }: { settings: SiteSettings }) {
         </div>
       </Container>
       <Container className="border-t border-white/10 py-6">
-        <p className="max-w-4xl text-xs leading-relaxed text-sand/80">{disclaimer}</p>
+        <p className="max-w-4xl text-xs leading-relaxed text-sand/80">{copy.home.disclaimer}</p>
         <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-[0.68rem] tracking-[0.14em] text-sand uppercase">
           <Link href="/privacy-policy" className="vedic-link hover:text-ivory">
             {copy.footer.privacy}

@@ -14,6 +14,7 @@ export function ServiceVideoFeature({
   reverse = false,
   boundary,
   variant = "feature",
+  filmNote,
 }: {
   category: string;
   title: string;
@@ -24,6 +25,7 @@ export function ServiceVideoFeature({
   reverse?: boolean;
   boundary?: string;
   variant?: "feature" | "panel";
+  filmNote?: string;
 }) {
   if (variant === "panel") {
     return (
@@ -36,9 +38,7 @@ export function ServiceVideoFeature({
         />
         <figcaption className="mt-3 max-w-2xl text-base leading-relaxed text-deep/80">{description}</figcaption>
         <p className="mt-2 text-xs text-bark">
-          {video.src
-            ? "Architectural film prepared for this website. Not a client property, and not a record of a consultation."
-            : studyCaption}
+          {video.src ? filmNote ?? studyCaption : studyCaption}
         </p>
       </figure>
     );

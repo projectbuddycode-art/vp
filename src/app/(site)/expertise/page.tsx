@@ -3,10 +3,11 @@ import Link from "next/link";
 import { PageHero } from "@/components/layout/PageHero";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { images, studyCaption } from "@/lib/images";
+import { images } from "@/lib/images";
 import { pageMetadata } from "@/lib/seo";
 import { services } from "@/lib/site";
-import { getCopy } from "@/lib/i18n/get-locale";
+import { getCopy, getLocale } from "@/lib/i18n/get-locale";
+import { getServiceBody } from "@/lib/i18n/service-bodies";
 
 export const metadata = pageMetadata({
   title: "Vastu consultation services",
@@ -17,7 +18,7 @@ export const metadata = pageMetadata({
 });
 
 export default async function ExpertisePage() {
-  const copy = await getCopy();
+  const [copy, locale] = await Promise.all([getCopy(), getLocale()]);
   return (
     <>
       <PageHero
@@ -44,7 +45,9 @@ export default async function ExpertisePage() {
                 <h2 className="font-serif text-4xl leading-tight group-hover:text-bark sm:text-5xl">
                   {copy.pages.expertise.cardTitles[index] ?? copy.form.serviceTitles[service.slug] ?? service.title}
                 </h2>
-                <p className="mt-4 max-w-md text-base leading-relaxed text-deep/75">{service.summary}</p>
+                <p className="mt-4 max-w-md text-base leading-relaxed text-deep/75">
+                  {getServiceBody(locale, service.slug)?.summary ?? service.summary}
+                </p>
               </div>
             </Link>
           ))}
