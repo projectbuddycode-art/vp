@@ -30,8 +30,7 @@ export function ServiceVideoFeature({
       <figure>
         <CinematicVideo
           video={video}
-          playInView
-          playOnHover
+          continuous
           className="aspect-[16/9]"
           sizes="(min-width: 1024px) 70vw, 100vw"
         />
@@ -50,8 +49,7 @@ export function ServiceVideoFeature({
       <div className={cn(reverse && "lg:order-2")}>
         <CinematicVideo
           video={video}
-          playInView
-          playOnHover
+          continuous
           className="aspect-[16/10]"
           sizes="(min-width: 1024px) 48vw, 100vw"
         />

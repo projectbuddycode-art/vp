@@ -7,13 +7,13 @@ import { cn } from "@/lib/utils";
 
 export function CinematicVideo({
   video,
-  autoPlay = false,
+  autoPlay = true,
   loop = true,
   controls = false,
   playInView = false,
   playOnHover = false,
   priority = false,
-  continuous = false,
+  continuous = true,
   className,
   sizes = "100vw",
 }: {
@@ -21,10 +21,11 @@ export function CinematicVideo({
   autoPlay?: boolean;
   loop?: boolean;
   controls?: boolean;
+  /** Kept for call-site compatibility; films no longer pause when leaving view. */
   playInView?: boolean;
   playOnHover?: boolean;
   priority?: boolean;
-  /** Keep a muted film playing. Used for the full-screen opening. */
+  /** Keep a muted film playing without interruption. */
   continuous?: boolean;
   className?: string;
   sizes?: string;
@@ -35,6 +36,7 @@ export function CinematicVideo({
   const [failed, setFailed] = useState(false);
   const [reduced, setReduced] = useState(false);
   const canPlay = Boolean(video.src) && !failed && !reduced;
+  const keepAlive = continuous || autoPlay || playInView;
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -46,49 +48,38 @@ export function CinematicVideo({
 
   useEffect(() => {
     const node = videoRef.current;
-    const root = rootRef.current;
-    if (!node || !root || !canPlay) return;
+    if (!node || !canPlay || !keepAlive) return;
 
-    const play = () => {
-      void node.play().catch(() => undefined);
-    };
-    const pause = () => {
-      node.pause();
+    const ensurePlaying = () => {
+      if (node.ended) node.currentTime = 0;
+      if (node.paused) void node.play().catch(() => undefined);
     };
 
-    if (continuous || (!playInView && autoPlay)) play();
+    ensurePlaying();
 
-    if (continuous) {
-      const keepPlaying = () => {
-        if (node.paused || node.ended) {
-          if (node.ended) node.currentTime = 0;
-          void node.play().catch(() => undefined);
-        }
-      };
-      node.addEventListener("pause", keepPlaying);
-      node.addEventListener("ended", keepPlaying);
-      node.addEventListener("stalled", keepPlaying);
-      return () => {
-        node.removeEventListener("pause", keepPlaying);
-        node.removeEventListener("ended", keepPlaying);
-        node.removeEventListener("stalled", keepPlaying);
-      };
-    }
+    const onVisibility = () => {
+      if (document.visibilityState === "visible") ensurePlaying();
+    };
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry) return;
-        if (entry.isIntersecting && (autoPlay || playInView)) play();
-        else pause();
-      },
-      { rootMargin: "240px 0px", threshold: 0.2 },
-    );
-    observer.observe(root);
+    node.addEventListener("pause", ensurePlaying);
+    node.addEventListener("ended", ensurePlaying);
+    node.addEventListener("stalled", ensurePlaying);
+    node.addEventListener("suspend", ensurePlaying);
+    node.addEventListener("waiting", ensurePlaying);
+    document.addEventListener("visibilitychange", onVisibility);
+
+    const retry = window.setInterval(ensurePlaying, 2500);
+
     return () => {
-      observer.disconnect();
-      pause();
+      window.clearInterval(retry);
+      node.removeEventListener("pause", ensurePlaying);
+      node.removeEventListener("ended", ensurePlaying);
+      node.removeEventListener("stalled", ensurePlaying);
+      node.removeEventListener("suspend", ensurePlaying);
+      node.removeEventListener("waiting", ensurePlaying);
+      document.removeEventListener("visibilitychange", onVisibility);
     };
-  }, [autoPlay, canPlay, continuous, playInView]);
+  }, [canPlay, keepAlive]);
 
   return (
     <div
@@ -96,11 +87,6 @@ export function CinematicVideo({
       className={cn("group/video relative overflow-hidden bg-charcoal", className)}
       onMouseEnter={() => {
         if (playOnHover && canPlay) void videoRef.current?.play().catch(() => undefined);
-      }}
-      onMouseLeave={() => {
-        if (playOnHover && !playInView && !autoPlay) {
-          videoRef.current?.pause();
-        }
       }}
     >
       <p id={labelId} className="sr-only">
@@ -110,15 +96,20 @@ export function CinematicVideo({
         <video
           ref={videoRef}
           className="video-frame absolute top-0 left-0 h-[132%] w-full object-cover object-top"
-          poster={continuous ? undefined : video.poster}
           muted
           playsInline
-          autoPlay={autoPlay || continuous}
-          loop={loop || continuous}
+          autoPlay
+          loop={loop || continuous || autoPlay}
           controls={controls}
-          preload={priority || continuous ? "auto" : "none"}
+          preload="auto"
           aria-labelledby={labelId}
           onError={() => setFailed(true)}
+          onLoadedData={() => {
+            void videoRef.current?.play().catch(() => undefined);
+          }}
+          onCanPlay={() => {
+            void videoRef.current?.play().catch(() => undefined);
+          }}
         >
           {video.mobileSrc ? <source src={video.mobileSrc} media="(max-width: 767px)" type="video/mp4" /> : null}
           {video.webm ? <source src={video.webm} type="video/webm" /> : null}
