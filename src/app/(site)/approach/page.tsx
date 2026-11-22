@@ -9,6 +9,7 @@ import { Container } from "@/components/ui/Container";
 import { images } from "@/lib/images";
 import { pageMetadata } from "@/lib/seo";
 import { disclaimer, processSteps } from "@/lib/site";
+import { getCopy } from "@/lib/i18n/get-locale";
 
 export const metadata = pageMetadata({
   title: "How a Vastu consultation works",
@@ -18,14 +19,18 @@ export const metadata = pageMetadata({
   image: images.geometry.src,
 });
 
-export default function ApproachPage() {
+export default async function ApproachPage() {
+  const copy = await getCopy();
   return (
     <>
       <PageHero
-        eyebrow={<SanskritLabel term="दिशा एवं संतुलन" reading="Directions and balance" meaning="The visit looks at direction, rooms and surroundings. A screen diagram is not the consultation." />}
-        title="Every Property Is Different. So Is Its Approach."
-        text="Mr. Sanjeev Jain studies the concern, the plan, the directions, and the surroundings before he suggests anything. Two properties do not get the same answer just because the worry sounds similar."
-        crumbs={[{ href: "/", label: "Home" }, { href: "/approach", label: "Vastu approach" }]}
+        eyebrow={<SanskritLabel term="दिशा एवं संतुलन" reading={copy.pages.approach.eyebrow} meaning={copy.pages.approach.text} />}
+        title={copy.pages.approach.title}
+        text={copy.pages.approach.text}
+        crumbs={[
+          { href: "/", label: copy.common.home },
+          { href: "/approach", label: copy.nav.approach },
+        ]}
         image={images.geometry}
       />
       <section className="bg-white py-12 sm:py-16">

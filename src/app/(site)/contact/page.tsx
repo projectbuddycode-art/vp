@@ -49,7 +49,7 @@ export default async function ContactPage() {
                 <dd>{settings.phone || "—"}</dd>
               </div>
               <div>
-                <dt className="text-[0.68rem] tracking-[0.16em] text-gold uppercase">Email</dt>
+                <dt className="text-[0.68rem] tracking-[0.16em] text-gold uppercase">{copy.pages.email}</dt>
                 <dd>{settings.email || "—"}</dd>
               </div>
               <div>

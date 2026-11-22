@@ -2,6 +2,7 @@ import { CaseStudyBrowser } from "@/components/case-studies/CaseStudyBrowser";
 import { PageHero } from "@/components/layout/PageHero";
 import { Container } from "@/components/ui/Container";
 import { getCaseStudies } from "@/lib/data/public";
+import { getCopy } from "@/lib/i18n/get-locale";
 import { images } from "@/lib/images";
 import { pageMetadata } from "@/lib/seo";
 
@@ -13,14 +14,17 @@ export const metadata = pageMetadata({
 });
 
 export default async function CaseStudiesPage() {
-  const studies = await getCaseStudies();
+  const [studies, copy] = await Promise.all([getCaseStudies(), getCopy()]);
   return (
     <>
       <PageHero
-        eyebrow="Case studies"
-        title="What do real Vastu visits look like?"
-        text="A story is published only when the client agrees. It separates the property, the concern, what was studied, the guidance, and the client’s own words. Their experience is not a promise for your property."
-        crumbs={[{ href: "/", label: "Home" }, { href: "/case-studies", label: "Case studies" }]}
+        eyebrow={copy.pages.studies.eyebrow}
+        title={copy.pages.studies.title}
+        text={copy.pages.studies.text}
+        crumbs={[
+          { href: "/", label: copy.common.home },
+          { href: "/case-studies", label: copy.nav.studies },
+        ]}
         image={images.modernHome}
       />
       <section className="bg-[#efe8da] py-16 sm:py-20">

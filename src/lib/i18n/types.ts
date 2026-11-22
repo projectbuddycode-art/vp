@@ -214,6 +214,45 @@ export type Copy = {
     prefer: string;
   };
   errors: Record<string, string>;
+  pages: {
+    about: {
+      eyebrow: string;
+      title: string;
+      text: string;
+      caption: string;
+      quote: string;
+      diamondTitle: string;
+      diamondText: string;
+      traditionTitle: string;
+      traditionText: string;
+      approachTitle: string;
+      approachText: string;
+      visitNote: string;
+    };
+    approach: { eyebrow: string; title: string; text: string };
+    understanding: { eyebrow: string; title: string; text: string };
+    expertise: {
+      eyebrow: string;
+      title: string;
+      text: string;
+      unsure: string;
+      unsureCta: string;
+      cardTitles: string[];
+    };
+    studies: { eyebrow: string; title: string; text: string };
+    knowledge: { eyebrow: string; title: string; text: string };
+    testimonials: {
+      eyebrow: string;
+      title: string;
+      text: string;
+      note: string;
+      emptyTitle: string;
+      emptyText: string;
+      sectionTitle: string;
+      sectionEmpty: string;
+    };
+    email: string;
+  };
   common: {
     home: string;
     loading: string;

@@ -12,6 +12,7 @@ const requiredBlocks = [
   "areas:",
   "whatsappBooking:",
   "bypassNote:",
+  "pages:",
 ];
 const requiredPlaceholders = [
   { localeKey: "confirm", needle: "whatsappBooking", vars: ["{ref}", "{subject}", "{language}"] },

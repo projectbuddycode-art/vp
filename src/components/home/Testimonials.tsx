@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import type { Testimonial } from "@/lib/data/public";
+import { useCopy } from "@/components/i18n/LocaleProvider";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
@@ -28,18 +29,19 @@ function embedUrl(url: string) {
 }
 
 export function TestimonialCarousel({ items }: { items: Testimonial[] }) {
+  const copy = useCopy();
   const [index, setIndex] = useState(0);
   if (items.length === 0) {
     return (
       <section className="bg-ivory py-20 sm:py-28">
         <Container>
           <SectionHeading
-            eyebrow="Testimonials"
-            title="Client words, only with permission."
-            text="A name, a place, and a photograph appear here only when the client has agreed. No review on this website is made up."
+            eyebrow={copy.pages.testimonials.eyebrow}
+            title={copy.pages.testimonials.emptyTitle}
+            text={copy.pages.testimonials.emptyText}
           />
           <div className="mt-10 border border-dashed border-deep/20 px-6 py-12">
-            <p className="max-w-xl font-serif text-3xl leading-tight">Approved client words will be placed here.</p>
+            <p className="max-w-xl font-serif text-3xl leading-tight">{copy.pages.testimonials.sectionEmpty}</p>
           </div>
         </Container>
       </section>
@@ -54,7 +56,7 @@ export function TestimonialCarousel({ items }: { items: Testimonial[] }) {
   return (
     <section className="bg-ivory py-20 sm:py-28">
       <Container>
-        <SectionHeading eyebrow="Testimonials" title="Client accounts, published with consent." />
+        <SectionHeading eyebrow={copy.pages.testimonials.eyebrow} title={copy.pages.testimonials.sectionTitle} />
         <div className="mt-10 border border-deep/10 bg-[#efe8da] p-6 sm:p-12">
           <AnimatePresence mode="wait">
             <motion.figure

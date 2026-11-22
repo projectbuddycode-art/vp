@@ -7,14 +7,17 @@ import { serviceGuides } from "@/lib/content/service-guides";
 import { images } from "@/lib/images";
 import { serviceFilms } from "@/lib/videos";
 import type { Service } from "@/lib/site";
+import { getCopy } from "@/lib/i18n/get-locale";
 import { siteUrl } from "@/lib/utils";
 
-export function ServiceView({ service }: { service: Service }) {
+export async function ServiceView({ service }: { service: Service }) {
+  const copy = await getCopy();
   const guide = serviceGuides[service.slug];
+  const title = copy.form.serviceTitles[service.slug] || service.title;
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: service.title,
+    name: title,
     description: service.lead,
     provider: { "@type": "Person", name: "Sanjeev Jain" },
     url: `${siteUrl()}/expertise/${service.slug}`,
@@ -38,16 +41,16 @@ export function ServiceView({ service }: { service: Service }) {
               <span className="font-serif text-xl italic">{guide.reading}</span>
             </span>
           ) : (
-            <span className="font-serif text-xl italic text-bark">Vastu consultation</span>
+            <span className="font-serif text-xl italic text-bark">{copy.nav.services}</span>
           )
         }
-        title={guide?.headline ?? service.title}
+        title={title}
         text={service.lead}
         image={service.image}
         crumbs={[
-          { href: "/", label: "Home" },
-          { href: "/expertise", label: "Services" },
-          { href: `/expertise/${service.slug}`, label: service.title },
+          { href: "/", label: copy.common.home },
+          { href: "/expertise", label: copy.nav.services },
+          { href: `/expertise/${service.slug}`, label: title },
         ]}
       />
       {service.slug in serviceFilms ? (
@@ -55,8 +58,8 @@ export function ServiceView({ service }: { service: Service }) {
           <Container>
             <ServiceVideoFeature
               variant="panel"
-              category={service.title}
-              title={service.title}
+              category={title}
+              title={title}
               description={service.lead}
               video={serviceFilms[service.slug as keyof typeof serviceFilms]}
             />
@@ -70,7 +73,7 @@ export function ServiceView({ service }: { service: Service }) {
               <p key={paragraph}>{paragraph}</p>
             ))}
             <div className="border-l-2 border-gold pl-5 text-sm leading-relaxed text-deep">{service.boundary}</div>
-            <Button href="/contact">Book a Visit</Button>
+            <Button href="/contact">{copy.bookVisit}</Button>
           </div>
           <div className="space-y-4">
             {service.points.map((point) => (
@@ -125,7 +128,7 @@ export function ServiceView({ service }: { service: Service }) {
               ))}
             </div>
             <div className="mt-8">
-              <Button href="/contact">Not sure where to start? Tell us about your property.</Button>
+              <Button href="/contact">{copy.pages.expertise.unsureCta}</Button>
             </div>
           </Container>
         </section>
@@ -136,13 +139,11 @@ export function ServiceView({ service }: { service: Service }) {
             <Image src={images.geometry.src} alt={images.geometry.alt} fill className="object-cover" sizes="(min-width: 768px) 50vw, 100vw" />
           </div>
           <div>
-            <h2 className="font-serif text-4xl leading-tight">The assessment remains personal.</h2>
-            <p className="mt-4 text-sm leading-relaxed text-deep/75">
-              This page describes the kind of work. It does not read a property. The consultation fee covers a one-time personal visit, and any remedy is costed separately.
-            </p>
+            <h2 className="font-serif text-4xl leading-tight">{copy.pages.approach.title}</h2>
+            <p className="mt-4 text-sm leading-relaxed text-deep/75">{copy.pages.approach.text}</p>
             <div className="mt-6">
               <Button href="/approach" variant="line">
-                See the four stages
+                {copy.nav.approach}
               </Button>
             </div>
           </div>

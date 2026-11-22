@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { images, resolvePortrait } from "@/lib/images";
 import { pageMetadata } from "@/lib/seo";
 import { getSettings } from "@/lib/data/public";
+import { getCopy } from "@/lib/i18n/get-locale";
 
 export const metadata = pageMetadata({
   title: "About Sanjeev Jain",
@@ -15,20 +16,18 @@ export const metadata = pageMetadata({
 });
 
 export default async function AboutPage() {
-  const settings = await getSettings();
+  const [settings, copy] = await Promise.all([getSettings(), getCopy()]);
   return (
     <>
       <section className="bg-ivory pt-[4.5rem] lg:pt-20">
         <Container className="grid items-end gap-10 py-12 lg:grid-cols-2 lg:py-16">
           <div>
-            <Breadcrumbs items={[{ href: "/", label: "Home" }, { href: "/about", label: "About Sanjeev Jain" }]} />
-            <p className="text-[0.72rem] tracking-[0.22em] text-gold uppercase">The person behind STHAPATYA</p>
+            <Breadcrumbs items={[{ href: "/", label: copy.common.home }, { href: "/about", label: copy.nav.about }]} />
+            <p className="text-[0.72rem] tracking-[0.22em] text-gold uppercase">{copy.pages.about.eyebrow}</p>
             <h1 className="mt-4 font-serif text-[clamp(2.6rem,5vw,4.8rem)] leading-[0.98] font-medium tracking-[-0.03em]">
-              A Journey Shaped by Precision. Guided by Tradition.
+              {copy.pages.about.title}
             </h1>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-deep/80 sm:text-lg">
-              Mr. Sanjeev Jain is the consultant behind STHAPATYA. He visits each property himself and explains what he finds in plain language.
-            </p>
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-deep/80 sm:text-lg">{copy.pages.about.text}</p>
           </div>
           <figure>
             <div className="relative aspect-[3/2] bg-parchment">
@@ -41,36 +40,28 @@ export default async function AboutPage() {
                 sizes="(min-width: 1024px) 46vw, 100vw"
               />
             </div>
-            <figcaption className="mt-2 text-sm text-bark">Mr. Sanjeev Jain</figcaption>
+            <figcaption className="mt-2 text-sm text-bark">{copy.pages.about.caption}</figcaption>
           </figure>
         </Container>
       </section>
       <section className="bg-white py-16 sm:py-24">
         <Container className="grid items-start gap-12 lg:grid-cols-[0.9fr_1.1fr]">
-          <p className="font-serif text-3xl leading-snug italic">Precision in every detail. Respect for every tradition. A thoughtful understanding of every space.</p>
+          <p className="font-serif text-3xl leading-snug italic">{copy.pages.about.quote}</p>
           <div className="space-y-5 text-base leading-relaxed text-deep/80">
             {settings.founderSummary ? (
               settings.founderSummary.split("\n").filter(Boolean).map((paragraph) => <p key={paragraph}>{paragraph}</p>)
             ) : (
               <>
-                <h2 className="font-serif text-3xl text-deep">A professional life in diamonds</h2>
-                <p>
-                  Mr. Sanjeev Jain comes to this work from a successful professional background in the diamond industry. That work asks for close attention, patience, and a clear judgement of quality. Those habits stay with him when he looks at a building.
-                </p>
-                <h2 className="font-serif text-3xl text-deep">Tradition, refined in practice</h2>
-                <p>
-                  Alongside that career, he has a personal connection with traditional Vedic knowledge. His understanding of Vastu Shastra was inherited, and he has continued to refine it by visiting properties himself. The diamond practice and the Vastu practice are two distinct parts of one journey.
-                </p>
-                <h2 className="font-serif text-3xl text-deep">How a property is approached</h2>
-                <p>
-                  He does not apply one chart to every building. The entrance, the rooms, the directions, and the way people use the place decide what is discussed. Traditional principles give the language. The property decides the guidance.
-                </p>
-                <p>
-                  A personal visit is ₹10,000. Travel, where it applies, is confirmed separately. Remedies and building work are discussed after the visit, and only when they belong to that property. His philosophy is simple: understand the space before recommending a change.
-                </p>
+                <h2 className="font-serif text-3xl text-deep">{copy.pages.about.diamondTitle}</h2>
+                <p>{copy.pages.about.diamondText}</p>
+                <h2 className="font-serif text-3xl text-deep">{copy.pages.about.traditionTitle}</h2>
+                <p>{copy.pages.about.traditionText}</p>
+                <h2 className="font-serif text-3xl text-deep">{copy.pages.about.approachTitle}</h2>
+                <p>{copy.pages.about.approachText}</p>
+                <p>{copy.pages.about.visitNote}</p>
               </>
             )}
-            <Button href="/contact">Book a Personal Consultation</Button>
+            <Button href="/contact">{copy.bookPersonal}</Button>
           </div>
         </Container>
       </section>

@@ -12,6 +12,7 @@ import { Container } from "@/components/ui/Container";
 import { images } from "@/lib/images";
 import { pageMetadata } from "@/lib/seo";
 import { disclaimer } from "@/lib/site";
+import { getCopy } from "@/lib/i18n/get-locale";
 
 export const metadata = pageMetadata({
   title: "Understanding Vastu Shastra",
@@ -48,23 +49,24 @@ const sections = [
   },
 ];
 
-export default function UnderstandingVastuPage() {
+export default async function UnderstandingVastuPage() {
+  const copy = await getCopy();
   return (
     <>
       <PageHero
         eyebrow={
           <SanskritLabel
             term="वास्तु विद्या"
-            reading="Knowledge of Vastu"
-            meaning="A traditional way of studying buildings. The English on this page explains the ideas. It is not a quotation from a scripture."
+            reading={copy.pages.understanding.eyebrow}
+            meaning={copy.pages.understanding.text}
           />
         }
-        title="Understanding the space around us."
-        text="Vastu Shastra looks at layout, direction, and surroundings. This page explains the words in simple English. It does not read your property."
+        title={copy.pages.understanding.title}
+        text={copy.pages.understanding.text}
         image={images.geometry}
         crumbs={[
-          { href: "/", label: "Home" },
-          { href: "/understanding-vastu", label: "Understanding Vastu" },
+          { href: "/", label: copy.common.home },
+          { href: "/understanding-vastu", label: copy.nav.understanding },
         ]}
       />
       <section className="bg-ivory py-12 sm:py-16">
