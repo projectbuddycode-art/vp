@@ -4,19 +4,22 @@ import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { YantraFrame } from "@/components/animations/YantraFrame";
+import { useCopy } from "@/components/i18n/LocaleProvider";
 import type { Article } from "@/lib/content/articles";
-import { articleCategories } from "@/lib/content/articles";
 
 export function ArticleBrowser({ articles }: { articles: Article[] }) {
+  const copy = useCopy();
   const [query, setQuery] = useState("");
-  const [category, setCategory] = useState("All");
-  const categories = ["All", ...articleCategories.filter((item) => articles.some((article) => article.category === item)), ...articles.map((article) => article.category).filter((item) => !articleCategories.includes(item))];
-  const uniqueCategories = [...new Set(categories)];
+  const [category, setCategory] = useState("all");
+  const categories = useMemo(() => {
+    const found = [...new Set(articles.map((article) => article.category))];
+    return found;
+  }, [articles]);
 
   const visible = useMemo(() => {
     const needle = query.trim().toLowerCase();
     return articles.filter((article) => {
-      const matchesCategory = category === "All" || article.category === category;
+      const matchesCategory = category === "all" || article.category === category;
       const matchesQuery =
         !needle ||
         article.title.toLowerCase().includes(needle) ||
@@ -29,17 +32,25 @@ export function ArticleBrowser({ articles }: { articles: Article[] }) {
     <div>
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <label className="block w-full max-w-md">
-          <span className="label">Search</span>
+          <span className="label">{copy.pages.knowledge.search}</span>
           <input
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             className="field"
-            placeholder="Search articles"
+            placeholder={copy.pages.knowledge.searchPlaceholder}
             type="search"
           />
         </label>
-        <div className="flex flex-wrap gap-2" role="group" aria-label="Article categories">
-          {uniqueCategories.map((item) => (
+        <div className="flex flex-wrap gap-2" role="group" aria-label={copy.pages.knowledge.search}>
+          <button
+            type="button"
+            onClick={() => setCategory("all")}
+            className={`px-3 py-2 text-[0.68rem] tracking-[0.14em] uppercase transition-colors hover:border-gold ${category === "all" ? "bg-deep text-ivory" : "border border-deep/15"}`}
+            aria-pressed={category === "all"}
+          >
+            {copy.pages.knowledge.allCategories}
+          </button>
+          {categories.map((item) => (
             <button
               key={item}
               type="button"
@@ -53,7 +64,7 @@ export function ArticleBrowser({ articles }: { articles: Article[] }) {
         </div>
       </div>
       {visible.length === 0 ? (
-        <p className="mt-10 text-deep/70">No articles match that search.</p>
+        <p className="mt-10 text-deep/70">{copy.pages.knowledge.empty}</p>
       ) : (
         <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {visible.map((article) => (

@@ -29,7 +29,7 @@ export const editorialArticles: Article[] = [
   {
     slug: "what-is-vastu-shastra",
     title: "What is Vastu Shastra?",
-    excerpt: "Vastu Shastra is a traditional Indian way of looking at a building: its layout, directions, and surroundings. It is guidance, not a guarantee.",
+    excerpt: "Vastu Shastra is a traditional Indian way of looking at a building: its layout, surroundings, and how the rooms are used. It is guidance, not a guarantee.",
     category: "Foundations",
     image: images.palace.src,
     imageAlt: images.palace.alt,
@@ -58,31 +58,35 @@ Related reading: [Understanding Vastu Shastra](/understanding-vastu) and [home c
   },
   {
     slug: "directional-principles-in-vastu",
-    title: "Why are directions important in Vastu?",
-    excerpt: "Direction tells a consultant which way the entrance and the rooms face. It starts from a reliable north on the property, not from a compass drawn on a screen.",
+    title: "How are directions used in a Vastu consultation?",
+    excerpt: "Direction is a useful shared language for naming where rooms sit. A consultation is shaped first by your concern, the layout, and how the property is lived in.",
     category: "Directions",
     image: images.hero.src,
     imageAlt: images.hero.alt,
     publishedAt: updated,
-    seoTitle: "Why are directions important in Vastu?",
-    seoDescription: "Directions matter because they locate the entrance and rooms. A website compass cannot assess a property.",
+    seoTitle: "How are directions used in a Vastu consultation?",
+    seoDescription: "Direction helps name where rooms sit. A Vastu visit still centres on your concern, the layout, and daily use.",
     source: "editorial",
     relatedHref: "/approach",
-    content: `Directions matter because they locate the building. Once north is known, the entrance, the plot edges, and the rooms can be discussed in relation to one another. Without a reliable north, those words are only guesses.
+    content: `Direction is one useful reference in a Vastu conversation. It helps place the entrance, the plot edges, and the rooms on a shared map. The consultation itself begins with the concern you bring, the way the rooms are used, and what can realistically change on that property.
 
-## Begin on the property
+## Begin with the property and the question
 
-**दिशा (Diśā)** means direction. A north point taken from a surveyed plan, or checked on site, is more useful than a phone compass used beside a steel cupboard. The meaning of a room is then discussed with the concern you brought. It is not a slogan such as “this direction is always lucky”.
+**दिशा (Diśā)** means direction. A north point taken from a surveyed plan, or checked on site, gives a calm way to name where things sit. The meaning of a room is then discussed with your question in mind. It is not a slogan such as “this direction is always lucky”.
 
 ## The eight directions
 
-People often speak of north, east, south, and west, and of the four corners between them: north-east, south-east, south-west, and north-west. Different teachers describe these corners with different emphasis. STHAPATYA does not publish one chart that assigns a remedy to every corner.
+People often speak of north, east, south, and west, and of the four corners between them: north-east, south-east, south-west, and north-west. Different teachers describe these corners with different emphasis. STHAPATYA does not publish one chart that assigns a remedy to every corner. Guidance follows the building in front of the consultant, not a corner label alone.
+
+## What carries the visit
+
+Alongside orientation, the visit looks at the door people use every day, the rooms tied to your concern, light and movement through the plan, and the surroundings that can be seen on site. Direction helps name those places. It does not stand in for a full reading of how the home or workplace is lived in.
 
 ## What this website’s compass is for
 
 The compass on the approach page explains how a visit proceeds. It does not point at your home, and it does not change when you turn your laptop.
 
-If you have a plan, mark north before the visit. The plan still does not replace seeing the place. See [how a consultation works](/approach).`,
+If you have a plan, marking north before the visit can make the conversation clearer. The plan still does not replace seeing the place. See [how a consultation works](/approach).`,
   },
   {
     slug: "understanding-the-vastu-purusha-mandala",
@@ -169,21 +173,21 @@ The personal visit is ₹10,000. Travel, if needed, is separate. Remedies are pr
   {
     slug: "what-a-vastu-consultant-studies",
     title: "What does a Vastu consultant study?",
-    excerpt: "The visit looks at the entrance, directions, rooms, daily use, and surroundings. A checklist on a website cannot do this for a real property.",
+    excerpt: "The visit looks at the entrance, rooms, daily use, surroundings, and orientation as a shared reference. A checklist on a website cannot do this for a real property.",
     category: "Practice",
     image: images.residence.src,
     imageAlt: images.residence.alt,
     publishedAt: updated,
     seoTitle: "What does a Vastu consultant study?",
-    seoDescription: "A Vastu visit studies entrance, direction, layout, use, and surroundings for one property.",
+    seoDescription: "A Vastu visit studies entrance, layout, use, surroundings, and orientation for one property.",
     source: "editorial",
     relatedHref: "/approach",
-    content: `A Vastu consultant studies the property in front of him, not a generic house type. Mr. Sanjeev Jain looks at the entrance, the direction, the rooms connected to your question, and the way those rooms are used.
+    content: `A Vastu consultant studies the property in front of him, not a generic house type. Mr. Sanjeev Jain looks at the entrance, the rooms connected to your question, how those rooms are used, and orientation as a helpful way to name where they sit.
 
 ## What is usually included
 
 - The main door and any second door that is used just as often.
-- North, as reliably as the plan or the site allows.
+- North, as a calm reference when the plan or the site allows.
 - The centre of the plan and the path through the building.
 - Rooms for living, cooking, sleep, or work, depending on the concern.
 - Light, air, and what can be seen around the property.
@@ -206,7 +210,7 @@ The same list is not a score. Two properties can share a compass and still need 
     seoDescription: "Homes and workplaces are studied through the same attention to layout, but the rooms that matter are different.",
     source: "editorial",
     relatedHref: "/expertise/business-vastu",
-    content: `Yes, an office can be studied. The difference is the brief. A home is organised around household life. A shop, office, or clinic is organised around work, visitors, staff, and storage. The same directional attention does not produce interchangeable advice.
+    content: `Yes, an office can be studied. The difference is the brief. A home is organised around household life. A shop, office, or clinic is organised around work, visitors, staff, and storage. The same compass reading does not produce interchangeable advice.
 
 ## In a home
 

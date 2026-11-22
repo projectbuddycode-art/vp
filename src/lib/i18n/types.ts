@@ -240,7 +240,19 @@ export type Copy = {
       cardTitles: string[];
     };
     studies: { eyebrow: string; title: string; text: string };
-    knowledge: { eyebrow: string; title: string; text: string };
+    knowledge: {
+      eyebrow: string;
+      title: string;
+      text: string;
+      search: string;
+      searchPlaceholder: string;
+      allCategories: string;
+      empty: string;
+      relatedPage: string;
+      bookCta: string;
+      continueReading: string;
+      byline: string;
+    };
     testimonials: {
       eyebrow: string;
       title: string;

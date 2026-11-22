@@ -327,6 +327,15 @@ export const en: Copy = {
       eyebrow: "Knowledge centre",
       title: "Plain answers, before you book.",
       text: "Short articles that explain the words and ideas used in a Vastu consultation.",
+      search: "Search",
+      searchPlaceholder: "Search articles",
+      allCategories: "All",
+      empty: "No articles match that search.",
+      relatedPage: "Related page",
+      bookCta: "Book a personal consultation",
+      continueReading: "Continue reading",
+      byline:
+        "Written for STHAPATYA, the Vastu practice of Mr. Sanjeev Jain. Updated {date}. {minutes} minute read. This note explains an idea. It does not read your property.",
     },
     testimonials: {
       eyebrow: "Testimonials",

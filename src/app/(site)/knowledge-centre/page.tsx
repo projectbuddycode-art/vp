@@ -2,7 +2,8 @@ import { ArticleBrowser } from "@/components/knowledge/ArticleBrowser";
 import { PageHero } from "@/components/layout/PageHero";
 import { Container } from "@/components/ui/Container";
 import { getArticles } from "@/lib/data/public";
-import { getCopy } from "@/lib/i18n/get-locale";
+import { getCopy, getLocale } from "@/lib/i18n/get-locale";
+import { localizeArticles } from "@/lib/i18n/article-bodies";
 import { images } from "@/lib/images";
 import { pageMetadata } from "@/lib/seo";
 
@@ -14,7 +15,8 @@ export const metadata = pageMetadata({
 });
 
 export default async function KnowledgePage() {
-  const [articles, copy] = await Promise.all([getArticles(), getCopy()]);
+  const [articles, copy, locale] = await Promise.all([getArticles(), getCopy(), getLocale()]);
+  const localized = localizeArticles(articles, locale);
   return (
     <>
       <PageHero
@@ -29,7 +31,7 @@ export default async function KnowledgePage() {
       />
       <section className="bg-ivory py-16 sm:py-20">
         <Container>
-          <ArticleBrowser articles={articles} />
+          <ArticleBrowser articles={localized} />
         </Container>
       </section>
     </>
