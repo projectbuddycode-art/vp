@@ -17,9 +17,11 @@ export const videos = {
   hero: {
     id: "hero",
     title: "STHAPATYA opening film",
-    src: "/videos/sthapathya-opening.mp4",
-    mobileSrc: "/videos/sthapathya-opening-720.mp4",
-    poster: "/images/video-posters/sthapathya-opening.jpg",
+    /** Desktop / tablet (≥768px): original 16:9 homepage film — do not change. */
+    src: "/videos/sthapatya-opening.mp4",
+    /** Phones (≤767px): dedicated 9:16 homepage film. */
+    mobileSrc: "/videos/sthapatya-home-mobile-9x16.mp4",
+    poster: "/images/video-posters/sthapatya-opening.jpg",
     posterAlt: "Still from the STHAPATYA opening film. An architectural study, not a client property.",
   },
   residential: {
