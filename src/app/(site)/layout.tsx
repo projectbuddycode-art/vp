@@ -7,8 +7,14 @@ import { MobileBookBar } from "@/components/layout/MobileBookBar";
 import { getSettings } from "@/lib/data/public";
 import { getLocale } from "@/lib/i18n/get-locale";
 
+async function SiteFooter() {
+  const settings = await getSettings();
+  return <Footer settings={settings} />;
+}
+
 async function SiteChrome({ children }: { children: React.ReactNode }) {
-  const [settings, locale] = await Promise.all([getSettings(), getLocale()]);
+  // Locale only — do not await settings before streaming the hero film.
+  const locale = await getLocale();
   return (
     <LocaleProvider locale={locale}>
       <ScrollProgress />
@@ -16,7 +22,9 @@ async function SiteChrome({ children }: { children: React.ReactNode }) {
       <main id="content" className="pb-20 sm:pb-0">
         {children}
       </main>
-      <Footer settings={settings} />
+      <Suspense fallback={null}>
+        <SiteFooter />
+      </Suspense>
       <MobileBookBar />
     </LocaleProvider>
   );

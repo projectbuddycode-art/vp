@@ -1,29 +1,12 @@
-import { SanskritVerseRibbon } from "@/components/verses/SanskritVerseRibbon";
-import {
-  ConsultationBand,
-  FinalCta,
-  FounderStory,
-  VastuIntro,
-  GuidanceAreas,
-  KnowledgePreview,
-  Philosophy,
-  Specialisations,
-} from "@/components/home/HomeSections";
-import { Journey } from "@/components/home/Journey";
-import { FaqList } from "@/components/home/FaqList";
-import { TestimonialCarousel } from "@/components/home/Testimonials";
+import { Suspense } from "react";
 import { Hero } from "@/components/hero/Hero";
-import { getArticles, getFaqs, getPublicReviews, getSettings } from "@/lib/data/public";
-import { disclaimer } from "@/lib/site";
-import { publicWhatsappNumber, siteUrl } from "@/lib/utils";
+import { HeroFilmPreload } from "@/components/hero/HeroFilmPreload";
+import { HomeBelowFold } from "@/components/home/HomeBelowFold";
+import { getFaqs, getSettings } from "@/lib/data/public";
+import { siteUrl } from "@/lib/utils";
 
-export default async function HomePage() {
-  const [settings, faqs, articles, reviews] = await Promise.all([
-    getSettings(),
-    getFaqs(),
-    getArticles(),
-    getPublicReviews(),
-  ]);
+async function HomeJsonLd() {
+  const [settings, faqs] = await Promise.all([getSettings(), getFaqs()]);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -63,28 +46,21 @@ export default async function HomePage() {
   };
 
   return (
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+  );
+}
+
+export default function HomePage() {
+  return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <HeroFilmPreload />
+      <Suspense fallback={null}>
+        <HomeJsonLd />
+      </Suspense>
       <Hero />
-      <SanskritVerseRibbon index={0} />
-      <VastuIntro />
-      <FounderStory settings={settings} />
-      <SanskritVerseRibbon index={1} />
-      <Philosophy />
-      <Specialisations whatsappNumber={publicWhatsappNumber(settings.whatsapp, settings.phone)} />
-      <SanskritVerseRibbon index={2} />
-      <Journey />
-      <SanskritVerseRibbon index={3} />
-      <GuidanceAreas />
-      <SanskritVerseRibbon index={0} />
-      <TestimonialCarousel items={reviews} />
-      <SanskritVerseRibbon index={2} />
-      <KnowledgePreview articles={articles} />
-      <SanskritVerseRibbon index={3} />
-      <ConsultationBand settings={settings} />
-      <FaqList faqs={faqs} />
-      <FinalCta />
-      <p className="sr-only">{disclaimer}</p>
+      <Suspense fallback={null}>
+        <HomeBelowFold />
+      </Suspense>
     </>
   );
 }

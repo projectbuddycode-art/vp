@@ -8,7 +8,7 @@
  */
 
 import Image from "next/image";
-import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useId, useLayoutEffect, useRef, useState, type SyntheticEvent } from "react";
 import { videos } from "@/lib/videos";
 import { cn } from "@/lib/utils";
 
@@ -37,8 +37,10 @@ export function HeroBackgroundVideo({ className }: { className?: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [failed, setFailed] = useState(false);
   const [reduced, setReduced] = useState(false);
-  /** null until layout effect — avoids downloading the wrong film. */
-  const [isPhone, setIsPhone] = useState<boolean | null>(null);
+  /** Client first paint already knows phone vs desktop; SSR stays null (poster only). */
+  const [isPhone, setIsPhone] = useState<boolean | null>(() =>
+    typeof window === "undefined" ? null : resolveIsPhone(),
+  );
 
   const desktopSrc = video.src || null;
   const phoneSrc = video.mobileSrc || null;
@@ -83,13 +85,16 @@ export function HeroBackgroundVideo({ className }: { className?: string }) {
     };
 
     ensurePlaying();
+
     node.addEventListener("loadeddata", ensurePlaying);
     node.addEventListener("canplay", ensurePlaying);
+    node.addEventListener("canplaythrough", ensurePlaying);
     document.addEventListener("visibilitychange", ensurePlaying);
 
     return () => {
       node.removeEventListener("loadeddata", ensurePlaying);
       node.removeEventListener("canplay", ensurePlaying);
+      node.removeEventListener("canplaythrough", ensurePlaying);
       document.removeEventListener("visibilitychange", ensurePlaying);
     };
   }, [activeSrc, reduced]);
@@ -132,8 +137,15 @@ export function HeroBackgroundVideo({ className }: { className?: string }) {
           aria-labelledby={labelId}
           onError={() => setFailed(true)}
           onLoadedData={() => setFailed(false)}
+          onCanPlay={ensurePlayingSafe}
         />
       ) : null}
     </div>
   );
+}
+
+function ensurePlayingSafe(event: SyntheticEvent<HTMLVideoElement>) {
+  const node = event.currentTarget;
+  if (document.visibilityState !== "visible") return;
+  if (node.paused) void node.play().catch(() => undefined);
 }
