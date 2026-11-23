@@ -5,6 +5,13 @@ import { useEffect, useId, useRef, useState } from "react";
 import type { VideoSlot } from "@/lib/videos";
 import { cn } from "@/lib/utils";
 
+function pickSource(video: VideoSlot) {
+  if (typeof window === "undefined") return video.src;
+  const preferMobile = window.matchMedia("(max-width: 767px)").matches;
+  if (preferMobile && video.mobileSrc) return video.mobileSrc;
+  return video.src ?? video.mobileSrc;
+}
+
 export function CinematicVideo({
   video,
   autoPlay = true,
@@ -21,11 +28,11 @@ export function CinematicVideo({
   autoPlay?: boolean;
   loop?: boolean;
   controls?: boolean;
-  /** Kept for call-site compatibility; films no longer pause when leaving view. */
+  /** Play when near the viewport to keep scrolling smooth. */
   playInView?: boolean;
   playOnHover?: boolean;
   priority?: boolean;
-  /** Keep a muted film playing without interruption. */
+  /** Keep looping without interruption while the film is active. */
   continuous?: boolean;
   className?: string;
   sizes?: string;
@@ -35,8 +42,12 @@ export function CinematicVideo({
   const videoRef = useRef<HTMLVideoElement>(null);
   const [failed, setFailed] = useState(false);
   const [reduced, setReduced] = useState(false);
-  const canPlay = Boolean(video.src) && !failed && !reduced;
-  const keepAlive = continuous || autoPlay || playInView;
+  const [src, setSrc] = useState<string | undefined>(video.src ?? video.mobileSrc);
+  const [nearView, setNearView] = useState(priority);
+  const [pageVisible, setPageVisible] = useState(true);
+  const [hasFrame, setHasFrame] = useState(false);
+  const canPlay = Boolean(src) && !failed && !reduced;
+  const shouldRun = canPlay && pageVisible && (priority || nearView) && (continuous || autoPlay || playInView || playOnHover);
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -47,39 +58,70 @@ export function CinematicVideo({
   }, []);
 
   useEffect(() => {
-    const node = videoRef.current;
-    if (!node || !canPlay || !keepAlive) return;
+    const applySource = () => {
+      setHasFrame(false);
+      setSrc(pickSource(video));
+    };
+    applySource();
+    const mobileQuery = window.matchMedia("(max-width: 767px)");
+    mobileQuery.addEventListener("change", applySource);
+    return () => mobileQuery.removeEventListener("change", applySource);
+  }, [video]);
 
-    const ensurePlaying = () => {
+  useEffect(() => {
+    const onVisibility = () => setPageVisible(document.visibilityState === "visible");
+    onVisibility();
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => document.removeEventListener("visibilitychange", onVisibility);
+  }, []);
+
+  useEffect(() => {
+    if (priority) {
+      setNearView(true);
+      return;
+    }
+    const root = rootRef.current;
+    if (!root) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setNearView(Boolean(entry?.isIntersecting));
+      },
+      {
+        // Start slightly early; pause when far away to limit concurrent decode.
+        rootMargin: "28% 0px",
+        threshold: 0.08,
+      },
+    );
+    observer.observe(root);
+    return () => observer.disconnect();
+  }, [priority]);
+
+  useEffect(() => {
+    const node = videoRef.current;
+    if (!node || !canPlay) return;
+
+    if (!shouldRun) {
+      if (!node.paused) node.pause();
+      return;
+    }
+
+    const tryPlay = () => {
       if (node.ended) node.currentTime = 0;
       if (node.paused) void node.play().catch(() => undefined);
     };
 
-    ensurePlaying();
-
-    const onVisibility = () => {
-      if (document.visibilityState === "visible") ensurePlaying();
-    };
-
-    node.addEventListener("pause", ensurePlaying);
-    node.addEventListener("ended", ensurePlaying);
-    node.addEventListener("stalled", ensurePlaying);
-    node.addEventListener("suspend", ensurePlaying);
-    node.addEventListener("waiting", ensurePlaying);
-    document.addEventListener("visibilitychange", onVisibility);
-
-    const retry = window.setInterval(ensurePlaying, 2500);
+    tryPlay();
+    node.addEventListener("loadeddata", tryPlay);
+    node.addEventListener("canplay", tryPlay);
+    node.addEventListener("ended", tryPlay);
 
     return () => {
-      window.clearInterval(retry);
-      node.removeEventListener("pause", ensurePlaying);
-      node.removeEventListener("ended", ensurePlaying);
-      node.removeEventListener("stalled", ensurePlaying);
-      node.removeEventListener("suspend", ensurePlaying);
-      node.removeEventListener("waiting", ensurePlaying);
-      document.removeEventListener("visibilitychange", onVisibility);
+      node.removeEventListener("loadeddata", tryPlay);
+      node.removeEventListener("canplay", tryPlay);
+      node.removeEventListener("ended", tryPlay);
     };
-  }, [canPlay, keepAlive]);
+  }, [canPlay, shouldRun, src]);
 
   return (
     <div
@@ -92,41 +134,37 @@ export function CinematicVideo({
       <p id={labelId} className="sr-only">
         {video.title}
       </p>
+      <div className={cn("absolute top-0 left-0 h-[132%] w-full transition-opacity duration-500", hasFrame && canPlay ? "opacity-0" : "opacity-100")}>
+        <Image
+          src={video.poster}
+          alt={video.posterAlt}
+          fill
+          priority={priority}
+          className="object-cover object-top"
+          sizes={sizes}
+        />
+      </div>
       {canPlay ? (
         <video
+          key={src}
           ref={videoRef}
           className="video-frame absolute top-0 left-0 h-[132%] w-full object-cover object-top"
+          src={src}
           muted
           playsInline
-          autoPlay
+          autoPlay={shouldRun}
           loop={loop || continuous || autoPlay}
           controls={controls}
-          preload="auto"
+          preload={priority || nearView ? "auto" : "metadata"}
+          disablePictureInPicture
           aria-labelledby={labelId}
           onError={() => setFailed(true)}
+          onPlaying={() => setHasFrame(true)}
           onLoadedData={() => {
-            void videoRef.current?.play().catch(() => undefined);
+            if (shouldRun) void videoRef.current?.play().catch(() => undefined);
           }}
-          onCanPlay={() => {
-            void videoRef.current?.play().catch(() => undefined);
-          }}
-        >
-          {video.mobileSrc ? <source src={video.mobileSrc} media="(max-width: 767px)" type="video/mp4" /> : null}
-          {video.webm ? <source src={video.webm} type="video/webm" /> : null}
-          {video.src ? <source src={video.src} type="video/mp4" /> : null}
-        </video>
-      ) : (
-        <div className="absolute top-0 left-0 h-[132%] w-full">
-          <Image
-            src={video.poster}
-            alt={video.posterAlt}
-            fill
-            priority={priority}
-            className="object-cover object-top"
-            sizes={sizes}
-          />
-        </div>
-      )}
+        />
+      ) : null}
       {!canPlay ? <span className="cinematic-light pointer-events-none absolute inset-0" aria-hidden /> : null}
     </div>
   );

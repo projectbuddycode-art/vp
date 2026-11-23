@@ -1,7 +1,7 @@
 import { TestimonialCarousel } from "@/components/home/Testimonials";
 import { PageHero } from "@/components/layout/PageHero";
 import { Container } from "@/components/ui/Container";
-import { getTestimonials } from "@/lib/data/public";
+import { getPublicReviews } from "@/lib/data/public";
 import { getCopy } from "@/lib/i18n/get-locale";
 import { images } from "@/lib/images";
 import { pageMetadata } from "@/lib/seo";
@@ -14,7 +14,7 @@ export const metadata = pageMetadata({
 });
 
 export default async function TestimonialsPage() {
-  const [testimonials, copy] = await Promise.all([getTestimonials(), getCopy()]);
+  const [testimonials, copy] = await Promise.all([getPublicReviews(), getCopy()]);
   return (
     <>
       <PageHero

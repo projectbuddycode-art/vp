@@ -47,21 +47,25 @@ export function Header() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-colors duration-500",
-        open ? "bg-transparent text-deep" : overlay ? "bg-transparent text-ivory" : "border-b border-deep/10 bg-ivory/92 text-deep",
+        open
+          ? "bg-transparent text-deep"
+          : overlay
+            ? "bg-transparent text-ivory"
+            : "border-b border-deep/10 bg-ivory/95 text-deep backdrop-blur-[2px]",
       )}
     >
       <Container className="flex h-[4.5rem] items-center justify-between gap-4 lg:h-20">
         <Link href="/" className="min-w-0 leading-none" aria-label="STHAPATYA, Vastu consultancy of Sanjeev Jain">
           <BrandLockup light={overlay} />
         </Link>
-        <nav className="hidden items-center gap-x-3 xl:flex 2xl:gap-x-4" aria-label={copy.primaryNav}>
+        <nav className="hidden items-center gap-x-3.5 xl:flex 2xl:gap-x-5" aria-label={copy.primaryNav}>
           {navItems.map((item, index) => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                "vedic-link text-[0.78rem] transition-colors 2xl:text-[0.86rem]",
-                overlay ? "text-ivory/90 hover:text-sand" : "text-deep/80 hover:text-deep",
+                "vedic-link text-[0.78rem] tracking-[0.01em] transition-colors duration-300 2xl:text-[0.86rem]",
+                overlay ? "text-ivory/90 hover:text-sand" : "text-deep/75 hover:text-deep",
                 pathname === item.href ? (overlay ? "text-sand" : "text-deep") : "",
               )}
               aria-current={pathname === item.href ? "page" : undefined}
@@ -75,7 +79,7 @@ export function Header() {
           <Link
             href="/contact"
             className={cn(
-              "vedic-button hidden px-4 py-2.5 text-sm transition sm:inline-flex",
+              "vedic-button hidden min-h-11 items-center px-4 py-2.5 text-sm transition duration-300 sm:inline-flex",
               overlay ? "bg-ivory text-deep hover:bg-sand" : "bg-deep text-ivory hover:bg-[#342b26]",
             )}
           >

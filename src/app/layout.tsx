@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     template: "%s · STHAPATYA",
   },
   description:
-    "STHAPATYA is the Vastu Shastra consultancy of Mr. Sanjeev Jain. He visits a home or workplace, studies its layout and directions, and explains practical guidance. A personal visit is ₹10,000.",
+    "STHAPATYA is the Vastu Shastra consultancy of Mr. Sanjeev Jain. He visits a home or workplace, studies its layout and how it is used, and explains practical guidance. A personal visit is ₹10,000.",
   applicationName: "STHAPATYA",
   authors: [{ name: "Sanjeev Jain" }],
   openGraph: {

@@ -28,7 +28,7 @@ export function Button({
   onClick?: () => void;
 }) {
   const classNames = cn(
-    "vedic-button inline-flex items-center justify-center px-6 py-3.5 text-center text-[0.95rem] font-medium tracking-normal transition duration-300 disabled:cursor-not-allowed disabled:opacity-50",
+    "vedic-button inline-flex min-h-12 items-center justify-center px-6 py-3.5 text-center text-[0.95rem] font-medium tracking-normal transition duration-300 ease-out disabled:cursor-not-allowed disabled:opacity-50",
     styles[variant],
     className,
   );

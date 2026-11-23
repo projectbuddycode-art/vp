@@ -77,7 +77,16 @@ export function TestimonialCarousel({ items }: { items: Testimonial[] }) {
                   />
                 </div>
               ) : null}
+              {item.rating ? (
+                <p className="mb-4 text-[0.72rem] tracking-[0.18em] text-gold uppercase" aria-label={`${item.rating} out of 5 stars`}>
+                  {"★".repeat(Math.max(0, Math.min(5, item.rating)))}
+                  {"☆".repeat(Math.max(0, 5 - Math.min(5, item.rating)))}
+                </p>
+              ) : null}
               <blockquote className="font-serif text-3xl leading-snug sm:text-4xl">{item.content}</blockquote>
+              {item.experienceText ? (
+                <p className="mt-4 max-w-3xl text-sm leading-relaxed text-deep/70">{item.experienceText}</p>
+              ) : null}
               <figcaption className="mt-6 text-sm text-deep/70">
                 {item.clientName || "Client name withheld"}
                 {item.sourceUrl ? (

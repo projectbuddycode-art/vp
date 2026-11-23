@@ -1,6 +1,5 @@
 import { SanskritVerseRibbon } from "@/components/verses/SanskritVerseRibbon";
 import {
-  CaseStories,
   ConsultationBand,
   FinalCta,
   FounderStory,
@@ -14,17 +13,16 @@ import { Journey } from "@/components/home/Journey";
 import { FaqList } from "@/components/home/FaqList";
 import { TestimonialCarousel } from "@/components/home/Testimonials";
 import { Hero } from "@/components/hero/Hero";
-import { getArticles, getCaseStudies, getFaqs, getSettings, getTestimonials } from "@/lib/data/public";
+import { getArticles, getFaqs, getPublicReviews, getSettings } from "@/lib/data/public";
 import { disclaimer } from "@/lib/site";
 import { publicWhatsappNumber, siteUrl } from "@/lib/utils";
 
 export default async function HomePage() {
-  const [settings, faqs, articles, studies, testimonials] = await Promise.all([
+  const [settings, faqs, articles, reviews] = await Promise.all([
     getSettings(),
     getFaqs(),
     getArticles(),
-    getCaseStudies(),
-    getTestimonials(),
+    getPublicReviews(),
   ]);
 
   const jsonLd = {
@@ -79,9 +77,7 @@ export default async function HomePage() {
       <SanskritVerseRibbon index={3} />
       <GuidanceAreas />
       <SanskritVerseRibbon index={0} />
-      <CaseStories studies={studies} />
-      <SanskritVerseRibbon index={1} />
-      <TestimonialCarousel items={testimonials} />
+      <TestimonialCarousel items={reviews} />
       <SanskritVerseRibbon index={2} />
       <KnowledgePreview articles={articles} />
       <SanskritVerseRibbon index={3} />

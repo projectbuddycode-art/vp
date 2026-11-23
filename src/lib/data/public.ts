@@ -40,6 +40,17 @@ export type Testimonial = {
   clientName: string;
   clientImageUrl: string;
   sourceUrl: string;
+  rating?: number;
+  experienceText?: string;
+};
+
+export type ClientReviewPublic = {
+  id: string;
+  clientName: string;
+  rating: number;
+  reviewText: string;
+  experienceText: string;
+  submittedAt: string;
 };
 
 function publicClient() {
@@ -259,4 +270,50 @@ export async function getTestimonials(): Promise<Testimonial[]> {
   } catch {
     return [];
   }
+}
+
+/** Only APPROVED reviews with explicit publication consent. Never returns email. */
+export async function getClientReviews(): Promise<ClientReviewPublic[]> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("client-reviews");
+  if (!isSupabaseConfigured()) return [];
+  try {
+    const { data, error } = await publicClient()
+      .from("client_reviews")
+      .select("id, client_name, rating, review_text, experience_text, submitted_at")
+      .eq("status", "APPROVED")
+      .eq("publish_consent", true)
+      .order("submitted_at", { ascending: false });
+    if (error || !data) return [];
+    return data.map((row) => {
+      const item = row as Record<string, unknown>;
+      return {
+        id: String(item.id),
+        clientName: String(item.client_name || ""),
+        rating: Number(item.rating || 0),
+        reviewText: String(item.review_text || ""),
+        experienceText: String(item.experience_text || ""),
+        submittedAt: String(item.submitted_at || ""),
+      };
+    });
+  } catch {
+    return [];
+  }
+}
+
+export async function getPublicReviews(): Promise<Testimonial[]> {
+  const [clientReviews, legacy] = await Promise.all([getClientReviews(), getTestimonials()]);
+  const fromClients: Testimonial[] = clientReviews.map((review) => ({
+    id: review.id,
+    kind: "written",
+    content: review.reviewText,
+    videoUrl: "",
+    clientName: review.clientName,
+    clientImageUrl: "",
+    sourceUrl: "",
+    rating: review.rating,
+    experienceText: review.experienceText,
+  }));
+  return [...fromClients, ...legacy];
 }

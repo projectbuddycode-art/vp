@@ -1,5 +1,3 @@
-import { images } from "@/lib/images";
-
 export type VideoSlot = {
   id: string;
   title: string;
@@ -55,29 +53,40 @@ export const videos = {
     poster: "/images/video-posters/villa.jpg",
     posterAlt: "Still from an architectural film of a modern villa. Not a client property.",
   },
+  /**
+   * Service pages reuse existing architectural films so every public video
+   * supports a clear narrative. Source masters in the repo root are the same
+   * subjects already compressed under /public/videos — they are not served.
+   */
   commercial: {
     id: "commercial",
-    title: "Light across a workplace interior",
-    poster: images.commercial.src,
-    posterAlt: images.commercial.alt,
+    title: "Approaching a workplace. An architectural film, not a client office.",
+    src: "/videos/entrance.mp4",
+    mobileSrc: "/videos/entrance-720.mp4",
+    poster: "/images/video-posters/entrance.jpg",
+    posterAlt: "Still from an architectural approach film used for business Vastu. Not a client office.",
   },
   financial: {
     id: "financial",
-    title: "A professional workspace in natural light",
-    poster: images.modernHome.src,
-    posterAlt: images.modernHome.alt,
+    title: "A floor-plan study for work and money rooms. Not a financial result.",
+    src: "/videos/courtyard.mp4",
+    mobileSrc: "/videos/courtyard-720.mp4",
+    poster: "/images/video-posters/courtyard.jpg",
+    posterAlt: "Still from an architectural floor-plan film used for work and money rooms.",
   },
   health: {
     id: "health",
-    title: "A calm room opening toward daylight",
-    poster: images.courtyard.src,
-    posterAlt: images.courtyard.alt,
+    title: "A calmer living environment. An architectural film, not medical advice.",
+    src: "/videos/villa.mp4",
+    poster: "/images/video-posters/villa.jpg",
+    posterAlt: "Still from an architectural film used for health and wellbeing consultations.",
   },
   finale: {
     id: "finale",
-    title: "A sandstone facade in evening light",
-    poster: images.palace.src,
-    posterAlt: images.palace.alt,
+    title: "Evening light on a modern residence. An architectural film, not a client property.",
+    src: "/videos/villa.mp4",
+    poster: "/images/video-posters/villa.jpg",
+    posterAlt: "Still from an architectural film of a modern villa. Not a client property.",
   },
 } as const satisfies Record<string, VideoSlot>;
 

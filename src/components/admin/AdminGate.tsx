@@ -10,6 +10,7 @@ const links = [
   { href: "/admin/leads", label: "Enquiries" },
   { href: "/admin/bookings", label: "Bookings" },
   { href: "/admin/case-studies", label: "Case studies" },
+  { href: "/admin/reviews", label: "Client reviews" },
   { href: "/admin/testimonials", label: "Testimonials" },
   { href: "/admin/articles", label: "Knowledge" },
   { href: "/admin/faqs", label: "FAQs" },

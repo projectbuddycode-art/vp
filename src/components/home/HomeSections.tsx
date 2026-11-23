@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { GoldLine } from "@/components/animations/GoldLine";
+import { Reveal } from "@/components/animations/Reveal";
 import { ConsultationForm } from "@/components/forms/ConsultationForm";
 import { useOnceInView } from "@/components/animations/useOnceInView";
 import { VastuDiagram } from "@/components/diagrams/VastuDiagram";
@@ -33,26 +34,28 @@ const areaHrefs = [
 export function VastuIntro() {
   const copy = useCopy();
   return (
-    <section className="bg-ivory py-20 sm:py-24">
+    <section className="bg-ivory py-20 sm:py-28">
       <Container className="max-w-3xl">
-        <SanskritLabel
-          term="वास्तु परिचय"
-          reading={copy.home.introEyebrow}
-          meaning={copy.home.intro1}
-        />
-        <h2 className="mt-4 font-serif text-[clamp(2.4rem,4.4vw,4.2rem)] leading-[0.98] font-medium tracking-[-0.03em]">
-          {copy.home.introTitle}
-        </h2>
-        <div className="mt-6 space-y-4 text-base leading-relaxed text-deep/80">
-          <p>{copy.home.intro1}</p>
-          <p>{copy.home.intro2}</p>
-          <p>{copy.home.intro3}</p>
-        </div>
-        <div className="mt-8">
-          <Button href="/understanding-vastu" variant="line">
-            {copy.home.introCta}
-          </Button>
-        </div>
+        <Reveal>
+          <SanskritLabel
+            term="वास्तु परिचय"
+            reading={copy.home.introEyebrow}
+            meaning={copy.home.intro1}
+          />
+          <h2 className="mt-4 font-serif text-[clamp(2.4rem,4.4vw,4.2rem)] leading-[0.98] font-medium tracking-[-0.03em]">
+            {copy.home.introTitle}
+          </h2>
+          <div className="mt-6 space-y-4 text-base leading-[1.75] text-deep/80">
+            <p>{copy.home.intro1}</p>
+            <p>{copy.home.intro2}</p>
+            <p>{copy.home.intro3}</p>
+          </div>
+          <div className="mt-8">
+            <Button href="/understanding-vastu" variant="line">
+              {copy.home.introCta}
+            </Button>
+          </div>
+        </Reveal>
       </Container>
     </section>
   );
@@ -394,7 +397,7 @@ export function FinalCta() {
         </div>
       </div>
       <div className="relative min-h-[52vw] lg:min-h-[28rem]">
-        <CinematicVideo video={videos.villa} playInView className="absolute inset-0" sizes="(min-width: 1024px) 50vw, 100vw" />
+        <CinematicVideo video={videos.finale} playInView className="absolute inset-0" sizes="(min-width: 1024px) 50vw, 100vw" />
         <p className="absolute right-0 bottom-0 left-0 bg-deep/80 px-5 py-3 text-xs text-sand sm:px-8">{copy.home.finalFilm}</p>
       </div>
     </section>

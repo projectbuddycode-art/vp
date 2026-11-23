@@ -13,28 +13,28 @@ export async function Footer({ settings }: { settings: SiteSettings }) {
 
   return (
     <footer className="dark-panel text-ivory">
-      <Container className="grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4 lg:py-20">
+      <Container className="grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4 lg:gap-10 lg:py-24">
         <div>
           <BrandMark light />
           <p className="mt-3 font-serif text-3xl tracking-[0.12em]">STHAPATYA</p>
           <p className="mt-2 text-sm text-sand">
             <span className="devanagari">स्थापत्य</span> · Sanjeev Jain
           </p>
-          <p className="mt-6 max-w-xs text-sm leading-relaxed text-sand">{settings.tagline}</p>
+          <p className="mt-6 max-w-xs text-sm leading-[1.7] text-sand">{settings.tagline}</p>
           <p className="devanagari mt-3 text-sm text-sand">वास्तु · दिशा · संतुलन</p>
         </div>
         <div>
           <p className="text-[0.68rem] tracking-[0.2em] text-gold uppercase">{copy.footer.visit}</p>
-          <ul className="mt-4 space-y-2 text-sm">
+          <ul className="mt-5 space-y-2.5 text-sm">
             {navItems.slice(1, 5).map((item, index) => (
               <li key={item.href}>
-                <Link href={item.href} className="vedic-link text-sand hover:text-ivory">
+                <Link href={item.href} className="vedic-link text-sand transition-colors hover:text-ivory">
                   {copy.nav[footerNav[index]]}
                 </Link>
               </li>
             ))}
             <li>
-              <Link href="/knowledge-centre" className="vedic-link text-sand hover:text-ivory">
+              <Link href="/knowledge-centre" className="vedic-link text-sand transition-colors hover:text-ivory">
                 {copy.nav.knowledge}
               </Link>
             </li>
@@ -42,10 +42,10 @@ export async function Footer({ settings }: { settings: SiteSettings }) {
         </div>
         <div>
           <p className="text-[0.68rem] tracking-[0.2em] text-gold uppercase">{copy.footer.expertise}</p>
-          <ul className="mt-4 space-y-2 text-sm">
+          <ul className="mt-5 space-y-2.5 text-sm">
             {services.map((service) => (
               <li key={service.slug}>
-                <Link href={`/expertise/${service.slug}`} className="vedic-link text-sand hover:text-ivory">
+                <Link href={`/expertise/${service.slug}`} className="vedic-link text-sand transition-colors hover:text-ivory">
                   {copy.form.serviceTitles[service.slug] || service.title}
                 </Link>
               </li>

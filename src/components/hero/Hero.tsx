@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { HeroAtmosphere } from "@/components/hero/HeroAtmosphere";
-import { CinematicVideo } from "@/components/video/CinematicVideo";
+import { HeroBackgroundVideo } from "@/components/hero/HeroBackgroundVideo";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { useCopy } from "@/components/i18n/LocaleProvider";
@@ -38,7 +38,7 @@ export function Hero() {
     <section className="relative min-h-[100svh] w-full overflow-hidden bg-charcoal text-ivory">
       {videos.hero.src ? <link rel="preload" href={videos.hero.src} as="video" type="video/mp4" fetchPriority="high" /> : null}
       <div className="absolute inset-0">
-        <CinematicVideo video={videos.hero} autoPlay continuous priority className="absolute inset-0 h-full w-full" sizes="100vw" />
+        <HeroBackgroundVideo className="absolute inset-0 h-full w-full" />
         <div className="absolute inset-0 bg-gradient-to-r from-charcoal/82 via-charcoal/55 to-charcoal/25" />
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-transparent to-charcoal/25" />
         <HeroAtmosphere />

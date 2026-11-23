@@ -12,7 +12,7 @@ export const metadata = pageMetadata({
   description:
     "Mr. Sanjeev Jain brings a diamond-industry background of precision and an inherited understanding of Vastu Shastra to each property he visits through STHAPATYA.",
   path: "/about",
-  image: images.palace.src,
+  image: images.founder.src,
 });
 
 export default async function AboutPage() {
@@ -20,11 +20,11 @@ export default async function AboutPage() {
   return (
     <>
       <section className="bg-ivory pt-[4.5rem] lg:pt-20">
-        <Container className="grid items-end gap-10 py-12 lg:grid-cols-2 lg:py-16">
+        <Container className="grid items-end gap-10 py-12 lg:grid-cols-2 lg:gap-16 lg:py-20">
           <div>
             <Breadcrumbs items={[{ href: "/", label: copy.common.home }, { href: "/about", label: copy.nav.about }]} />
-            <p className="text-[0.72rem] tracking-[0.22em] text-gold uppercase">{copy.pages.about.eyebrow}</p>
-            <h1 className="mt-4 font-serif text-[clamp(2.6rem,5vw,4.8rem)] leading-[0.98] font-medium tracking-[-0.03em]">
+            <p className="mt-6 text-[0.72rem] tracking-[0.22em] text-gold uppercase">{copy.pages.about.eyebrow}</p>
+            <h1 className="mt-4 max-w-xl font-serif text-[clamp(2.6rem,5vw,4.8rem)] leading-[0.98] font-medium tracking-[-0.03em]">
               {copy.pages.about.title}
             </h1>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-deep/80 sm:text-lg">{copy.pages.about.text}</p>
@@ -45,23 +45,34 @@ export default async function AboutPage() {
         </Container>
       </section>
       <section className="bg-white py-16 sm:py-24">
-        <Container className="grid items-start gap-12 lg:grid-cols-[0.9fr_1.1fr]">
-          <p className="font-serif text-3xl leading-snug italic">{copy.pages.about.quote}</p>
-          <div className="space-y-5 text-base leading-relaxed text-deep/80">
+        <Container className="grid items-start gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+          <p className="font-serif text-[clamp(1.7rem,2.6vw,2.35rem)] leading-snug text-deep italic">{copy.pages.about.quote}</p>
+          <div className="space-y-8 text-base leading-[1.75] text-deep/80">
             {settings.founderSummary ? (
               settings.founderSummary.split("\n").filter(Boolean).map((paragraph) => <p key={paragraph}>{paragraph}</p>)
             ) : (
               <>
-                <h2 className="font-serif text-3xl text-deep">{copy.pages.about.diamondTitle}</h2>
-                <p>{copy.pages.about.diamondText}</p>
-                <h2 className="font-serif text-3xl text-deep">{copy.pages.about.traditionTitle}</h2>
-                <p>{copy.pages.about.traditionText}</p>
-                <h2 className="font-serif text-3xl text-deep">{copy.pages.about.approachTitle}</h2>
-                <p>{copy.pages.about.approachText}</p>
-                <p>{copy.pages.about.visitNote}</p>
+                <div>
+                  <h2 className="font-serif text-[clamp(1.7rem,2.4vw,2.2rem)] leading-tight text-deep">{copy.pages.about.diamondTitle}</h2>
+                  <p className="mt-3">{copy.pages.about.diamondText}</p>
+                </div>
+                <div>
+                  <h2 className="font-serif text-[clamp(1.7rem,2.4vw,2.2rem)] leading-tight text-deep">{copy.pages.about.traditionTitle}</h2>
+                  <p className="mt-3">{copy.pages.about.traditionText}</p>
+                </div>
+                <div>
+                  <h2 className="font-serif text-[clamp(1.7rem,2.4vw,2.2rem)] leading-tight text-deep">{copy.pages.about.approachTitle}</h2>
+                  <p className="mt-3">{copy.pages.about.approachText}</p>
+                  <p className="mt-4">{copy.pages.about.visitNote}</p>
+                </div>
               </>
             )}
-            <Button href="/contact">{copy.bookPersonal}</Button>
+            <div className="flex flex-col gap-3 pt-2 sm:flex-row">
+              <Button href="/contact">{copy.bookPersonal}</Button>
+              <Button href="/approach" variant="line">
+                {copy.nav.approach}
+              </Button>
+            </div>
           </div>
         </Container>
       </section>

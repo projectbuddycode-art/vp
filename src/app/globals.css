@@ -29,8 +29,20 @@ body {
   background: #f5f0e6;
   color: #211b17;
   font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.65;
   text-rendering: optimizeLegibility;
   overflow-x: clip;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 html[lang="hi"] body {

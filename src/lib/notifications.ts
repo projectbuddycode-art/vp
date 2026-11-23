@@ -72,3 +72,46 @@ export async function notifyEnquiry(notice: Notice) {
     emailNote: visitorResult.sent ? "" : visitorResult.reason,
   };
 }
+
+export type ReviewNotice = {
+  reviewId: string;
+  clientName: string;
+  rating: number;
+  reviewText: string;
+  experienceText: string;
+  moderationUrl: string;
+};
+
+export async function notifyReviewSubmitted(notice: ReviewNotice) {
+  const admin = process.env.ADMIN_NOTIFICATION_EMAIL;
+  if (!admin) {
+    return { sent: false, reason: "ADMIN_NOTIFICATION_EMAIL is not configured." };
+  }
+  if (!process.env.RESEND_API_KEY || !process.env.EMAIL_FROM) {
+    return { sent: false, reason: "Email delivery is not configured (RESEND_API_KEY / EMAIL_FROM)." };
+  }
+
+  const summary = [
+    "A new client review was submitted for STHAPATYA.",
+    "",
+    `Review ID: ${notice.reviewId}`,
+    `Name: ${notice.clientName}`,
+    `Rating: ${notice.rating} / 5`,
+    "",
+    "Review:",
+    notice.reviewText,
+    "",
+    notice.experienceText ? `Experience note:\n${notice.experienceText}\n` : "",
+    "Status: PENDING — not published.",
+    "",
+    "Open the secure moderation link to approve or reject (expires, single use):",
+    notice.moderationUrl,
+    "",
+    "You can also manage reviews after signing in at /admin/reviews.",
+    "Do not forward this link. It is for Sanjeev Jain / authorised administrators only.",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  return sendEmail(admin, `New client review · ${notice.clientName}`, summary);
+}
