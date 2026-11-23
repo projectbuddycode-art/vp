@@ -21,7 +21,7 @@ export const gu: Copy = {
     approach: "વાસ્તુની રીત",
     services: "સેવાઓ",
     studies: "અભ્યાસ",
-    testimonials: "અનુભવ",
+    testimonials: "ગ્રાહક સમીક્ષાઓ",
     contact: "સંપર્ક",
     knowledge: "જ્ઞાન કેન્દ્ર",
   },

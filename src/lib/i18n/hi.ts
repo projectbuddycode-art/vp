@@ -21,7 +21,7 @@ export const hi: Copy = {
     approach: "वास्तु की विधि",
     services: "सेवाएँ",
     studies: "अध्ययन",
-    testimonials: "अनुभव",
+    testimonials: "ग्राहक समीक्षाएँ",
     contact: "संपर्क",
     knowledge: "ज्ञान केन्द्र",
   },

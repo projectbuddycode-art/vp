@@ -28,8 +28,15 @@ export default async function ReviewPage() {
           { href: "/review", label: "Review" },
         ]}
       />
-      <section className="bg-white py-16 sm:py-20">
+      <section className="bg-white py-16 sm:py-24">
         <Container className="max-w-2xl">
+          <div className="mb-10 space-y-3 border-b border-deep/10 pb-8">
+            <p className="text-[0.72rem] tracking-[0.18em] text-gold uppercase">Private submission</p>
+            <p className="text-sm leading-relaxed text-deep/75">
+              Your review is held as pending until it is read. Email addresses stay private. Do not include medical,
+              financial, or property details you would not want stored.
+            </p>
+          </div>
           <ReviewForm />
         </Container>
       </section>

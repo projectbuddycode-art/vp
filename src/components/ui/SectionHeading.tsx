@@ -31,6 +31,10 @@ export function SectionHeading({
       >
         {title}
       </h2>
+      <span
+        aria-hidden
+        className={cn("mt-5 block h-px w-16 origin-left", light ? "bg-gold/70" : "bg-gold/80")}
+      />
       {text ? (
         <p className={cn("mt-5 max-w-2xl text-base leading-[1.75] sm:text-lg", light ? "text-sand" : "text-deep/75")}>
           {text}

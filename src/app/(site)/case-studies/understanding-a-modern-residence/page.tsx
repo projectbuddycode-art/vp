@@ -17,6 +17,7 @@ export const metadata = pageMetadata({
     "An illustrative educational case study of how a home may be discussed through Vastu. It is not a real client project and it does not report a result.",
   path: "/case-studies/understanding-a-modern-residence",
   image: "/images/modern-home.jpg",
+  noIndex: true,
 });
 
 const objectives = [

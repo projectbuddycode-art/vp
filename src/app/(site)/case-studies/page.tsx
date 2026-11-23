@@ -11,6 +11,7 @@ export const metadata = pageMetadata({
   description: "Client stories are published only with permission. A reported experience is not proof that another property will have the same result.",
   path: "/case-studies",
   image: images.modernHome.src,
+  noIndex: true,
 });
 
 export default async function CaseStudiesPage() {

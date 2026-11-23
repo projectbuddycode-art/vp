@@ -21,7 +21,7 @@ export const en: Copy = {
     approach: "Vastu Approach",
     services: "Services",
     studies: "Case Studies",
-    testimonials: "Testimonials",
+    testimonials: "Client Reviews",
     contact: "Contact",
     knowledge: "Knowledge Centre",
   },

@@ -221,18 +221,18 @@ export function ConsultationForm({ settings }: { settings: SiteSettings }) {
           <p className="mt-3 text-xs text-bark">{copy.whatsapp.or}</p>
         </div>
       ) : null}
-      <div className="grid gap-3 sm:grid-cols-3">
+      <div className="grid gap-4 border border-deep/10 bg-ivory/80 p-4 sm:grid-cols-3 sm:gap-6 sm:p-5">
         <p>
-          <span className="block text-xs text-bark">{copy.visit.totalLabel}</span>
-          <span className="font-serif text-2xl">{formatInr(fees.total)}</span>
+          <span className="block text-[0.68rem] tracking-[0.14em] text-bark uppercase">{copy.visit.totalLabel}</span>
+          <span className="mt-1 block font-serif text-[1.65rem] leading-none">{formatInr(fees.total)}</span>
         </p>
         <p>
-          <span className="block text-xs text-bark">{copy.visit.tokenLabel}</span>
-          <span className="font-serif text-2xl">{formatInr(fees.token)}</span>
+          <span className="block text-[0.68rem] tracking-[0.14em] text-bark uppercase">{copy.visit.tokenLabel}</span>
+          <span className="mt-1 block font-serif text-[1.65rem] leading-none">{formatInr(fees.token)}</span>
         </p>
         <p>
-          <span className="block text-xs text-bark">{copy.visit.remainingLabel}</span>
-          <span className="font-serif text-2xl">{formatInr(fees.remaining)}</span>
+          <span className="block text-[0.68rem] tracking-[0.14em] text-bark uppercase">{copy.visit.remainingLabel}</span>
+          <span className="mt-1 block font-serif text-[1.65rem] leading-none">{formatInr(fees.remaining)}</span>
         </p>
       </div>
       <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden>

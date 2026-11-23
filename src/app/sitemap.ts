@@ -1,19 +1,17 @@
 import type { MetadataRoute } from "next";
-import { getArticles, getCaseStudies } from "@/lib/data/public";
+import { getArticles } from "@/lib/data/public";
 import { locales } from "@/lib/i18n/locale";
 import { services } from "@/lib/site";
 import { siteUrl } from "@/lib/utils";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [articles, studies] = await Promise.all([getArticles(), getCaseStudies()]);
+  const articles = await getArticles();
   const staticPaths = [
     "",
     "/about",
     "/understanding-vastu",
     "/approach",
     "/expertise",
-    "/case-studies",
-    "/case-studies/understanding-a-modern-residence",
     "/testimonials",
     "/knowledge-centre",
     "/contact",
@@ -23,7 +21,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/terms-and-conditions",
     ...services.map((service) => `/expertise/${service.slug}`),
     ...articles.map((article) => `/knowledge-centre/${article.slug}`),
-    ...studies.map((study) => `/case-studies/${study.slug}`),
   ];
   const base = siteUrl();
   return staticPaths.map((path) => {

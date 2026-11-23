@@ -11,8 +11,7 @@ export const navItems: NavItem[] = [
   { href: "/understanding-vastu", label: "Understanding Vastu" },
   { href: "/approach", label: "Vastu Approach" },
   { href: "/expertise", label: "Services" },
-  { href: "/case-studies", label: "Case Studies" },
-  { href: "/testimonials", label: "Testimonials" },
+  { href: "/testimonials", label: "Client Reviews" },
   { href: "/contact", label: "Contact" },
 ];
 

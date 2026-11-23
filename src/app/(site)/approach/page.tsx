@@ -42,39 +42,41 @@ export default async function ApproachPage() {
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-bark">{a.filmNote}</p>
         </Container>
       </section>
-      <section className="bg-ivory py-16 sm:py-20">
-        <Container className="grid gap-6 md:grid-cols-2">
+      <section className="bg-ivory py-16 sm:py-24">
+        <Container className="grid gap-6 md:grid-cols-2 md:gap-8">
           {copy.home.journeySteps.map((step) => (
-            <article key={step.number} className="border border-deep/10 p-6">
+            <article key={step.number} className="border border-deep/10 bg-white/40 p-6 sm:p-8">
               <p className="text-[0.68rem] tracking-[0.18em] text-gold uppercase">{step.number}</p>
-              <h2 className="mt-2 font-serif text-4xl">{step.title}</h2>
-              <p className="mt-3 text-sm leading-relaxed text-deep/75">{step.text}</p>
+              <h2 className="mt-3 font-serif text-[clamp(1.8rem,3vw,2.4rem)] leading-tight">{step.title}</h2>
+              <p className="mt-4 text-sm leading-[1.7] text-deep/75 sm:text-base">{step.text}</p>
             </article>
           ))}
         </Container>
       </section>
       <EightDirections />
       <Methodology />
-      <section className="bg-white py-16 sm:py-20">
+      <section className="bg-white py-16 sm:py-24">
         <Container>
-          <h2 className="max-w-3xl font-serif text-4xl">{a.studyTitle}</h2>
-          <ol className="mt-8 grid gap-6 md:grid-cols-2">
+          <h2 className="max-w-3xl font-serif text-[clamp(2rem,4vw,3.2rem)] leading-[1.05] tracking-[-0.02em]">{a.studyTitle}</h2>
+          <ol className="mt-10 grid gap-6 md:grid-cols-2 md:gap-8">
             {a.studyItems.map((item, index) => (
-              <li key={item.title} className="border border-deep/10 p-5">
+              <li key={item.title} className="border border-deep/10 p-6">
                 <p className="font-serif text-2xl text-gold">0{index + 1}</p>
-                <h3 className="mt-2 font-serif text-3xl">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-deep/75">{item.text}</p>
+                <h3 className="mt-3 font-serif text-[clamp(1.6rem,2.4vw,2.1rem)] leading-tight">{item.title}</h3>
+                <p className="mt-3 text-sm leading-[1.7] text-deep/75 sm:text-base">{item.text}</p>
               </li>
             ))}
           </ol>
         </Container>
       </section>
-      <section className="bg-ivory py-16">
-        <Container className="max-w-3xl space-y-4 text-base leading-relaxed text-deep/80">
-          <h2 className="font-serif text-4xl text-deep">{a.purposeTitle}</h2>
+      <section className="bg-ivory py-16 sm:py-24">
+        <Container className="max-w-3xl space-y-5 text-base leading-[1.75] text-deep/80">
+          <h2 className="font-serif text-[clamp(2rem,4vw,3.2rem)] leading-[1.05] tracking-[-0.02em] text-deep">{a.purposeTitle}</h2>
           <p>{a.purposeText}</p>
           <p>{copy.home.disclaimer}</p>
-          <Button href="/contact">{a.requestCta}</Button>
+          <div className="pt-2">
+            <Button href="/contact">{a.requestCta}</Button>
+          </div>
         </Container>
       </section>
     </>

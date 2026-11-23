@@ -15,12 +15,13 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const study = await getCaseStudy(slug);
-  if (!study) return pageMetadata({ title: "Case study", description: "Case study", path: "/case-studies" });
+  if (!study) return pageMetadata({ title: "Case study", description: "Case study", path: "/case-studies", noIndex: true });
   return pageMetadata({
     title: study.seoTitle || study.title,
     description: study.seoDescription || study.clientConcern,
     path: `/case-studies/${study.slug}`,
     image: study.coverImageUrl || "/images/modern-home.jpg",
+    noIndex: true,
   });
 }
 

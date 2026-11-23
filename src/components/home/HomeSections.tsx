@@ -87,8 +87,11 @@ export function FounderStory({ settings }: { settings: SiteSettings }) {
             )}
             <p className="font-serif text-xl leading-snug text-deep italic">{copy.home.founderQuote}</p>
           </div>
-          <div className="mt-8">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Button href="/contact">{copy.bookVisit}</Button>
+            <Button href="/about" variant="line">
+              {copy.nav.about}
+            </Button>
           </div>
         </div>
       </Container>

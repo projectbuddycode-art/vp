@@ -207,6 +207,12 @@ html[lang="gu"] .font-serif {
   background: #b68b50;
   transform: scaleX(0);
   transform-origin: left center;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.vedic-link:hover::after,
+.vedic-link[aria-current="page"]::after {
+  transform: scaleX(1);
 }
 
 .vedic-button {

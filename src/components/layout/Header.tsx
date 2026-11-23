@@ -11,7 +11,7 @@ import { navItems } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/ui/Container";
 
-const navKeys = ["home", "about", "understanding", "approach", "services", "studies", "testimonials", "contact"] as const;
+const navKeys = ["home", "about", "understanding", "approach", "services", "testimonials", "contact"] as const;
 
 export function Header() {
   const pathname = usePathname();
@@ -64,9 +64,13 @@ export function Header() {
               key={item.href}
               href={item.href}
               className={cn(
-                "vedic-link text-[0.78rem] tracking-[0.01em] transition-colors duration-300 2xl:text-[0.86rem]",
-                overlay ? "text-ivory/90 hover:text-sand" : "text-deep/75 hover:text-deep",
-                pathname === item.href ? (overlay ? "text-sand" : "text-deep") : "",
+                "vedic-link text-[0.78rem] tracking-[0.02em] transition-colors duration-300 2xl:text-[0.86rem]",
+                overlay ? "text-ivory/90 hover:text-sand" : "text-deep/70 hover:text-deep",
+                pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href))
+                  ? overlay
+                    ? "text-sand"
+                    : "text-deep"
+                  : "",
               )}
               aria-current={pathname === item.href ? "page" : undefined}
             >

@@ -72,6 +72,11 @@ export async function Footer({ settings }: { settings: SiteSettings }) {
             {settings.address ? <li>{settings.address}</li> : null}
             {settings.serviceAreas ? <li>{copy.footer.serviceAreas}: {settings.serviceAreas}</li> : null}
             <li>
+              <Link href="/testimonials" className="vedic-link hover:text-ivory">
+                {copy.nav.testimonials}
+              </Link>
+            </li>
+            <li>
               <Link href="/contact" className="vedic-link hover:text-ivory">
                 {copy.footer.enquire}
               </Link>
